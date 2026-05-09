@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, ChevronDown, HelpCircle } from "lucide-react";
+import { ChevronDown, HelpCircle } from "lucide-react";
 import { GoogleSignInButton } from "@/components/auth-buttons";
 import { LocalizedString, LocalizedText } from "@/components/localized-text";
 import { MarketingFooter } from "@/components/marketing-footer";

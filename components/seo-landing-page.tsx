@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, ChevronDown, Sparkles } from "lucide-react";
+import { CheckCircle2, ChevronDown, Sparkles } from "lucide-react";
 import { GoogleSignInButton } from "@/components/auth-buttons";
 import { LocalizedString, LocalizedText } from "@/components/localized-text";
 import { MarketingFooter } from "@/components/marketing-footer";

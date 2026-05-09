@@ -3,8 +3,6 @@ services:
     image: postgres:17-alpine
     container_name: cvlift-postgres-prod
     restart: unless-stopped
-    env_file:
-      - .env
     environment:
       POSTGRES_USER: ${POSTGRES_USER:?POSTGRES_USER is required}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
@@ -16,6 +14,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - cvlift_private
 
   app:
     build:
@@ -36,7 +36,15 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    command: sh -c "npx prisma migrate deploy && npm run start"
+    command: sh -c "node_modules/.bin/prisma migrate deploy && node server.js"
+    networks:
+      - cvlift_public
+      - cvlift_private
 
 volumes:
   postgres_data_prod:
+
+networks:
+  cvlift_public:
+  cvlift_private:
+    internal: true
