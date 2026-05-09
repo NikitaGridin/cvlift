@@ -3,8 +3,8 @@ import { getRequiredSeoPage } from "@/lib/seo-content";
 
 const page = getRequiredSeoPage("ats-resume-checker");
 
-export const metadata = getSeoLandingMetadata(page, "en");
+export const metadata = getSeoLandingMetadata(page, "ru");
 
-export default function AtsResumeCheckerPage() {
-  return <SeoLandingPage page={page} locale="en" />;
+export default function RuAtsResumeCheckerPage() {
+  return <SeoLandingPage page={page} locale="ru" />;
 }

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Clock3 } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
@@ -7,6 +8,14 @@ import { requireUserSession } from "@/lib/auth-required";
 import { getHistoryRecords } from "@/lib/server-data";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Analysis History",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default async function HistoryPage() {
   await requireUserSession();

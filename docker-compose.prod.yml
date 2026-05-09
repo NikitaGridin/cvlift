@@ -36,7 +36,7 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    command: sh -c "node_modules/.bin/prisma migrate deploy && node server.js"
+    command: node server.js
     networks:
       - cvlift_public
       - cvlift_private

@@ -326,13 +326,12 @@ export const translations = {
     "analysis.docs.coverTitle": "Cover letter",
     "analysis.docs.fillIns":
       "Red highlights mark values you should replace with verified numbers or details.",
-    "cookie.title": "Cookie preferences",
+    "cookie.title": "Cookie notice",
     "cookie.text":
-      "CVlift uses essential cookies for sign-in and security. Optional cookies may help us improve the product experience.",
+      "CVlift uses cookies for sign-in, security, preferences, and product improvement. By continuing to use this website, you agree to our cookie use.",
     "cookie.read": "Read our",
     "cookie.policy": "Cookie Policy",
-    "cookie.necessary": "Necessary only",
-    "cookie.accept": "Accept all",
+    "cookie.dismiss": "Got it",
   },
   ru: {
     "common.appName": "CVlift",
@@ -651,13 +650,12 @@ export const translations = {
     "analysis.docs.coverTitle": "Сопроводительное письмо",
     "analysis.docs.fillIns":
       "Красные выделения показывают значения, которые нужно заменить проверенными цифрами или деталями.",
-    "cookie.title": "Настройки cookie",
+    "cookie.title": "Уведомление о cookie",
     "cookie.text":
-      "CVlift использует обязательные cookie для входа и безопасности. Необязательные cookie помогают улучшать продукт.",
+      "CVlift использует cookie для входа, безопасности, настроек и улучшения продукта. Продолжая пользоваться сайтом, вы соглашаетесь с использованием cookie.",
     "cookie.read": "Подробнее:",
     "cookie.policy": "Политика cookie",
-    "cookie.necessary": "Только необходимые",
-    "cookie.accept": "Принять все",
+    "cookie.dismiss": "Понятно",
   },
 } as const;
 

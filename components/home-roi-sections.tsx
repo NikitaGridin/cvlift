@@ -151,10 +151,6 @@ const sectionVariants = {
   hidden: { opacity: 0, y: 28 },
   visible: { opacity: 1, y: 0 },
 };
-const highlightTransition = {
-  duration: 0.28,
-  ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
-};
 const chartTone = {
   grid: "rgba(255,255,255,0.09)",
   tick: "#92988E",
@@ -572,22 +568,21 @@ function DonutChart({
                 : `drop-shadow(0 0 3px ${item.color}16)`;
 
             return (
-              <motion.path
+              <path
                 key={item.label.en}
                 d={d}
                 fill={item.color}
-                initial={{
-                  opacity: 0,
-                  scale: 0.985,
-                  filter: `drop-shadow(0 0 3px ${item.color}16)`,
-                }}
-                animate={{
-                  opacity: isInView ? visibleOpacity : 0,
-                  scale: active ? 1.035 : 1,
+                opacity={isInView ? visibleOpacity : 0}
+                style={{
                   filter: glow,
+                  transition:
+                    "opacity 0.18s cubic-bezier(0.22,1,0.36,1), filter 0.18s cubic-bezier(0.22,1,0.36,1), transform 0.18s cubic-bezier(0.22,1,0.36,1)",
                 }}
-                transition={highlightTransition}
-                style={{ transformOrigin: "100px 100px" }}
+                transform={
+                  active
+                    ? "translate(100 100) scale(1.035) translate(-100 -100)"
+                    : "translate(100 100) scale(1) translate(-100 -100)"
+                }
                 onMouseEnter={() => onActiveChange(index)}
                 onMouseLeave={() => onActiveChange(null)}
                 onFocus={() => onActiveChange(index)}
@@ -635,17 +630,21 @@ function getDonutSegmentPath(
   const largeArcFlag = sweepAngle - outerAngleOffset * 2 > 180 ? 1 : 0;
 
   return [
-    `M ${outerStart.x} ${outerStart.y}`,
-    `A ${outerRadius} ${outerRadius} 0 ${largeArcFlag} 1 ${outerEnd.x} ${outerEnd.y}`,
-    `Q ${outerEndCorner.x} ${outerEndCorner.y} ${endOuterInset.x} ${endOuterInset.y}`,
-    `L ${endInnerInset.x} ${endInnerInset.y}`,
-    `Q ${innerEndCorner.x} ${innerEndCorner.y} ${innerEnd.x} ${innerEnd.y}`,
-    `A ${innerRadius} ${innerRadius} 0 ${largeArcFlag} 0 ${innerStart.x} ${innerStart.y}`,
-    `Q ${innerStartCorner.x} ${innerStartCorner.y} ${startInnerInset.x} ${startInnerInset.y}`,
-    `L ${startOuterInset.x} ${startOuterInset.y}`,
-    `Q ${outerStartCorner.x} ${outerStartCorner.y} ${outerStart.x} ${outerStart.y}`,
+    `M ${formatPathNumber(outerStart.x)} ${formatPathNumber(outerStart.y)}`,
+    `A ${outerRadius} ${outerRadius} 0 ${largeArcFlag} 1 ${formatPathNumber(outerEnd.x)} ${formatPathNumber(outerEnd.y)}`,
+    `Q ${formatPathNumber(outerEndCorner.x)} ${formatPathNumber(outerEndCorner.y)} ${formatPathNumber(endOuterInset.x)} ${formatPathNumber(endOuterInset.y)}`,
+    `L ${formatPathNumber(endInnerInset.x)} ${formatPathNumber(endInnerInset.y)}`,
+    `Q ${formatPathNumber(innerEndCorner.x)} ${formatPathNumber(innerEndCorner.y)} ${formatPathNumber(innerEnd.x)} ${formatPathNumber(innerEnd.y)}`,
+    `A ${innerRadius} ${innerRadius} 0 ${largeArcFlag} 0 ${formatPathNumber(innerStart.x)} ${formatPathNumber(innerStart.y)}`,
+    `Q ${formatPathNumber(innerStartCorner.x)} ${formatPathNumber(innerStartCorner.y)} ${formatPathNumber(startInnerInset.x)} ${formatPathNumber(startInnerInset.y)}`,
+    `L ${formatPathNumber(startOuterInset.x)} ${formatPathNumber(startOuterInset.y)}`,
+    `Q ${formatPathNumber(outerStartCorner.x)} ${formatPathNumber(outerStartCorner.y)} ${formatPathNumber(outerStart.x)} ${formatPathNumber(outerStart.y)}`,
     "Z",
   ].join(" ");
+}
+
+function formatPathNumber(value: number) {
+  return Number(value.toFixed(4));
 }
 
 function radiansToDegrees(radians: number) {

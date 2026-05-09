@@ -5,7 +5,7 @@ import { localized as l } from "@/lib/i18n";
 export const metadata: Metadata = {
   title: "Cookie Policy | CVlift",
   description:
-    "How CVlift uses essential cookies, preference cookies, and optional product improvement cookies.",
+    "How CVlift uses cookies for sign-in, security, preferences, and product improvement.",
   alternates: {
     canonical: "/cookies",
   },
@@ -16,8 +16,8 @@ export default function CookiesPage() {
     <LegalPage
       title={l("Cookie Policy", "Политика cookie")}
       description={l(
-        "This policy explains the cookie categories CVlift may use and how your choice is stored.",
-        "Эта политика объясняет, какие категории cookie может использовать CVlift и как сохраняется ваш выбор.",
+        "This policy explains how CVlift uses cookies. By continuing to use the website, you agree to this cookie use.",
+        "Эта политика объясняет, как CVlift использует cookie. Продолжая пользоваться сайтом, вы соглашаетесь с использованием cookie.",
       )}
       sections={[
         {
@@ -43,16 +43,16 @@ export default function CookiesPage() {
               "Cookie безопасности, которые защищают доступ к аккаунту.",
             ),
             l(
-              "Cookie preference storage so the banner does not reappear every visit.",
-              "Хранение выбора cookie, чтобы баннер не появлялся при каждом визите.",
+              "Cookie notice storage so the banner does not reappear every visit.",
+              "Хранение отметки о показе уведомления, чтобы баннер не появлялся при каждом визите.",
             ),
           ],
         },
         {
-          title: l("Optional cookies", "Необязательные cookie"),
+          title: l("Product and preference cookies", "Cookie продукта и настроек"),
           text: l(
-            "Optional cookies may be used to understand product usage and improve the user experience, but only after you accept them.",
-            "Необязательные cookie могут использоваться для понимания использования продукта и улучшения опыта, но только после вашего согласия.",
+            "CVlift may use cookies to remember product preferences, understand usage, improve public pages, and make the service more stable.",
+            "CVlift может использовать cookie, чтобы запоминать настройки продукта, понимать использование, улучшать публичные страницы и делать сервис стабильнее.",
           ),
           bullets: [
             l(
@@ -70,17 +70,17 @@ export default function CookiesPage() {
           ],
         },
         {
-          title: l("How to change your choice", "Как изменить выбор"),
+          title: l("How to control cookies", "Как управлять cookie"),
           text: l(
-            "You can clear site cookies in your browser settings to reset the banner and choose again. If you block essential cookies, sign-in and analysis history may not work correctly.",
-            "Можно очистить cookie сайта в настройках браузера, чтобы сбросить баннер и выбрать заново. Если заблокировать обязательные cookie, вход и история анализа могут работать некорректно.",
+            "You can clear or block site cookies in your browser settings. If you block essential cookies, sign-in and analysis history may not work correctly.",
+            "Вы можете очистить или заблокировать cookie сайта в настройках браузера. Если заблокировать обязательные cookie, вход и история анализа могут работать некорректно.",
           ),
         },
         {
-          title: l("Current consent choices", "Текущие варианты согласия"),
+          title: l("Website use means agreement", "Использование сайта означает согласие"),
           text: l(
-            "The banner lets you choose Necessary only or Accept all. CVlift stores that choice in a cookie named cvlift_cookie_consent.",
-            "Баннер позволяет выбрать только необходимые cookie или принять все. CVlift хранит этот выбор в cookie cvlift_cookie_consent.",
+            "The banner is informational. CVlift stores a technical cookie named cvlift_cookie_notice only to remember that the notice has already been shown.",
+            "Баннер носит информационный характер. CVlift хранит техническую cookie cvlift_cookie_notice только для того, чтобы помнить, что уведомление уже было показано.",
           ),
         },
       ]}

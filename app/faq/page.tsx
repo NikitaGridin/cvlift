@@ -29,6 +29,7 @@ export default function FaqPage() {
       },
     })),
   };
+  const jsonLdHtml = JSON.stringify(jsonLd).replace(/</g, "\\u003c");
 
   return (
     <main className="min-h-screen bg-[#FAFBFC] text-[#0F172A]">
@@ -121,7 +122,7 @@ export default function FaqPage() {
       <MarketingFooter />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdHtml }}
       />
     </main>
   );

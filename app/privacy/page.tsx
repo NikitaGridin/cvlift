@@ -91,8 +91,8 @@ export default function PrivacyPage() {
         {
           title: l("Cookies and sign-in", "Cookie и вход"),
           text: l(
-            "CVlift uses essential cookies to support sign-in, session security, and cookie preference storage.",
-            "CVlift использует обязательные cookie для входа, безопасности сессии и хранения выбора по cookie.",
+            "CVlift uses cookies to support sign-in, session security, product preferences, and service improvement. By continuing to use the website, you agree to this cookie use.",
+            "CVlift использует cookie для входа, безопасности сессии, настроек продукта и улучшения сервиса. Продолжая пользоваться сайтом, вы соглашаетесь с использованием cookie.",
           ),
           bullets: [
             l(
@@ -100,12 +100,12 @@ export default function PrivacyPage() {
               "Обязательные cookie помогают оставаться в аккаунте и защищают доступ.",
             ),
             l(
-              "Preference cookies remember your cookie choice.",
-              "Cookie предпочтений запоминают ваш выбор.",
+              "Notice cookies remember that the cookie banner has already been shown.",
+              "Cookie уведомления запоминают, что баннер о cookie уже был показан.",
             ),
             l(
-              "Optional cookies may be used only when you accept them.",
-              "Необязательные cookie используются только после вашего согласия.",
+              "You can control or block cookies in your browser settings.",
+              "Вы можете управлять cookie или блокировать их в настройках браузера.",
             ),
           ],
         },

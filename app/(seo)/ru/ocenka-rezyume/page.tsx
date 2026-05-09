@@ -3,8 +3,8 @@ import { getRequiredSeoPage } from "@/lib/seo-content";
 
 const page = getRequiredSeoPage("resume-score");
 
-export const metadata = getSeoLandingMetadata(page, "en");
+export const metadata = getSeoLandingMetadata(page, "ru");
 
-export default function ResumeScorePage() {
-  return <SeoLandingPage page={page} locale="en" />;
+export default function RuResumeScorePage() {
+  return <SeoLandingPage page={page} locale="ru" />;
 }

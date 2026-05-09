@@ -6,25 +6,26 @@ import { useSyncExternalStore } from "react";
 import { useI18n } from "@/components/preferences-provider";
 
 const legacyPreferencePrefix = "cv" + "pilot";
+const noticeCookieName = "cvlift_cookie_notice";
 const consentCookieName = "cvlift_cookie_consent";
 const legacyConsentCookieName = `${legacyPreferencePrefix}_cookie_consent`;
-const consentMaxAge = 60 * 60 * 24 * 180;
-const consentChangeEvent = "cvlift-cookie-consent-change";
+const noticeMaxAge = 60 * 60 * 24 * 180;
+const noticeChangeEvent = "cvlift-cookie-notice-change";
 
 export function CookieConsent() {
   const { t } = useI18n();
-  const hasConsent = useSyncExternalStore(
-    subscribeToConsent,
-    getConsentSnapshot,
-    getServerConsentSnapshot,
+  const hasSeenNotice = useSyncExternalStore(
+    subscribeToNotice,
+    getNoticeSnapshot,
+    getServerNoticeSnapshot,
   );
 
-  function saveConsent(value: "necessary" | "all") {
-    document.cookie = `${consentCookieName}=${value}; Max-Age=${consentMaxAge}; Path=/; SameSite=Lax`;
-    window.dispatchEvent(new Event(consentChangeEvent));
+  function dismissNotice() {
+    document.cookie = `${noticeCookieName}=seen; Max-Age=${noticeMaxAge}; Path=/; SameSite=Lax`;
+    window.dispatchEvent(new Event(noticeChangeEvent));
   }
 
-  if (hasConsent) {
+  if (hasSeenNotice) {
     return null;
   }
 
@@ -45,20 +46,13 @@ export function CookieConsent() {
               .
             </p>
           </div>
-          <div className="flex flex-col gap-2 sm:col-start-2 sm:flex-row">
+          <div className="sm:col-start-2">
             <button
               type="button"
-              onClick={() => saveConsent("necessary")}
-              className="inline-flex h-11 items-center justify-center rounded-full border border-black/[0.06] bg-white px-5 text-sm font-bold text-[#0F172A] transition duration-200 hover:bg-[#FAFBFC]"
-            >
-              {t("cookie.necessary")}
-            </button>
-            <button
-              type="button"
-              onClick={() => saveConsent("all")}
+              onClick={dismissNotice}
               className="inline-flex h-11 items-center justify-center rounded-full bg-[#6366F1] px-5 text-sm font-bold text-white shadow-[0_14px_34px_rgba(99,102,241,0.24)] transition duration-200 hover:bg-[#4F46E5]"
             >
-              {t("cookie.accept")}
+              {t("cookie.dismiss")}
             </button>
           </div>
         </div>
@@ -67,18 +61,19 @@ export function CookieConsent() {
   );
 }
 
-function subscribeToConsent(callback: () => void) {
-  window.addEventListener(consentChangeEvent, callback);
-  return () => window.removeEventListener(consentChangeEvent, callback);
+function subscribeToNotice(callback: () => void) {
+  window.addEventListener(noticeChangeEvent, callback);
+  return () => window.removeEventListener(noticeChangeEvent, callback);
 }
 
-function getConsentSnapshot() {
+function getNoticeSnapshot() {
   return (
+    document.cookie.includes(`${noticeCookieName}=`) ||
     document.cookie.includes(`${consentCookieName}=`) ||
     document.cookie.includes(`${legacyConsentCookieName}=`)
   );
 }
 
-function getServerConsentSnapshot() {
+function getServerNoticeSnapshot() {
   return true;
 }

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -19,6 +20,7 @@ import { creditPackages, formatUsdCents } from "@/lib/credits-public";
 import type { TranslationKey } from "@/lib/i18n";
 import { seoPages } from "@/lib/seo-content";
 import { getSessionSafely } from "@/lib/server-data";
+import { absoluteUrl, siteLogoPath, siteLogoUrl } from "@/lib/site-url";
 
 const outcomes = [
   "home.outcome.ats",
@@ -65,6 +67,98 @@ const tokenPackageMeta = {
     accent: "lime" | "purple";
   }
 >;
+
+const homeTitle =
+  "CVlift - AI Resume Checker, ATS Score and Resume Optimization";
+const homeDescription =
+  "CVlift analyzes resumes with AI, checks ATS score, finds missing keywords, matches vacancies, and helps create stronger job applications.";
+
+export const metadata: Metadata = {
+  title: homeTitle,
+  description: homeDescription,
+  keywords: [
+    "AI resume checker",
+    "ATS resume checker",
+    "resume score checker",
+    "resume optimizer",
+    "resume job match",
+    "resume keywords",
+    "cover letter generator",
+    "проверка резюме онлайн",
+    "оценка резюме онлайн",
+    "AI анализ резюме",
+    "ATS проверка резюме",
+    "резюме под вакансию",
+    "улучшить резюме",
+    "ключевые слова резюме",
+  ],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: homeTitle,
+    description: homeDescription,
+    url: "/",
+    siteName: "CVlift",
+    type: "website",
+    locale: "en_US",
+    alternateLocale: ["ru_RU"],
+    images: [
+      {
+        url: siteLogoPath,
+        width: 512,
+        height: 512,
+        alt: "CVlift logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: homeTitle,
+    description: homeDescription,
+    images: [siteLogoPath],
+  },
+};
+
+const homeJsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "CVlift",
+    url: absoluteUrl("/"),
+    logo: siteLogoUrl,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "CVlift",
+    url: absoluteUrl("/"),
+    inLanguage: ["en-US", "ru-RU"],
+    description: homeDescription,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "CVlift",
+    url: absoluteUrl("/"),
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    inLanguage: ["en-US", "ru-RU"],
+    description: homeDescription,
+    image: siteLogoUrl,
+    provider: {
+      "@type": "Organization",
+      name: "CVlift",
+      logo: siteLogoUrl,
+    },
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+  },
+];
+const homeJsonLdHtml = JSON.stringify(homeJsonLd).replace(/</g, "\\u003c");
 
 export const dynamic = "force-dynamic";
 
@@ -209,6 +303,10 @@ export default async function Home() {
           </div>
         </div>
       </footer>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: homeJsonLdHtml }}
+      />
     </main>
   );
 }
