@@ -1,26 +1,2252 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #050605;
+  --foreground: #f4f7f0;
+  --surface: rgba(18, 23, 13, 0.88);
+  --surface-solid: #12170d;
+  --surface-muted: #0d1109;
+  --surface-elevated: rgba(22, 28, 15, 0.94);
+  --border-soft: rgba(183, 255, 0, 0.13);
+  --text-muted: #92988e;
+  --accent: #b7ff00;
+  --accent-strong: #d8ff70;
+  --accent-foreground: #050605;
+  --accent-soft: rgba(183, 255, 0, 0.1);
+  --accent-border: rgba(183, 255, 0, 0.34);
+  --purple: #9b5cff;
+  --purple-soft: rgba(155, 92, 255, 0.12);
+  color-scheme: dark;
+}
+
+[data-theme="dark"] {
+  --background: #050605;
+  --foreground: #f4f7f0;
+  --surface: rgba(18, 23, 13, 0.88);
+  --surface-solid: #12170d;
+  --surface-muted: #0d1109;
+  --surface-elevated: rgba(22, 28, 15, 0.94);
+  --border-soft: rgba(183, 255, 0, 0.13);
+  --text-muted: #92988e;
+  --accent: #b7ff00;
+  --accent-strong: #d8ff70;
+  --accent-foreground: #050605;
+  --accent-soft: rgba(183, 255, 0, 0.1);
+  --accent-border: rgba(183, 255, 0, 0.34);
+  --purple: #9b5cff;
+  --purple-soft: rgba(155, 92, 255, 0.12);
+  color-scheme: dark;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-montserrat);
+  --font-mono: var(--font-montserrat);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-montserrat), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+  font-weight: 500;
+}
+
+.font-mono {
+  font-family: var(--font-montserrat), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+}
+
+::selection {
+  background: rgba(99, 102, 241, 0.16);
+}
+
+a[href],
+button:not(:disabled),
+summary,
+label[for],
+select:not(:disabled),
+input[type="button"]:not(:disabled),
+input[type="submit"]:not(:disabled),
+input[type="reset"]:not(:disabled),
+input[type="checkbox"]:not(:disabled),
+input[type="radio"]:not(:disabled),
+[role="button"]:not([aria-disabled="true"]),
+[role="link"]:not([aria-disabled="true"]),
+[aria-controls]:not([aria-disabled="true"]),
+[aria-expanded]:not([aria-disabled="true"]) {
+  cursor: pointer;
+}
+
+button:disabled,
+select:disabled,
+input:disabled,
+[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
+.home-ambient {
+  position: relative;
+  isolation: isolate;
+  background:
+    linear-gradient(180deg, rgba(250, 251, 252, 0.88), rgba(250, 251, 252, 0.96)),
+    var(--background);
+}
+
+.home-ambient::before,
+.home-ambient::after {
+  content: "";
+  position: fixed;
+  pointer-events: none;
+}
+
+.home-ambient::before {
+  inset: -28vmax;
+  z-index: -2;
+  background:
+    linear-gradient(
+      118deg,
+      rgba(99, 102, 241, 0.18) 0%,
+      rgba(20, 184, 166, 0.1) 24%,
+      rgba(139, 92, 246, 0.1) 48%,
+      rgba(14, 165, 233, 0.12) 70%,
+      rgba(99, 102, 241, 0.16) 100%
+    ),
+    linear-gradient(
+      52deg,
+      rgba(34, 197, 94, 0.08) 0%,
+      transparent 28%,
+      rgba(99, 102, 241, 0.12) 52%,
+      transparent 78%
+    );
+  background-size:
+    240% 240%,
+    180% 180%;
+  filter: blur(2px) saturate(1.12);
+  opacity: 0.78;
+  transform: translate3d(0, 0, 0) rotate(0deg);
+  animation: home-ambient-flow 18s ease-in-out infinite alternate;
+}
+
+.home-ambient::after {
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(250, 251, 252, 0.62), transparent 18%, transparent 82%, rgba(250, 251, 252, 0.72)),
+    linear-gradient(180deg, rgba(250, 251, 252, 0.44), transparent 28%, rgba(250, 251, 252, 0.72));
+}
+
+.home-ambient > * {
+  position: relative;
+  z-index: 1;
+}
+
+.cvlift-home {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 50% 10%, rgba(183, 255, 0, 0.08), transparent 24rem),
+    radial-gradient(circle at 36% 15%, rgba(155, 92, 255, 0.16), transparent 22rem),
+    radial-gradient(circle at 62% 18%, rgba(183, 255, 0, 0.08), transparent 20rem),
+    #050605;
+  background-size:
+    130% 130%,
+    140% 140%,
+    130% 130%,
+    auto;
+  animation: cvlift-background-flow 14s ease-in-out infinite alternate;
+  letter-spacing: 0;
+  will-change: background-position;
+}
+
+.cvlift-home * {
+  letter-spacing: 0;
+}
+
+.cvlift-home h1,
+.cvlift-home h2,
+.cvlift-home h3,
+.cvlift-home p,
+.cvlift-home a,
+.cvlift-home button,
+.cvlift-home span {
+  overflow-wrap: break-word;
+}
+
+.cvlift-home h1,
+.cvlift-home h2,
+.cvlift-home h3 {
+  text-wrap: balance;
+}
+
+.cvlift-home p {
+  text-wrap: pretty;
+}
+
+.cvlift-hero-title {
+  font-size: clamp(2.8rem, 7.9vw, 5.6rem);
+  line-height: 1;
+}
+
+.cvlift-section-title {
+  font-size: clamp(2.25rem, 5.35vw, 3.75rem);
+  line-height: 1.06;
+}
+
+.cvlift-card-title {
+  font-size: clamp(1.35rem, 1.8vw, 1.65rem);
+  line-height: 1.16;
+}
+
+.cvlift-home .max-w-\[1180px\] {
+  max-width: 82.5rem;
+}
+
+.cvlift-home .max-w-5xl {
+  max-width: 72rem;
+}
+
+.cvlift-home .font-mono.text-\[10px\] {
+  font-size: 0.72rem;
+}
+
+.cvlift-home .font-mono.text-\[11px\] {
+  font-size: 0.8rem;
+}
+
+.cvlift-home .font-mono.text-xs {
+  font-size: 0.88rem;
+  line-height: 1.75;
+}
+
+.cvlift-home .font-mono.text-sm {
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.cvlift-hero-inner {
+  gap: clamp(4rem, 6vw, 5.4rem);
+  padding-top: clamp(4.25rem, 7vw, 7rem);
+  padding-bottom: clamp(5.25rem, 8vw, 8.5rem);
+}
+
+.cvlift-outcome-grid {
+  max-width: 58rem;
+  gap: 1rem;
+}
+
+.cvlift-outcome-grid > div {
+  min-height: 4.25rem;
+  border-radius: 1.35rem;
+  padding: 1rem 1.15rem;
+}
+
+.cvlift-hero-stats {
+  gap: 1.5rem;
+}
+
+.cvlift-hero-stats > div {
+  min-width: 9rem;
+  border-radius: 1.75rem;
+  padding: 1.25rem 1.4rem;
+}
+
+.cvlift-home header nav {
+  min-height: 4.8rem;
+  border-radius: 2.05rem;
+  padding: 0.9rem 1.25rem;
+}
+
+.cvlift-home header nav > a:first-child span:first-child {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+html[lang="ru"] .cvlift-home {
+  hyphens: auto;
+}
+
+html[lang="ru"] .cvlift-home .uppercase,
+html[lang="ru"] .cvlift-primary-button,
+html[lang="ru"] .cvlift-secondary-button,
+html[lang="ru"] .cvlift-header-button {
+  text-transform: none;
+}
+
+.cvlift-home::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(to bottom, black, transparent 78%);
+}
+
+.cvlift-home::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(5, 6, 5, 0.94), transparent 24%, transparent 76%, rgba(5, 6, 5, 0.96)),
+    linear-gradient(180deg, transparent, rgba(5, 6, 5, 0.86) 74%);
+}
+
+.cvlift-scanline {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.03) 1px,
+    transparent 1px,
+    transparent 5px
+  );
+  mix-blend-mode: soft-light;
+  opacity: 0.32;
+}
+
+.cvlift-hero {
+  background:
+    radial-gradient(circle at 50% 28%, rgba(183, 255, 0, 0.08), transparent 26rem),
+    radial-gradient(circle at 38% 36%, rgba(155, 92, 255, 0.2), transparent 26rem),
+    linear-gradient(180deg, rgba(5, 6, 5, 0.78), #050605);
+  overflow: hidden;
+}
+
+.cvlift-hero::before {
+  content: "";
+  position: absolute;
+  inset: -44%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 22% 42%, rgba(183, 255, 0, 0.22), transparent 20rem),
+    radial-gradient(circle at 72% 34%, rgba(155, 92, 255, 0.28), transparent 23rem),
+    radial-gradient(circle at 48% 74%, rgba(183, 255, 0, 0.14), transparent 18rem);
+  filter: blur(18px) saturate(1.24);
+  mix-blend-mode: screen;
+  opacity: 1;
+  transform: translate3d(-6%, -3%, 0) rotate(-8deg);
+  animation: cvlift-hero-gradient-flight 12s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.cvlift-hero-copy {
+  animation: cvlift-fade-up 740ms ease-out both;
+}
+
+.cvlift-gradient-text {
+  background: linear-gradient(90deg, #b7ff00 0%, #d8ff70 42%, #9b5cff 78%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.cvlift-panel {
+  position: relative;
+  overflow: hidden;
+  min-height: 19.5rem;
+  border-radius: 2.1rem;
+  padding: clamp(2rem, 2.6vw, 2.6rem);
+}
+
+.cvlift-use-case-card {
+  min-height: 18rem;
+}
+
+.cvlift-use-case-intro {
+  display: flex;
+  flex-direction: column;
+}
+
+.cvlift-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(183, 255, 0, 0.07), transparent 32%);
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.cvlift-panel:hover::after {
+  opacity: 1;
+}
+
+.cvlift-roi-section {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 12% 20%, rgba(183, 255, 0, 0.09), transparent 24rem),
+    radial-gradient(circle at 88% 18%, rgba(155, 92, 255, 0.12), transparent 26rem),
+    #050605;
+}
+
+.cvlift-roi-section::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 42%, rgba(183, 255, 0, 0.16), transparent 18rem),
+    radial-gradient(circle at 74% 30%, rgba(251, 113, 133, 0.06), transparent 20rem),
+    radial-gradient(circle at 58% 86%, rgba(155, 92, 255, 0.14), transparent 20rem);
+  filter: blur(18px) saturate(1.2);
+  opacity: 0.75;
+  animation: cvlift-section-gradient-flight 18s ease-in-out infinite alternate;
+}
+
+.cvlift-roi-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 68px 68px;
+  mask-image: linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
+  opacity: 0.5;
+}
+
+.cvlift-roi-growth {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(183, 255, 0, 0.08), transparent 26rem),
+    #050605;
+}
+
+.cvlift-rejection-section {
+  background:
+    radial-gradient(circle at 14% 34%, rgba(251, 113, 133, 0.055), transparent 24rem),
+    radial-gradient(circle at 84% 72%, rgba(155, 92, 255, 0.13), transparent 24rem),
+    #070807;
+}
+
+.cvlift-rejection-title {
+  font-size: clamp(2rem, 4.3vw, 3.2rem);
+  line-height: 0.98;
+}
+
+.cvlift-rejection-subtitle {
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.cvlift-comparison-section {
+  background:
+    radial-gradient(circle at 18% 18%, rgba(239, 68, 68, 0.08), transparent 22rem),
+    radial-gradient(circle at 82% 18%, rgba(183, 255, 0, 0.1), transparent 22rem),
+    #050605;
+}
+
+.cvlift-roi-eyebrow {
+  display: inline-flex;
+  width: max-content;
+  max-width: 100%;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid rgba(183, 255, 0, 0.26);
+  border-radius: 999px;
+  background: rgba(183, 255, 0, 0.08);
+  padding: 0.55rem 0.9rem;
+  color: #b7ff00;
+  font-family: var(--font-montserrat), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.cvlift-roi-eyebrow-danger {
+  border-color: rgba(239, 68, 68, 0.32);
+  background: rgba(239, 68, 68, 0.08);
+  color: #f87171;
+}
+
+.cvlift-roi-card,
+.cvlift-comparison-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 2rem;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.065), rgba(255, 255, 255, 0.018)),
+    rgba(8, 10, 7, 0.72);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 28px 80px rgba(0, 0, 0, 0.32),
+    0 0 54px rgba(183, 255, 0, 0.055);
+  backdrop-filter: blur(22px);
+}
+
+.cvlift-roi-card::before,
+.cvlift-comparison-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(183, 255, 0, 0.11), transparent 14rem),
+    radial-gradient(circle at 92% 0%, rgba(155, 92, 255, 0.1), transparent 16rem);
+  opacity: 0.8;
+}
+
+.cvlift-roi-card > *,
+.cvlift-comparison-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.cvlift-chart-card,
+.cvlift-donut-card,
+.cvlift-solutions-card,
+.cvlift-comparison-card {
+  padding: clamp(1.35rem, 2.2vw, 2rem);
+}
+
+.cvlift-kpi-card {
+  min-height: 11rem;
+  padding: 1.35rem;
+}
+
+.cvlift-chart-legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.5rem 0.72rem;
+  color: #dce7d1;
+}
+
+.cvlift-chart-legend::before {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+}
+
+.cvlift-chart-legend-before::before {
+  background: #94a3b8;
+}
+
+.cvlift-chart-legend-after::before {
+  background: linear-gradient(135deg, #a8ff00, #14b8a6, #8b5cf6);
+  box-shadow: 0 0 18px rgba(20, 184, 166, 0.42);
+}
+
+.cvlift-reasons-showcase {
+  --cvlift-highlight-transition: 280ms cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: clamp(1.5rem, 3vw, 2.7rem);
+  background:
+    radial-gradient(circle at 50% 43%, rgba(183, 255, 0, 0.12), transparent 23rem),
+    radial-gradient(circle at 76% 38%, rgba(239, 68, 68, 0.13), transparent 24rem),
+    radial-gradient(circle at 28% 66%, rgba(20, 184, 166, 0.12), transparent 24rem),
+    linear-gradient(180deg, rgba(13, 18, 21, 0.9), rgba(4, 8, 11, 0.98));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 34px 120px rgba(0, 0, 0, 0.34),
+    0 0 86px rgba(183, 255, 0, 0.06);
+  padding: clamp(1.05rem, 2vw, 2rem);
+}
+
+.cvlift-reasons-showcase::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 62px 62px;
+  mask-image: radial-gradient(circle at center, black 0%, transparent 72%);
+  opacity: 0.44;
+}
+
+.cvlift-reasons-showcase::after {
+  content: "";
+  position: absolute;
+  inset: 12% 24%;
+  z-index: -1;
+  border-radius: 999px;
+  background: rgba(183, 255, 0, 0.09);
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.cvlift-reasons-showcase > * {
+  position: relative;
+  z-index: 1;
+}
+
+.cvlift-reasons-topline {
+  margin-bottom: clamp(1rem, 2.5vw, 2rem);
+}
+
+.cvlift-donut-meta {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--font-montserrat), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+}
+
+.cvlift-donut-meta p {
+  color: #f4f7f0;
+  font-size: 0.82rem;
+  font-weight: 950;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.cvlift-donut-meta span {
+  max-width: 21rem;
+  color: #8f98a3;
+  font-size: 0.86rem;
+  font-weight: 850;
+  text-align: right;
+}
+
+.cvlift-reason-diagram-grid {
+  display: grid;
+  grid-template-columns: minmax(14rem, 0.86fr) minmax(23rem, 32rem) minmax(14rem, 0.86fr);
+  align-items: center;
+  gap: clamp(2.2rem, 4vw, 4.4rem);
+}
+
+.cvlift-reason-column {
+  display: grid;
+  gap: clamp(1.05rem, 2.2vw, 2.25rem);
+}
+
+.cvlift-reason-column-right {
+  gap: clamp(1.6rem, 3vw, 3rem);
+}
+
+.cvlift-reason-callout {
+  --reason-color: #b7ff00;
+  --connector-length: clamp(1.35rem, 2.6vw, 2.8rem);
+  --reason-transition: var(--cvlift-highlight-transition);
+  position: relative;
+  display: grid;
+  grid-template-columns: 3.45rem minmax(0, 1fr);
+  align-items: flex-start;
+  gap: 0.8rem;
+  min-height: 5.95rem;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 1.35rem;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.018), rgba(255, 255, 255, 0.006)),
+    rgba(0, 0, 0, 0.62);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.025),
+    0 18px 44px rgba(0, 0, 0, 0.3);
+  padding: 0.85rem;
+  color: #f4f7f0;
+  font-family: var(--font-montserrat), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+  opacity: 1;
+  transition:
+    transform var(--reason-transition),
+    border-color var(--reason-transition),
+    background var(--reason-transition),
+    box-shadow var(--reason-transition),
+    opacity var(--reason-transition);
+}
+
+.cvlift-reason-callout:hover,
+.cvlift-reason-callout:focus-visible,
+.cvlift-reason-callout.is-active {
+  transform: translateY(-3px);
+  opacity: 1;
+  border-color: color-mix(in srgb, var(--reason-color) 36%, transparent);
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--reason-color) 10%, transparent), rgba(255, 255, 255, 0.022)),
+    rgba(5, 8, 8, 0.88);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.09),
+    0 20px 48px rgba(0, 0, 0, 0.28),
+    0 0 34px color-mix(in srgb, var(--reason-color) 18%, transparent);
+}
+
+.cvlift-reason-callout.is-dimmed {
+  opacity: 0.38;
+}
+
+.cvlift-reason-icon {
+  display: inline-flex;
+  width: 3.45rem;
+  height: 3.45rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in srgb, var(--reason-color) 46%, transparent);
+  border-radius: 1rem;
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--reason-color) 18%, transparent), rgba(255, 255, 255, 0.035)),
+    rgba(255, 255, 255, 0.04);
+  color: color-mix(in srgb, var(--reason-color) 54%, #47515f);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.13),
+    0 0 30px color-mix(in srgb, var(--reason-color) 28%, transparent);
+  transition:
+    color var(--reason-transition),
+    border-color var(--reason-transition),
+    background var(--reason-transition),
+    box-shadow var(--reason-transition);
+}
+
+.cvlift-reason-copy {
+  display: block;
+  min-width: 0;
+}
+
+.cvlift-reason-heading {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.cvlift-reason-heading strong {
+  color: color-mix(in srgb, var(--reason-color) 84%, #4b5563);
+  font-size: clamp(1.45rem, 1.9vw, 2rem);
+  font-weight: 950;
+  line-height: 0.95;
+  text-shadow: none;
+  transition:
+    color var(--reason-transition),
+    text-shadow var(--reason-transition);
+}
+
+.cvlift-reason-heading span {
+  color: #d8dee8;
+  font-size: clamp(0.78rem, 0.95vw, 0.98rem);
+  font-weight: 950;
+  line-height: 1.22;
+  transition: color var(--reason-transition);
+}
+
+.cvlift-reason-description {
+  display: block;
+  margin-top: 0.55rem;
+  color: #a8b0bd;
+  font-size: clamp(0.72rem, 0.78vw, 0.82rem);
+  font-weight: 700;
+  line-height: 1.45;
+  transition: color var(--reason-transition);
+}
+
+.cvlift-reason-callout:hover .cvlift-reason-icon,
+.cvlift-reason-callout:focus-visible .cvlift-reason-icon,
+.cvlift-reason-callout.is-active .cvlift-reason-icon {
+  border-color: color-mix(in srgb, var(--reason-color) 62%, transparent);
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--reason-color) 24%, transparent), rgba(255, 255, 255, 0.055)),
+    rgba(255, 255, 255, 0.055);
+  color: var(--reason-color);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 0 34px color-mix(in srgb, var(--reason-color) 38%, transparent);
+}
+
+.cvlift-reason-callout:hover .cvlift-reason-heading strong,
+.cvlift-reason-callout:focus-visible .cvlift-reason-heading strong,
+.cvlift-reason-callout.is-active .cvlift-reason-heading strong {
+  color: var(--reason-color);
+  text-shadow: 0 0 22px color-mix(in srgb, var(--reason-color) 38%, transparent);
+}
+
+.cvlift-reason-callout:hover .cvlift-reason-heading span,
+.cvlift-reason-callout:focus-visible .cvlift-reason-heading span,
+.cvlift-reason-callout.is-active .cvlift-reason-heading span {
+  color: #ffffff;
+}
+
+.cvlift-reason-callout:hover .cvlift-reason-description,
+.cvlift-reason-callout:focus-visible .cvlift-reason-description,
+.cvlift-reason-callout.is-active .cvlift-reason-description {
+  color: #d6dde8;
+}
+
+.cvlift-reason-connector,
+.cvlift-reason-dot-end {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.54;
+  transition:
+    opacity var(--reason-transition),
+    box-shadow var(--reason-transition),
+    transform var(--reason-transition);
+}
+
+.cvlift-reason-connector {
+  top: 1.7rem;
+  width: var(--connector-length);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--reason-color));
+  box-shadow: 0 0 8px color-mix(in srgb, var(--reason-color) 16%, transparent);
+}
+
+.cvlift-reason-dot-end {
+  top: 1.48rem;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 999px;
+  background: var(--reason-color);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--reason-color) 24%, transparent);
+}
+
+.cvlift-reason-callout-left .cvlift-reason-connector {
+  left: calc(100% + 0.65rem);
+}
+
+.cvlift-reason-callout-left .cvlift-reason-dot-end {
+  left: calc(100% + 0.65rem + var(--connector-length));
+}
+
+.cvlift-reason-callout-right .cvlift-reason-connector {
+  right: calc(100% + 0.65rem);
+  background: linear-gradient(90deg, var(--reason-color), transparent);
+}
+
+.cvlift-reason-callout-right .cvlift-reason-dot-end {
+  right: calc(100% + 0.65rem + var(--connector-length));
+}
+
+.cvlift-reason-callout:hover .cvlift-reason-connector,
+.cvlift-reason-callout:focus-visible .cvlift-reason-connector,
+.cvlift-reason-callout.is-active .cvlift-reason-connector,
+.cvlift-reason-callout:hover .cvlift-reason-dot-end,
+.cvlift-reason-callout:focus-visible .cvlift-reason-dot-end,
+.cvlift-reason-callout.is-active .cvlift-reason-dot-end {
+  opacity: 1;
+  transform: scaleX(1.04);
+}
+
+.cvlift-reason-callout.is-dimmed .cvlift-reason-connector,
+.cvlift-reason-callout.is-dimmed .cvlift-reason-dot-end {
+  opacity: 0.12;
+}
+
+.cvlift-reason-callout:hover .cvlift-reason-connector,
+.cvlift-reason-callout:focus-visible .cvlift-reason-connector,
+.cvlift-reason-callout.is-active .cvlift-reason-connector {
+  box-shadow: 0 0 20px color-mix(in srgb, var(--reason-color) 46%, transparent);
+}
+
+.cvlift-reason-callout:hover .cvlift-reason-dot-end,
+.cvlift-reason-callout:focus-visible .cvlift-reason-dot-end,
+.cvlift-reason-callout.is-active .cvlift-reason-dot-end {
+  box-shadow: 0 0 18px var(--reason-color);
+}
+
+.cvlift-donut-stage {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+.cvlift-donut-chart {
+  position: relative;
+  display: flex;
+  width: min(100%, 31.5rem);
+  aspect-ratio: 1;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.cvlift-donut-ring-svg {
+  position: relative;
+  z-index: 2;
+  overflow: visible;
+}
+
+.cvlift-donut-segment {
+  cursor: pointer;
+  outline: none;
+  transition:
+    filter var(--cvlift-highlight-transition),
+    opacity var(--cvlift-highlight-transition);
+}
+
+.cvlift-donut-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: clamp(0.25rem, 0.8vw, 0.75rem);
+}
+
+.cvlift-donut-actions .cvlift-primary-button,
+.cvlift-donut-actions .cvlift-secondary-button {
+  min-width: min(100%, 15.6rem);
+  min-height: 3rem;
+  padding: 0.78rem 1.35rem;
+  font-size: 0.76rem;
+}
+
+.cvlift-safe-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+  color: #8f98a3;
+  font-family: var(--font-montserrat), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.cvlift-fix-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.2rem;
+  background: rgba(0, 0, 0, 0.26);
+  padding: 1rem 1.05rem;
+  color: #dce7d1;
+  font-family: var(--font-montserrat), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.cvlift-fix-module {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.2rem 0;
+}
+
+.cvlift-fix-module:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.cvlift-fix-module:last-child {
+  padding-bottom: 0;
+}
+
+.cvlift-fix-module-title {
+  color: #f4f7f0;
+  font-size: 0.92rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.cvlift-example-rewrite {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 0.9rem;
+  margin-left: 2rem;
+  border-left: 2px solid rgba(183, 255, 0, 0.52);
+  border-radius: 0 1rem 1rem 0;
+  background: rgba(183, 255, 0, 0.045);
+  padding: 0.78rem 0.9rem;
+  color: #92988e;
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.6;
+}
+
+.cvlift-example-rewrite svg {
+  color: #b7ff00;
+}
+
+.cvlift-example-rewrite strong {
+  color: #f4f7f0;
+}
+
+.cvlift-comparison-card {
+  min-height: 34rem;
+}
+
+.cvlift-comparison-card-danger {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 28px 80px rgba(0, 0, 0, 0.34),
+    0 0 54px rgba(239, 68, 68, 0.08);
+}
+
+.cvlift-comparison-card-success {
+  border-color: rgba(183, 255, 0, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 34px 92px rgba(0, 0, 0, 0.34),
+    0 0 70px rgba(183, 255, 0, 0.12);
+}
+
+.cvlift-comparison-card-success::before {
+  background:
+    radial-gradient(circle at 16% 0%, rgba(183, 255, 0, 0.14), transparent 16rem),
+    radial-gradient(circle at 92% 8%, rgba(20, 184, 166, 0.1), transparent 16rem);
+}
+
+.cvlift-verdict-badge,
+.cvlift-status-chip {
+  display: inline-flex;
+  width: max-content;
+  max-width: 100%;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.48rem 0.72rem;
+  font-family: var(--font-montserrat), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.cvlift-verdict-badge.is-danger,
+.cvlift-status-chip.is-danger {
+  border: 1px solid rgba(248, 113, 113, 0.3);
+  background: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+}
+
+.cvlift-verdict-badge.is-success,
+.cvlift-status-chip.is-success {
+  border: 1px solid rgba(183, 255, 0, 0.3);
+  background: rgba(183, 255, 0, 0.1);
+  color: #b7ff00;
+}
+
+.cvlift-comparison-metric {
+  border-radius: 1.15rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.24);
+  padding: 1rem;
+  color: #92988e;
+  font-family: var(--font-montserrat), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.cvlift-comparison-metric strong {
+  color: #f4f7f0;
+  font-size: 0.9rem;
+}
+
+.cvlift-progress-danger {
+  background: linear-gradient(90deg, #ef4444, #f97316);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.35);
+}
+
+.cvlift-progress-success {
+  background: linear-gradient(90deg, #a8ff00, #14b8a6, #8b5cf6);
+  box-shadow: 0 0 22px rgba(168, 255, 0, 0.38);
+}
+
+.cvlift-primary-button,
+.cvlift-secondary-button,
+.cvlift-header-button {
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  overflow: hidden;
+  isolation: isolate;
+  flex-shrink: 0;
+  white-space: nowrap;
+  border-radius: 999px;
+  font-family: var(--font-montserrat), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+  font-size: 0.84rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.cvlift-primary-button > *,
+.cvlift-secondary-button > *,
+.cvlift-header-button > * {
+  position: relative;
+  z-index: 1;
+}
+
+.cvlift-primary-button::before,
+.cvlift-secondary-button::before,
+.cvlift-header-button::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    110deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.34) 42%,
+    transparent 72%
+  );
+  transform: translateX(-130%);
+  transition: transform 520ms ease;
+}
+
+.cvlift-primary-button {
+  min-height: 3.5rem;
+  border: 1px solid rgba(183, 255, 0, 0.34);
+  padding: 1rem 1.9rem;
+  background: #b7ff00;
+  color: #050605;
+  box-shadow: 0 0 36px rgba(183, 255, 0, 0.2);
+}
+
+.cvlift-secondary-button {
+  min-height: 3.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  padding: 1rem 1.75rem;
+  background: #050605;
+  color: #ffffff;
+}
+
+.cvlift-header-button {
+  min-height: 2.85rem;
+  border: 1px solid rgba(183, 255, 0, 0.34);
+  padding: 0.78rem 1.2rem;
+  background: #b7ff00;
+  color: #050605;
+}
+
+.cvlift-primary-button:hover,
+.cvlift-secondary-button:hover,
+.cvlift-header-button:hover {
+  transform: translateY(-2px);
+}
+
+.cvlift-primary-button:hover::before,
+.cvlift-secondary-button:hover::before,
+.cvlift-header-button:hover::before {
+  transform: translateX(130%);
+}
+
+.cvlift-primary-button:hover,
+.cvlift-header-button:hover {
+  box-shadow: 0 0 44px rgba(183, 255, 0, 0.3);
+}
+
+.cvlift-secondary-button:hover {
+  border-color: rgba(255, 255, 255, 0.42);
+  color: #ffffff;
+}
+
+.cvlift-bottom-cta,
+.cvlift-token-section {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.cvlift-bottom-cta::before,
+.cvlift-token-section::before {
+  content: "";
+  position: absolute;
+  inset: -34%;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 54%, rgba(183, 255, 0, 0.16), transparent 18rem),
+    radial-gradient(circle at 78% 20%, rgba(155, 92, 255, 0.2), transparent 20rem),
+    radial-gradient(circle at 58% 88%, rgba(183, 255, 0, 0.08), transparent 16rem);
+  filter: blur(18px) saturate(1.2);
+  opacity: 0.9;
+  animation: cvlift-section-gradient-flight 16s ease-in-out infinite alternate;
+}
+
+.cvlift-bottom-cta::after,
+.cvlift-token-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(183, 255, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, transparent, black 18%, black 74%, transparent);
+  opacity: 0.55;
+  animation: cvlift-grid-slide 18s linear infinite;
+}
+
+.cvlift-bottom-copy,
+.cvlift-cta-console,
+.cvlift-token-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+.cvlift-cta-console {
+  min-height: 30rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 2rem;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(183, 255, 0, 0.16), transparent 11rem),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.015)),
+    rgba(0, 0, 0, 0.42);
+  padding: 1.65rem;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 28px 80px rgba(0, 0, 0, 0.32);
+}
+
+.cvlift-cta-console::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(115deg, transparent 0 36%, rgba(183, 255, 0, 0.14) 44%, transparent 52%),
+    linear-gradient(90deg, rgba(183, 255, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(rgba(183, 255, 0, 0.035) 1px, transparent 1px);
+  background-size:
+    220% 100%,
+    26px 26px,
+    26px 26px;
+  animation: cvlift-console-sweep 7s ease-in-out infinite;
+}
+
+.cvlift-cta-orbit {
+  position: absolute;
+  left: 50%;
+  top: 1.5rem;
+  width: min(20.5rem, 78vw);
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+}
+
+.cvlift-cta-ring,
+.cvlift-cta-core {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+}
+
+.cvlift-cta-ring {
+  border: 1px solid rgba(183, 255, 0, 0.16);
+  box-shadow: inset 0 0 32px rgba(183, 255, 0, 0.04);
+}
+
+.cvlift-cta-ring::before {
+  content: "";
+  position: absolute;
+  top: -0.25rem;
+  left: 50%;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: #b7ff00;
+  box-shadow: 0 0 24px rgba(183, 255, 0, 0.9);
+}
+
+.cvlift-cta-ring-1 {
+  animation: cvlift-orbit-spin 9s linear infinite;
+}
+
+.cvlift-cta-ring-2 {
+  inset: 2.6rem;
+  border-color: rgba(155, 92, 255, 0.24);
+  animation: cvlift-orbit-spin 12s linear infinite reverse;
+}
+
+.cvlift-cta-ring-2::before {
+  background: #9b5cff;
+  box-shadow: 0 0 24px rgba(155, 92, 255, 0.9);
+}
+
+.cvlift-cta-core {
+  inset: 5.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(183, 255, 0, 0.34);
+  background:
+    radial-gradient(circle, rgba(183, 255, 0, 0.18), rgba(183, 255, 0, 0.04) 62%, rgba(0, 0, 0, 0.36));
+  color: #b7ff00;
+  box-shadow: 0 0 42px rgba(183, 255, 0, 0.18);
+  animation: cvlift-core-pulse 3.4s ease-in-out infinite;
+}
+
+.cvlift-cta-status-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 1rem;
+  margin-top: 18rem;
+}
+
+.cvlift-cta-status {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.45rem;
+  background: rgba(0, 0, 0, 0.42);
+  padding: 1.1rem 1.2rem;
+  font-family: var(--font-montserrat), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+  font-size: 0.76rem;
+  font-weight: 900;
+  color: #777d72;
+  text-transform: uppercase;
+}
+
+.cvlift-cta-status strong {
+  color: #b7ff00;
+  font-size: 0.96rem;
+}
+
+.cvlift-cta-status-bar {
+  height: 100%;
+  width: var(--signal-width);
+  border-radius: 999px;
+  background: linear-gradient(90deg, #b7ff00, #d8ff70, #9b5cff);
+  box-shadow: 0 0 18px rgba(183, 255, 0, 0.38);
+  transform-origin: left center;
+  animation: cvlift-signal-breathe 4.8s ease-in-out infinite;
+}
+
+.cvlift-token-section {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(155, 92, 255, 0.08), transparent 30rem),
+    #050605;
+}
+
+.cvlift-token-note {
+  display: flex;
+  min-height: 3.9rem;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.35rem;
+  background: rgba(255, 255, 255, 0.035);
+  padding: 1rem 1.2rem;
+}
+
+.cvlift-token-card {
+  position: relative;
+  display: flex;
+  min-height: 29rem;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 2.2rem;
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.06), transparent 42%),
+    rgba(8, 10, 7, 0.84);
+  padding: 1.7rem;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 26px 70px rgba(0, 0, 0, 0.28);
+  animation: cvlift-token-card-float 4s ease-in-out infinite alternate;
+  animation-delay: var(--card-delay, 0s);
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.cvlift-token-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(183, 255, 0, 0.16), transparent 11rem),
+    linear-gradient(115deg, transparent 0 34%, rgba(255, 255, 255, 0.16) 46%, transparent 58%);
+  background-size:
+    100% 100%,
+    240% 100%;
+  opacity: 0.75;
+  animation: cvlift-card-shine 6.6s ease-in-out infinite;
+}
+
+.cvlift-token-card::after {
+  content: "";
+  position: absolute;
+  inset: 0.8rem;
+  pointer-events: none;
+  border: 1px solid rgba(183, 255, 0, 0.08);
+  border-radius: 1.7rem;
+}
+
+.cvlift-token-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.cvlift-token-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(183, 255, 0, 0.34);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 32px 90px rgba(183, 255, 0, 0.12);
+}
+
+.cvlift-token-card-purple::before {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(155, 92, 255, 0.22), transparent 11rem),
+    linear-gradient(115deg, transparent 0 34%, rgba(255, 255, 255, 0.16) 46%, transparent 58%);
+  background-size:
+    100% 100%,
+    240% 100%;
+}
+
+.cvlift-token-card-popular {
+  border-color: rgba(183, 255, 0, 0.3);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(183, 255, 0, 0.12), transparent 13rem),
+    linear-gradient(160deg, rgba(255, 255, 255, 0.075), transparent 48%),
+    rgba(8, 10, 7, 0.92);
+}
+
+.cvlift-token-badge {
+  display: inline-flex;
+  width: max-content;
+  max-width: 100%;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 1.2rem;
+  border: 1px solid rgba(183, 255, 0, 0.28);
+  border-radius: 999px;
+  background: rgba(183, 255, 0, 0.1);
+  padding: 0.52rem 0.78rem;
+  font-family: var(--font-montserrat), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 900;
+  color: #b7ff00;
+  text-transform: uppercase;
+}
+
+.cvlift-token-price {
+  flex-shrink: 0;
+  border: 1px solid rgba(183, 255, 0, 0.22);
+  border-radius: 999px;
+  background: rgba(183, 255, 0, 0.08);
+  padding: 0.56rem 0.82rem;
+  font-family: var(--font-montserrat), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+  font-size: 0.84rem;
+  font-weight: 900;
+  color: #b7ff00;
+  white-space: nowrap;
+}
+
+.cvlift-token-meter {
+  height: 0.62rem;
+  margin-top: 1.25rem;
+  margin-bottom: 1.35rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.cvlift-token-meter span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #b7ff00, #d8ff70, #9b5cff);
+  box-shadow: 0 0 20px rgba(183, 255, 0, 0.32);
+  transform-origin: left center;
+  animation: cvlift-token-meter-pulse 4.4s ease-in-out infinite;
+}
+
+.cvlift-token-status-badge {
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3.35rem;
+  width: 100%;
+  margin-top: auto;
+  overflow: hidden;
+  border: 1px solid rgba(183, 255, 0, 0.32);
+  border-radius: 999px;
+  background: #b7ff00;
+  padding: 0.98rem 1.15rem;
+  color: #050605;
+  font-family: var(--font-montserrat), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 0 32px rgba(183, 255, 0, 0.18);
+}
+
+.cvlift-token-status-badge::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent, rgba(255, 255, 255, 0.34), transparent);
+  transform: translateX(-130%);
+  animation: cvlift-token-status-shine 4.8s ease-in-out infinite;
+}
+
+.cvlift-token-status-badge > * {
+  position: relative;
+  z-index: 1;
+}
+
+html[lang="ru"] .cvlift-home .uppercase,
+html[lang="ru"] .cvlift-primary-button,
+html[lang="ru"] .cvlift-secondary-button,
+html[lang="ru"] .cvlift-header-button,
+html[lang="ru"] .cvlift-token-status-badge,
+html[lang="ru"] .cvlift-token-badge {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.cvlift-icon {
+  display: inline-flex;
+  width: 2.75rem;
+  height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.85rem;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.cvlift-icon svg {
+  width: 1.18rem;
+  height: 1.18rem;
+}
+
+.cvlift-icon-lime {
+  color: #b7ff00;
+}
+
+.cvlift-icon-purple {
+  color: #9b5cff;
+}
+
+.cvlift-icon-red {
+  color: #ff4d5e;
+}
+
+.premium-grid {
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.035) 1px, transparent 1px),
+    radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.14), transparent 42%);
+  background-size:
+    34px 34px,
+    34px 34px,
+    100% 70%;
+  animation: premium-grid-drift 24s ease-in-out infinite alternate;
+}
+
+.glass-card {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.06);
+  backdrop-filter: blur(20px);
+}
+
+.seo-cta-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.seo-cta-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 14% 16%, rgba(99, 102, 241, 0.22), transparent 18rem),
+    radial-gradient(circle at 84% 18%, rgba(34, 197, 94, 0.12), transparent 18rem);
+}
+[data-theme="dark"] .cvlift-home .bg-white\/75,
+[data-theme="dark"] .cvlift-home .bg-white {
+  background-color: rgba(10, 12, 8, 0.78);
+}
+
+[data-theme="dark"] .cvlift-home .text-\[\#0F172A\] {
+  color: #f4f7f0;
+}
+
+[data-theme="dark"] .cvlift-home .border-black\/\[0\.06\] {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .cvlift-home .shadow-sm {
+  box-shadow: none;
+}
+
+[data-theme="dark"] .cvlift-panel,
+[data-theme="dark"] .cvlift-cta-console,
+[data-theme="dark"] .cvlift-token-card {
+  border-color: rgba(183, 255, 0, 0.15);
+  background:
+    radial-gradient(circle at 16% 0%, rgba(183, 255, 0, 0.07), transparent 16rem),
+    radial-gradient(circle at 94% 12%, rgba(155, 92, 255, 0.06), transparent 18rem),
+    linear-gradient(160deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018)),
+    rgba(18, 23, 13, 0.92);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.075),
+    0 28px 78px rgba(0, 0, 0, 0.46),
+    0 0 44px rgba(183, 255, 0, 0.075),
+    0 0 72px rgba(155, 92, 255, 0.045);
+}
+
+[data-theme="dark"] .cvlift-panel:hover,
+[data-theme="dark"] .cvlift-token-card:hover {
+  border-color: rgba(183, 255, 0, 0.3);
+  background:
+    radial-gradient(circle at 18% 0%, rgba(183, 255, 0, 0.095), transparent 17rem),
+    radial-gradient(circle at 92% 12%, rgba(155, 92, 255, 0.08), transparent 18rem),
+    linear-gradient(160deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02)),
+    rgba(21, 27, 15, 0.95);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.09),
+    0 34px 92px rgba(0, 0, 0, 0.5),
+    0 0 58px rgba(183, 255, 0, 0.12),
+    0 0 84px rgba(155, 92, 255, 0.06);
+}
+
+[data-theme="dark"] .cvlift-token-note,
+[data-theme="dark"] .cvlift-cta-status {
+  border-color: rgba(255, 255, 255, 0.105);
+  background: rgba(10, 13, 7, 0.68);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.045),
+    0 12px 34px rgba(0, 0, 0, 0.26),
+    0 0 28px rgba(183, 255, 0, 0.035);
+}
+
+[data-theme="dark"] .cvlift-home .bg-\[\#070807\],
+[data-theme="dark"] .cvlift-home .bg-\[\#080A07\],
+[data-theme="dark"] .cvlift-home .bg-\[\#0A0B0A\],
+[data-theme="dark"] .cvlift-home .bg-\[\#0B0C0A\],
+[data-theme="dark"] .cvlift-home .bg-\[\#0C1008\],
+[data-theme="dark"] .cvlift-home .bg-\[\#0A0C08\],
+[data-theme="dark"] .cvlift-home .bg-black\/25,
+[data-theme="dark"] .cvlift-home .bg-black\/30,
+[data-theme="dark"] .cvlift-home .bg-black\/50,
+[data-theme="dark"] .cvlift-home .bg-black\/55,
+[data-theme="dark"] .cvlift-home .bg-black\/65 {
+  background-color: rgba(18, 23, 13, 0.78);
+}
+
+[data-theme="dark"] ::selection {
+  background: rgba(129, 140, 248, 0.28);
+}
+
+[data-theme="dark"] .home-ambient {
+  background:
+    linear-gradient(180deg, rgba(8, 13, 25, 0.84), rgba(8, 13, 25, 0.96)),
+    var(--background);
+}
+
+[data-theme="dark"] .home-ambient::before {
+  background:
+    linear-gradient(
+      116deg,
+      rgba(99, 102, 241, 0.22) 0%,
+      rgba(20, 184, 166, 0.12) 24%,
+      rgba(139, 92, 246, 0.1) 47%,
+      rgba(14, 165, 233, 0.13) 70%,
+      rgba(99, 102, 241, 0.2) 100%
+    ),
+    linear-gradient(
+      48deg,
+      rgba(34, 197, 94, 0.08) 0%,
+      transparent 30%,
+      rgba(168, 85, 247, 0.14) 54%,
+      transparent 80%
+    );
+  opacity: 0.54;
+  filter: blur(3px) saturate(1.18);
+}
+
+[data-theme="dark"] .home-ambient::after {
+  background:
+    linear-gradient(90deg, rgba(8, 13, 25, 0.78), transparent 20%, transparent 80%, rgba(8, 13, 25, 0.82)),
+    linear-gradient(180deg, rgba(8, 13, 25, 0.5), transparent 26%, rgba(8, 13, 25, 0.86));
+}
+
+[data-theme="dark"] .premium-grid {
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.075) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.075) 1px, transparent 1px),
+    radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.22), transparent 42%);
+}
+
+[data-theme="dark"] .glass-card {
+  border-color: var(--border-soft);
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.05), transparent 54%),
+    var(--surface-elevated);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 24px 72px rgba(0, 0, 0, 0.36),
+    0 0 42px rgba(183, 255, 0, 0.055);
+}
+
+[data-theme="dark"] .bg-\[\#FAFBFC\],
+[data-theme="dark"] .bg-\[\#F8FAFC\],
+[data-theme="dark"] .bg-\[\#F3F5FB\],
+[data-theme="dark"] .bg-\[\#EEF2F7\],
+[data-theme="dark"] .bg-\[\#E8ECF2\] {
+  background-color: var(--surface-muted);
+}
+
+[data-theme="dark"] .bg-\[\#0F172A\] {
+  background-color: var(--surface-solid);
+}
+
+[data-theme="dark"] .bg-\[\#0F172A\]\/20 {
+  background-color: rgba(5, 6, 5, 0.7);
+}
+
+[data-theme="dark"] .bg-white,
+[data-theme="dark"] .bg-white\/60,
+[data-theme="dark"] .bg-white\/70,
+[data-theme="dark"] .bg-white\/75,
+[data-theme="dark"] .bg-white\/85,
+[data-theme="dark"] .bg-white\/90 {
+  background-color: var(--surface-elevated);
+}
+
+[data-theme="dark"] .rounded-\[20px\].bg-white,
+[data-theme="dark"] .rounded-\[22px\].bg-white\/75,
+[data-theme="dark"] .rounded-\[24px\].bg-white\/75,
+[data-theme="dark"] .rounded-\[28px\].bg-white\/75,
+[data-theme="dark"] .rounded-\[28px\].bg-white\/90 {
+  border-color: var(--border-soft);
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.045), transparent 58%),
+    var(--surface-elevated);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.055),
+    0 22px 62px rgba(0, 0, 0, 0.34),
+    0 0 38px rgba(183, 255, 0, 0.045);
+}
+
+[data-theme="dark"] .hover\:bg-white:hover,
+[data-theme="dark"] .hover\:bg-white\/60:hover,
+[data-theme="dark"] .hover\:bg-white\/75:hover,
+[data-theme="dark"] .hover\:bg-\[\#FAFBFC\]:hover,
+[data-theme="dark"] .hover\:bg-\[\#F8FAFC\]:hover,
+[data-theme="dark"] .hover\:bg-\[\#F3F5FB\]:hover {
+  background-color: rgba(16, 20, 12, 0.92);
+}
+
+[data-theme="dark"] .focus\:bg-white:focus {
+  background-color: rgba(10, 12, 8, 0.96);
+}
+
+[data-theme="dark"] .text-\[\#0F172A\] {
+  color: var(--foreground);
+}
+
+[data-theme="dark"] .text-\[\#64748B\],
+[data-theme="dark"] .text-\[\#94A3B8\],
+[data-theme="dark"] .text-\[\#CBD5E1\] {
+  color: var(--text-muted);
+}
+
+[data-theme="dark"] .text-\[\#6366F1\],
+[data-theme="dark"] .text-\[\#4F46E5\],
+[data-theme="dark"] .hover\:text-\[\#6366F1\]:hover,
+[data-theme="dark"] .hover\:text-\[\#4F46E5\]:hover {
+  color: var(--accent);
+}
+
+[data-theme="dark"] .text-\[\#A5B4FC\] {
+  color: var(--purple);
+}
+
+[data-theme="dark"] .hover\:text-\[\#0F172A\]:hover {
+  color: var(--foreground);
+}
+
+[data-theme="dark"] .bg-\[\#6366F1\],
+[data-theme="dark"] .hover\:bg-\[\#4F46E5\]:hover {
+  background-color: #b7ff00;
+  color: #050605;
+}
+
+[data-theme="dark"] .bg-\[\#6366F1\]\/8,
+[data-theme="dark"] .bg-\[\#6366F1\]\/10,
+[data-theme="dark"] .bg-\[\#6366F1\]\/12,
+[data-theme="dark"] .hover\:bg-\[\#6366F1\]\/12:hover {
+  background-color: var(--accent-soft);
+}
+
+[data-theme="dark"] .disabled\:bg-\[\#CBD5E1\]:disabled {
+  background-color: rgba(146, 152, 142, 0.24);
+  color: var(--text-muted);
+}
+
+[data-theme="dark"] .border-black\/10,
+[data-theme="dark"] .border-black\/\[0\.06\],
+[data-theme="dark"] .border-white\/70 {
+  border-color: var(--border-soft);
+}
+
+[data-theme="dark"] .border-\[\#6366F1\],
+[data-theme="dark"] .border-\[\#6366F1\]\/15,
+[data-theme="dark"] .border-\[\#6366F1\]\/40,
+[data-theme="dark"] .focus\:border-\[\#6366F1\]\/50:focus,
+[data-theme="dark"] .hover\:border-\[\#6366F1\]\/70:hover {
+  border-color: var(--accent-border);
+}
+
+[data-theme="dark"] .ring-\[\#6366F1\]\/10,
+[data-theme="dark"] .focus\:ring-\[\#6366F1\]\/10:focus {
+  --tw-ring-color: var(--accent-soft);
+}
+
+[data-theme="dark"] .border-dashed.border-black\/10 {
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+[data-theme="dark"] .shadow-sm {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.045),
+    0 18px 56px rgba(0, 0, 0, 0.34),
+    0 0 34px rgba(183, 255, 0, 0.045);
+}
+
+[data-theme="dark"] .text-\[\#22C55E\],
+[data-theme="dark"] .text-\[\#16A34A\],
+[data-theme="dark"] .text-\[\#15803D\] {
+  color: #8ee99f;
+}
+
+[data-theme="dark"] .bg-\[\#22C55E\]\/5,
+[data-theme="dark"] .bg-\[\#22C55E\]\/10 {
+  background-color: rgba(34, 197, 94, 0.16);
+}
+
+[data-theme="dark"] .border-\[\#22C55E\]\/20 {
+  border-color: rgba(142, 233, 159, 0.24);
+}
+
+[data-theme="dark"] .text-\[\#F59E0B\],
+[data-theme="dark"] .text-\[\#B45309\] {
+  color: #f6d77b;
+}
+
+[data-theme="dark"] .bg-\[\#F59E0B\]\/8,
+[data-theme="dark"] .bg-\[\#F59E0B\]\/10 {
+  background-color: rgba(245, 158, 11, 0.16);
+}
+
+[data-theme="dark"] .border-\[\#F59E0B\]\/20 {
+  border-color: rgba(246, 215, 123, 0.24);
+}
+
+[data-theme="dark"] .text-\[\#EF4444\],
+[data-theme="dark"] .text-\[\#B91C1C\] {
+  color: #fca5a5;
+}
+
+[data-theme="dark"] .bg-\[\#EF4444\]\/5,
+[data-theme="dark"] .bg-\[\#EF4444\]\/8,
+[data-theme="dark"] .bg-\[\#EF4444\]\/10 {
+  background-color: rgba(127, 29, 29, 0.18);
+}
+
+[data-theme="dark"] .border-\[\#EF4444\]\/15,
+[data-theme="dark"] .border-\[\#EF4444\]\/20 {
+  border-color: rgba(252, 165, 165, 0.24);
+}
+
+[data-theme="dark"] input,
+[data-theme="dark"] textarea,
+[data-theme="dark"] select {
+  color: var(--foreground);
+}
+
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+  color: #7f8da3;
+}
+
+@keyframes home-ambient-flow {
+  0% {
+    background-position:
+      0% 42%,
+      100% 18%;
+    transform: translate3d(-2%, -1%, 0) rotate(-2deg) scale(1.02);
+  }
+
+  50% {
+    background-position:
+      72% 58%,
+      34% 82%;
+    transform: translate3d(1%, 2%, 0) rotate(1deg) scale(1.05);
+  }
+
+  100% {
+    background-position:
+      100% 36%,
+      0% 64%;
+    transform: translate3d(2%, -1%, 0) rotate(2deg) scale(1.03);
+  }
+}
+
+@keyframes premium-grid-drift {
+  0% {
+    background-position:
+      0 0,
+      0 0,
+      50% 0%;
+  }
+
+  100% {
+    background-position:
+      34px 22px,
+      -18px 34px,
+      48% 8%;
+  }
+}
+
+@keyframes cvlift-background-flow {
+  0% {
+    background-position:
+      22% -12%,
+      78% 4%,
+      42% 22%,
+      0 0;
+  }
+
+  50% {
+    background-position:
+      82% 24%,
+      18% 34%,
+      70% -8%,
+      0 0;
+  }
+
+  100% {
+    background-position:
+      40% 36%,
+      64% -16%,
+      16% 18%,
+      0 0;
+  }
+}
+
+@keyframes cvlift-hero-gradient-flight {
+  0% {
+    transform: translate3d(-14%, -10%, 0) rotate(-10deg) scale(1);
+  }
+
+  35% {
+    transform: translate3d(12%, 8%, 0) rotate(11deg) scale(1.1);
+  }
+
+  70% {
+    transform: translate3d(-6%, 16%, 0) rotate(-4deg) scale(1.18);
+  }
+
+  100% {
+    transform: translate3d(16%, -12%, 0) rotate(13deg) scale(1.08);
+  }
+}
+
+@keyframes cvlift-fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes cvlift-section-gradient-flight {
+  0% {
+    transform: translate3d(-10%, -8%, 0) rotate(-8deg) scale(1);
+  }
+
+  38% {
+    transform: translate3d(10%, 7%, 0) rotate(7deg) scale(1.12);
+  }
+
+  72% {
+    transform: translate3d(-4%, 14%, 0) rotate(-2deg) scale(1.18);
+  }
+
+  100% {
+    transform: translate3d(12%, -10%, 0) rotate(11deg) scale(1.08);
+  }
+}
+
+@keyframes cvlift-grid-slide {
+  to {
+    background-position: 72px 72px, 72px 72px;
+  }
+}
+
+@keyframes cvlift-console-sweep {
+  0%,
+  100% {
+    background-position:
+      -120% 0,
+      0 0,
+      0 0;
+  }
+
+  50% {
+    background-position:
+      120% 0,
+      13px 0,
+      0 13px;
+  }
+}
+
+@keyframes cvlift-orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes cvlift-core-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 42px rgba(183, 255, 0, 0.18);
+  }
+
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 62px rgba(183, 255, 0, 0.3);
+  }
+}
+
+@keyframes cvlift-signal-breathe {
+  0%,
+  100% {
+    transform: scaleX(0.86);
+  }
+
+  50% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes cvlift-token-card-float {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, -6px, 0);
+  }
+}
+
+@keyframes cvlift-card-shine {
+  0%,
+  100% {
+    background-position:
+      0 0,
+      -140% 0;
+  }
+
+  50% {
+    background-position:
+      0 0,
+      140% 0;
+  }
+}
+
+@keyframes cvlift-token-meter-pulse {
+  0%,
+  100% {
+    transform: scaleX(0.9);
+    filter: saturate(1);
+  }
+
+  50% {
+    transform: scaleX(1);
+    filter: saturate(1.35);
+  }
+}
+
+@keyframes cvlift-token-status-shine {
+  0%,
+  100% {
+    transform: translateX(-130%);
+  }
+
+  50% {
+    transform: translateX(130%);
+  }
+}
+
+@media (max-width: 1100px) {
+  .cvlift-reason-diagram-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .cvlift-donut-stage {
+    order: -1;
+  }
+
+  .cvlift-reason-column,
+  .cvlift-reason-column-right {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .cvlift-reason-callout {
+    min-height: auto;
+    grid-template-columns: 3.4rem minmax(0, 1fr);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1.35rem;
+    background: rgba(255, 255, 255, 0.045);
+    padding: 1rem;
+  }
+
+  .cvlift-reason-icon {
+    width: 3.4rem;
+    height: 3.4rem;
+    border-radius: 1rem;
+  }
+
+  .cvlift-reason-connector,
+  .cvlift-reason-dot-end {
+    display: none;
+  }
+
+  .cvlift-donut-chart {
+    width: min(78vw, 28rem);
+  }
+}
+
+@media (max-width: 640px) {
+  .cvlift-home .font-mono.text-\[10px\],
+  .cvlift-home .font-mono.text-\[11px\] {
+    font-size: 0.7rem;
+  }
+
+  .cvlift-home .font-mono.text-xs {
+    font-size: 0.8rem;
+  }
+
+  .cvlift-panel {
+    min-height: auto;
+    padding: 1.45rem;
+  }
+
+  .cvlift-cta-console {
+    min-height: 27rem;
+    padding: 1.1rem;
+  }
+
+  .cvlift-cta-status-grid {
+    margin-top: 16.5rem;
+  }
+
+  .cvlift-token-card {
+    min-height: 27rem;
+    padding: 1.35rem;
+  }
+
+  .cvlift-comparison-card {
+    min-height: auto;
+  }
+
+  .cvlift-chart-card,
+  .cvlift-donut-card,
+  .cvlift-solutions-card,
+  .cvlift-comparison-card {
+    padding: 1.25rem;
+  }
+
+  .cvlift-donut-meta {
+    flex-direction: column;
+  }
+
+  .cvlift-donut-meta span {
+    max-width: none;
+    text-align: left;
+  }
+
+  .cvlift-reason-column,
+  .cvlift-reason-column-right {
+    grid-template-columns: 1fr;
+  }
+
+  .cvlift-reason-heading strong {
+    font-size: 1.65rem;
+  }
+
+  .cvlift-reason-description {
+    font-size: 0.84rem;
+  }
+
+  .cvlift-donut-chart {
+    width: min(82vw, 20rem);
+    margin-block: 1rem;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cvlift-home,
+  .cvlift-hero::before,
+  .home-ambient::before,
+  .premium-grid,
+  .cvlift-hero-copy,
+  .cvlift-roi-section::before,
+  .cvlift-bottom-cta::before,
+  .cvlift-bottom-cta::after,
+  .cvlift-token-section::before,
+  .cvlift-token-section::after,
+  .cvlift-cta-console::before,
+  .cvlift-cta-ring,
+  .cvlift-cta-core,
+  .cvlift-cta-status-bar,
+  .cvlift-token-card,
+  .cvlift-token-card::before,
+  .cvlift-token-meter span,
+  .cvlift-token-status-badge::before {
+    animation: none;
+  }
 }

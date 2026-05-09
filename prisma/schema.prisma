@@ -1,0 +1,140 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id            String     @id @default(cuid())
+  name          String?
+  email         String?    @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  resumes       Resume[]
+  analyses      Analysis[]
+  wallet        Wallet?
+  walletTransactions WalletTransaction[]
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+}
+
+model Resume {
+  id           String     @id @default(cuid())
+  userId       String?
+  fileName     String
+  fileType     String
+  originalText String
+  analyses     Analysis[]
+  user         User?      @relation(fields: [userId], references: [id], onDelete: SetNull)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@index([userId, createdAt])
+}
+
+model Analysis {
+  id                  String   @id @default(cuid())
+  userId              String?
+  resumeId            String?
+  analysisMode        String   @default("vacancy")
+  targetRole          String?
+  salaryMin           Int?
+  salaryMax           Int?
+  salaryCurrency      String?
+  vacancyText         String?
+  vacancyUrl          String?
+  totalScore          Int
+  atsScore            Int
+  vacancyMatchScore   Int
+  keywordScore        Int      @default(0)
+  weakPoints          Json
+  strongPoints        Json
+  recommendedFixes    Json
+  keywordCoverage     Json?
+  resumeIdeas         Json?
+  improvedResumeText  String
+  coverLetter         String
+  model               String?
+  creditTransactions  WalletTransaction[]
+  user                User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  resume              Resume?  @relation(fields: [resumeId], references: [id], onDelete: SetNull)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@index([userId, createdAt])
+  @@index([resumeId])
+}
+
+model Wallet {
+  id              String              @id @default(cuid())
+  userId          String              @unique
+  balance         Int                 @default(0)
+  lifetimeCredits Int                 @default(0)
+  spentCredits    Int                 @default(0)
+  user            User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions    WalletTransaction[]
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+}
+
+model WalletTransaction {
+  id           String         @id @default(cuid())
+  userId       String
+  walletId     String
+  analysisId   String?
+  type         String
+  credits      Int
+  balanceAfter Int
+  description  String
+  user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  wallet       Wallet         @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  analysis     Analysis?      @relation(fields: [analysisId], references: [id], onDelete: SetNull)
+  createdAt    DateTime       @default(now())
+
+  @@index([userId, createdAt])
+  @@index([walletId, createdAt])
+  @@index([analysisId])
+}
