@@ -70,7 +70,7 @@ export default async function HistoryPage() {
             href="/upload"
             className="mt-6 inline-flex h-11 items-center justify-center gap-2 rounded-full bg-[#6366F1] px-5 text-sm font-bold text-white transition duration-200 hover:bg-[#4F46E5]"
           >
-            <LocalizedText k="common.uploadResume" />
+            <LocalizedText k="common.startAnalysis" />
             <ArrowRight aria-hidden="true" className="size-4" />
           </Link>
         </div>

@@ -24,7 +24,7 @@ export function MarketingFooter() {
             <FooterGroup
               title={<LocalizedText k="marketing.footer.product" />}
               links={[
-                [<LocalizedText key="upload" k="common.uploadResume" />, "/upload"],
+                [<LocalizedText key="dashboard" k="common.dashboard" />, "/upload"],
                 [<LocalizedText key="history" k="common.history" />, "/history"],
                 [<LocalizedText key="faq" k="common.faq" />, "/faq"],
               ]}

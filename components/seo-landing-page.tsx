@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CheckCircle2, ChevronDown, Sparkles } from "lucide-react";
-import { GoogleSignInButton } from "@/components/auth-buttons";
 import { LocalizedString, LocalizedText } from "@/components/localized-text";
 import { MarketingFooter } from "@/components/marketing-footer";
 import { MarketingHeader } from "@/components/marketing-header";
@@ -153,12 +152,12 @@ export function SeoLandingPage({
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <GoogleSignInButton
+            <Link
+              href="/login"
               className="inline-flex h-[52px] items-center justify-center gap-2 rounded-full bg-[#6366F1] px-7 text-sm font-bold text-white shadow-[0_16px_40px_rgba(99,102,241,0.26)] transition duration-200 hover:-translate-y-0.5 hover:scale-[1.02] hover:bg-[#4F46E5]"
-              redirectTo="/upload"
             >
               <SeoLocalizedString value={page.cta} locale={locale} />
-            </GoogleSignInButton>
+            </Link>
             <Link
               href="/faq"
               className="inline-flex h-[52px] items-center justify-center gap-2 rounded-full border border-black/[0.06] bg-white/75 px-7 text-sm font-bold text-[#0F172A] shadow-sm backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:bg-white"
@@ -276,12 +275,12 @@ export function SeoLandingPage({
                 />
               </h2>
             </div>
-            <GoogleSignInButton
+            <Link
+              href="/login"
               className="seo-cta-button cvlift-primary-button"
-              redirectTo="/upload"
             >
               <SeoLocalizedText k="common.startAnalysis" locale={locale} />
-            </GoogleSignInButton>
+            </Link>
           </div>
         </div>
       </section>

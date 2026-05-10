@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Sparkles } from "lucide-react";
-import { GoogleSignInButton } from "@/components/auth-buttons";
 import { LocalizedText } from "@/components/localized-text";
 import { PreferenceControls } from "@/components/preference-controls";
 import type { TranslationKey } from "@/lib/i18n";
@@ -44,15 +43,15 @@ export function MarketingHeader({ isSignedIn = false }: MarketingHeaderProps) {
             href="/upload"
             className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-black/[0.06] bg-white/75 px-4 text-sm font-semibold text-[#0F172A] shadow-sm backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:bg-white"
           >
-            <LocalizedText k="marketing.header.upload" />
+            <LocalizedText k="common.dashboard" />
           </Link>
         ) : (
-          <GoogleSignInButton
+          <Link
+            href="/login"
             className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-black/[0.06] bg-white/75 px-4 text-sm font-semibold text-[#0F172A] shadow-sm backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:bg-white"
-            redirectTo="/upload"
           >
             <LocalizedText k="marketing.header.signIn" />
-          </GoogleSignInButton>
+          </Link>
         )}
       </div>
     </nav>

@@ -14,15 +14,18 @@ import {
 import { useI18n } from "@/components/preferences-provider";
 
 type CreditsPanelProps = {
+  analysisCreditCost?: number;
   initialSummary: WalletSummary;
   packages: CreditPackage[];
 };
 
 export function CreditsPanel({
+  analysisCreditCost = ANALYSIS_CREDIT_COST,
   initialSummary,
   packages,
 }: CreditsPanelProps) {
   const { t } = useI18n();
+  const isFreeAnalysis = analysisCreditCost === 0;
 
   return (
     <div className="grid gap-6 xl:grid-cols-[0.72fr_1.28fr]">
@@ -31,10 +34,12 @@ export function CreditsPanel({
           <div>
             <p className="text-sm font-bold text-[#6366F1]">{CREDIT_NAME}</p>
             <h2 className="mt-2 text-5xl font-bold tracking-tight text-[#0F172A]">
-              {initialSummary.balance}
+              {isFreeAnalysis ? t("credits.freeLabel") : initialSummary.balance}
             </h2>
             <p className="mt-2 text-sm font-medium leading-6 text-[#64748B]">
-              {t("credits.perAnalysis", { count: ANALYSIS_CREDIT_COST })}
+              {isFreeAnalysis
+                ? t("credits.freeMode")
+                : t("credits.perAnalysis", { count: analysisCreditCost })}
             </p>
           </div>
           <span className="flex size-12 items-center justify-center rounded-[20px] bg-[#6366F1]/10 text-[#6366F1]">
@@ -119,7 +124,7 @@ export function CreditsPanel({
               {t("credits.usage")}
             </h2>
             <p className="mt-2 max-w-3xl text-sm font-medium leading-6 text-[#64748B]">
-              {t("credits.usageText")}
+              {isFreeAnalysis ? t("credits.usageTextFree") : t("credits.usageText")}
             </p>
           </div>
         </div>

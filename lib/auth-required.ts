@@ -5,7 +5,7 @@ export async function requireUserSession() {
   const session = await getSessionSafely();
 
   if (!session?.user?.id) {
-    redirect("/");
+    redirect("/login");
   }
 
   return session;

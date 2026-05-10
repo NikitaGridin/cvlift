@@ -1,8 +1,8 @@
 import { analyzeRequestSchema } from "@/lib/analysis-schema";
 import type { AnalysisRecord, ResumeAnalysis } from "@/lib/analysis-types";
-import { ANALYSIS_CREDIT_COST } from "@/lib/credits-public";
 import {
   InsufficientCreditsError,
+  getAnalysisCreditCost,
   getWalletSummary,
   spendAnalysisCredit,
 } from "@/lib/credits";
@@ -76,13 +76,17 @@ export async function POST(request: Request) {
     );
   }
 
-  const wallet = await getWalletSummary(session.user.id);
+  const analysisCreditCost = getAnalysisCreditCost();
 
-  if (wallet.balance < ANALYSIS_CREDIT_COST) {
-    return Response.json(
-      { error: "Not enough CV Credits to analyze a resume." },
-      { status: 402 },
-    );
+  if (analysisCreditCost > 0) {
+    const wallet = await getWalletSummary(session.user.id);
+
+    if (wallet.balance < analysisCreditCost) {
+      return Response.json(
+        { error: "Not enough CV Credits to analyze a resume." },
+        { status: 402 },
+      );
+    }
   }
 
   const formData = await request.formData();
@@ -177,7 +181,7 @@ export async function POST(request: Request) {
         },
       });
 
-      await spendAnalysisCredit(tx, session.user.id, analysis.id);
+      await spendAnalysisCredit(tx, session.user.id, analysis.id, analysisCreditCost);
 
       return { resume, analysis };
     });

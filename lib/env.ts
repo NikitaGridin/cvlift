@@ -13,3 +13,9 @@ export function hasRealEnv(name: string) {
     value.includes("your-subdomain")
   );
 }
+
+export function isEnvFlagEnabled(name: string) {
+  const value = process.env[name]?.trim().toLowerCase();
+
+  return value === "1" || value === "true" || value === "yes" || value === "on";
+}

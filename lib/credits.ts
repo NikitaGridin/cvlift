@@ -4,8 +4,10 @@ import {
   creditPackages,
   type WalletSummary,
 } from "@/lib/credits-public";
+import { isEnvFlagEnabled } from "@/lib/env";
 
 type PrismaTransaction = Parameters<Parameters<typeof prisma.$transaction>[0]>[0];
+const FREE_RESUME_ANALYSIS_ENV = "FREE_RESUME_ANALYSIS_ENABLED";
 
 const zeroWallet: WalletSummary = {
   balance: 0,
@@ -16,11 +18,23 @@ const zeroWallet: WalletSummary = {
 export class InsufficientCreditsError extends Error {
   status: number;
 
-  constructor() {
-    super("Not enough CV Credits to analyze a resume.");
+  constructor(message = "Not enough CV Credits to analyze a resume.") {
+    super(message);
     this.name = "InsufficientCreditsError";
     this.status = 402;
   }
+}
+
+export function isFreeResumeAnalysisEnabled() {
+  return isEnvFlagEnabled(FREE_RESUME_ANALYSIS_ENV);
+}
+
+export function getAnalysisCreditCost() {
+  return isFreeResumeAnalysisEnabled() ? 0 : ANALYSIS_CREDIT_COST;
+}
+
+export function getResumeAgentConversationCreditCost() {
+  return isFreeResumeAnalysisEnabled() ? 0 : ANALYSIS_CREDIT_COST;
 }
 
 export async function getWalletSummary(userId: string): Promise<WalletSummary> {
@@ -63,7 +77,12 @@ export async function spendAnalysisCredit(
   tx: PrismaTransaction,
   userId: string,
   analysisId: string,
+  analysisCreditCost = getAnalysisCreditCost(),
 ) {
+  if (analysisCreditCost === 0) {
+    return null;
+  }
+
   const wallet = await tx.wallet.upsert({
     where: { userId },
     create: { userId },
@@ -73,11 +92,11 @@ export async function spendAnalysisCredit(
   const debit = await tx.wallet.updateMany({
     where: {
       id: wallet.id,
-      balance: { gte: ANALYSIS_CREDIT_COST },
+      balance: { gte: analysisCreditCost },
     },
     data: {
-      balance: { decrement: ANALYSIS_CREDIT_COST },
-      spentCredits: { increment: ANALYSIS_CREDIT_COST },
+      balance: { decrement: analysisCreditCost },
+      spentCredits: { increment: analysisCreditCost },
     },
   });
 
@@ -95,13 +114,78 @@ export async function spendAnalysisCredit(
       walletId: wallet.id,
       analysisId,
       type: "analysis_spend",
-      credits: -ANALYSIS_CREDIT_COST,
+      credits: -analysisCreditCost,
       balanceAfter: updatedWallet.balance,
       description: "Resume analysis",
     },
   });
 
   return updatedWallet;
+}
+
+export async function spendResumeAgentConversationCredit(
+  tx: PrismaTransaction,
+  userId: string,
+  conversationId: string,
+  conversationCreditCost = getResumeAgentConversationCreditCost(),
+) {
+  if (conversationCreditCost === 0) {
+    return null;
+  }
+
+  const transactionId = getResumeAgentConversationTransactionId(conversationId);
+  const existingTransaction = await tx.walletTransaction.findUnique({
+    where: { id: transactionId },
+  });
+
+  if (existingTransaction) {
+    return null;
+  }
+
+  const wallet = await tx.wallet.upsert({
+    where: { userId },
+    create: { userId },
+    update: {},
+  });
+
+  const debit = await tx.wallet.updateMany({
+    where: {
+      id: wallet.id,
+      balance: { gte: conversationCreditCost },
+    },
+    data: {
+      balance: { decrement: conversationCreditCost },
+      spentCredits: { increment: conversationCreditCost },
+    },
+  });
+
+  if (debit.count !== 1) {
+    throw new InsufficientCreditsError(
+      "Not enough CV Credits to start a resume conversation.",
+    );
+  }
+
+  const updatedWallet = await tx.wallet.findUniqueOrThrow({
+    where: { id: wallet.id },
+  });
+
+  await tx.walletTransaction.create({
+    data: {
+      id: transactionId,
+      userId,
+      walletId: wallet.id,
+      type: "resume_agent_spend",
+      credits: -conversationCreditCost,
+      balanceAfter: updatedWallet.balance,
+      description: "AI resume agent conversation",
+    },
+  });
+
+  return updatedWallet;
+}
+
+function getResumeAgentConversationTransactionId(conversationId: string) {
+  return `resume-agent-${conversationId}`;
 }
 
 async function ensureWallet(userId: string) {

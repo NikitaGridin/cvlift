@@ -79,9 +79,11 @@ type LoadingStep = {
 
 export function ResumeAnalyzer({
   compact = false,
+  analysisCreditCost = ANALYSIS_CREDIT_COST,
   creditsBalance,
 }: {
   compact?: boolean;
+  analysisCreditCost?: number;
   creditsBalance?: number;
 }) {
   const router = useRouter();
@@ -122,7 +124,10 @@ export function ResumeAnalyzer({
   );
   const activeLoadingStep = loadingSteps[Math.min(loadingStepIndex, loadingSteps.length - 1)];
   const hasCredits =
-    typeof creditsBalance !== "number" || creditsBalance >= ANALYSIS_CREDIT_COST;
+    analysisCreditCost === 0 ||
+    typeof creditsBalance !== "number" ||
+    creditsBalance >= analysisCreditCost;
+  const isFreeAnalysis = analysisCreditCost === 0;
 
   useEffect(() => {
     if (!showProgressModal) {
@@ -390,18 +395,24 @@ export function ResumeAnalyzer({
       >
         <div>
           <p className="text-sm font-bold text-[#0F172A]">
-            {t("resume.credits.available", { count: creditsBalance ?? 0 })}
+            {isFreeAnalysis
+              ? t("resume.credits.freeAvailable")
+              : t("resume.credits.available", { count: creditsBalance ?? 0 })}
           </p>
           <p className="mt-1 text-sm font-medium leading-6 text-[#64748B]">
-            {t("resume.credits.cost", { count: ANALYSIS_CREDIT_COST })}
+            {isFreeAnalysis
+              ? t("resume.credits.freeCost")
+              : t("resume.credits.cost", { count: analysisCreditCost })}
           </p>
         </div>
-        <Link
-          href="/credits"
-          className="inline-flex h-11 w-fit items-center justify-center rounded-full bg-[#6366F1] px-5 text-sm font-bold text-white shadow-[0_14px_34px_rgba(99,102,241,0.22)] transition duration-200 hover:-translate-y-0.5 hover:bg-[#4F46E5]"
-        >
-          {t("resume.credits.topUp")}
-        </Link>
+        {isFreeAnalysis ? null : (
+          <Link
+            href="/credits"
+            className="inline-flex h-11 w-fit items-center justify-center rounded-full bg-[#6366F1] px-5 text-sm font-bold text-white shadow-[0_14px_34px_rgba(99,102,241,0.22)] transition duration-200 hover:-translate-y-0.5 hover:bg-[#4F46E5]"
+          >
+            {t("resume.credits.topUp")}
+          </Link>
+        )}
       </motion.div>
 
       <motion.div

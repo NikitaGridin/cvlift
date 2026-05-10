@@ -5,14 +5,13 @@ import {
   CheckCircle2,
   Coins,
   Layers3,
+  LayoutDashboard,
   Power,
   Radar,
   Sparkles,
   Terminal,
-  Upload,
   Zap,
 } from "lucide-react";
-import { GoogleSignInButton } from "@/components/auth-buttons";
 import { HomeRoiSections } from "@/components/home-roi-sections";
 import { LocalizedString, LocalizedText } from "@/components/localized-text";
 import { PreferenceControls } from "@/components/preference-controls";
@@ -200,16 +199,14 @@ export default async function Home() {
             <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
               {isSignedIn ? (
                 <Link href="/upload" className="cvlift-primary-button">
-                  <LocalizedText k="home.primarySignedIn" />
+                  <LocalizedText k="common.openDashboard" />
                   <ArrowRight aria-hidden="true" className="size-4" />
                 </Link>
               ) : (
-                <GoogleSignInButton
-                  className="cvlift-primary-button"
-                  redirectTo="/upload"
-                >
-                  <LocalizedText k="home.primarySignedOut" />
-                </GoogleSignInButton>
+                <Link href="/login" className="cvlift-primary-button">
+                  <LocalizedText k="common.openDashboard" />
+                  <ArrowRight aria-hidden="true" className="size-4" />
+                </Link>
               )}
               <Link href="/faq" className="cvlift-secondary-button">
                 <Terminal aria-hidden="true" className="size-4" />
@@ -331,16 +328,14 @@ function BottomCta({ isSignedIn }: { isSignedIn: boolean }) {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             {isSignedIn ? (
               <Link href="/upload" className="cvlift-primary-button">
-                <Upload aria-hidden="true" className="size-4" />
-                <LocalizedText k="home.primarySignedIn" />
+                <LayoutDashboard aria-hidden="true" className="size-4" />
+                <LocalizedText k="common.openDashboard" />
               </Link>
             ) : (
-              <GoogleSignInButton
-                className="cvlift-primary-button"
-                redirectTo="/upload"
-              >
+              <Link href="/login" className="cvlift-primary-button">
+                <LayoutDashboard aria-hidden="true" className="size-4" />
                 <LocalizedText k="home.cta.google" />
-              </GoogleSignInButton>
+              </Link>
             )}
             <Link href="/resume-keywords" className="cvlift-secondary-button">
               <Radar aria-hidden="true" className="size-4" />
@@ -522,15 +517,12 @@ function CyberHeader({ isSignedIn }: { isSignedIn: boolean }) {
           </div>
           {isSignedIn ? (
             <Link href="/upload" className="cvlift-header-button">
-              <LocalizedText k="marketing.header.upload" />
+              <LocalizedText k="common.dashboard" />
             </Link>
           ) : (
-            <GoogleSignInButton
-              className="cvlift-header-button"
-              redirectTo="/upload"
-            >
+            <Link href="/login" className="cvlift-header-button">
               <LocalizedText k="marketing.header.signIn" />
-            </GoogleSignInButton>
+            </Link>
           )}
         </div>
       </nav>

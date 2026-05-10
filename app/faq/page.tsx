@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronDown, HelpCircle } from "lucide-react";
-import { GoogleSignInButton } from "@/components/auth-buttons";
 import { LocalizedString, LocalizedText } from "@/components/localized-text";
 import { MarketingFooter } from "@/components/marketing-footer";
 import { MarketingHeader } from "@/components/marketing-header";
@@ -95,12 +94,12 @@ export default function FaqPage() {
                 />
               </p>
             </div>
-            <GoogleSignInButton
+            <Link
+              href="/login"
               className="cvlift-primary-button"
-              redirectTo="/upload"
             >
               <LocalizedText k="common.startAnalysis" />
-            </GoogleSignInButton>
+            </Link>
           </div>
         </div>
 
