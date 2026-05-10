@@ -7,7 +7,7 @@ import {
 import {
   ANALYSIS_CREDIT_COST,
   CREDIT_NAME,
-  formatUsdCents,
+  formatRubles,
   type CreditPackage,
   type WalletSummary,
 } from "@/lib/credits-public";
@@ -104,7 +104,7 @@ export function CreditsPanel({
                 {item.credits}
               </p>
               <p className="mt-1 text-sm font-bold text-[#6366F1]">
-                {formatUsdCents(item.amountUsdCents)}
+                {formatRubles(item.amountRubles)}
               </p>
               <p className="mt-4 text-sm font-medium leading-6 text-[#64748B]">
                 {getPackageDescription(item, t)}

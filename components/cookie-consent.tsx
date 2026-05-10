@@ -6,11 +6,11 @@ import { useSyncExternalStore } from "react";
 import { useI18n } from "@/components/preferences-provider";
 
 const legacyPreferencePrefix = "cv" + "pilot";
-const noticeCookieName = "cvlift_cookie_notice";
-const consentCookieName = "cvlift_cookie_consent";
+const noticeCookieName = "offerlyra_cookie_notice";
+const consentCookieName = "offerlyra_cookie_consent";
 const legacyConsentCookieName = `${legacyPreferencePrefix}_cookie_consent`;
 const noticeMaxAge = 60 * 60 * 24 * 180;
-const noticeChangeEvent = "cvlift-cookie-notice-change";
+const noticeChangeEvent = "offerlyra-cookie-notice-change";
 
 export function CookieConsent() {
   const { t } = useI18n();

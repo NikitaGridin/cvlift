@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Coins, Sparkles, UserCircle } from "lucide-react";
 import { AppNavigation } from "@/components/app-navigation";
 import { SignOutButton } from "@/components/auth-buttons";
-import { LocalizedText } from "@/components/localized-text";
+import { LocalizedString, LocalizedText } from "@/components/localized-text";
 import { PreferenceControls } from "@/components/preference-controls";
 import { getAnalysisCreditCost, getWalletSummary } from "@/lib/credits";
 import { getSessionSafely } from "@/lib/server-data";
@@ -34,7 +34,7 @@ export async function AppShell({
                 <Sparkles aria-hidden="true" className="size-5" />
               </span>
               <span className="hidden text-base font-bold tracking-tight sm:inline">
-                CVlift
+                OfferLyra
               </span>
             </Link>
 
@@ -60,7 +60,11 @@ export async function AppShell({
                       {isFreeAnalysis ? (
                         <LocalizedText k="common.freeMode" />
                       ) : (
-                        `${wallet?.balance ?? 0} CV Credits`
+                        <LocalizedString
+                          value={{
+                            ru: `${wallet?.balance ?? 0} токенов`,
+                          }}
+                        />
                       )}
                     </span>
                   </span>

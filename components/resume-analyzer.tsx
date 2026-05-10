@@ -837,11 +837,11 @@ function localizeAnalysisError(
   }
 
   const messages: Record<string, TranslationKey> = {
-    "Add vacancy text.": "resume.error.vacancyRequired",
-    "Choose a target IT role.": "resume.error.roleRequired",
-    "Enter a valid salary range.": "resume.error.salaryInvalid",
-    "Salary max must be greater than salary min.": "resume.error.salaryInvalid",
-    "Not enough CV Credits to analyze a resume.": "resume.error.noCredits",
+    "Добавьте текст вакансии.": "resume.error.vacancyRequired",
+    "Выберите целевую IT-должность.": "resume.error.roleRequired",
+    "Введите корректную зарплатную вилку.": "resume.error.salaryInvalid",
+    "Максимальная зарплата должна быть больше минимальной.": "resume.error.salaryInvalid",
+    "Недостаточно токенов для проверки резюме.": "resume.error.noCredits",
   };
 
   return messages[error] ? t(messages[error]) : error;

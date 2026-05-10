@@ -44,7 +44,7 @@ export async function analyzeResumeWithOpenRouter(params: {
       Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
       "Content-Type": "application/json",
       "HTTP-Referer": process.env.OPENROUTER_SITE_URL ?? process.env.AUTH_URL ?? "http://localhost:3000",
-      "X-OpenRouter-Title": "CVlift",
+      "X-OpenRouter-Title": "OfferLyra",
     },
     body: JSON.stringify({
       model: DEFAULT_MODEL,
@@ -116,14 +116,14 @@ function buildSystemPrompt(analysisMode: AnalysisMode) {
     "Audit ATS/search keywords strictly. Return keywordScore and keywordCoverage with matched keywords, missing keywords, recommended keywords, and concrete searchRankingActions.",
     "Add missing ATS keywords naturally when they match the user's likely experience and target role.",
     "If the salary range is ambitious, score more strictly and require stronger evidence of scope, ownership, complexity, business impact, and seniority.",
-    "The coverLetter should be confident and polished, but it must follow the same factual constraints.",
+    "Use the coverLetter field as an interview preparation brief, not as a job application letter: write a concise self-presentation, likely recruiter questions, likely technical questions, and strong answer angles. Keep the same factual constraints.",
   ];
 
   if (analysisMode === "general") {
     return [
-      "You are a senior recruiter, resume strategist, and ATS optimization expert.",
+      "You are a senior recruiter, resume strategist, ATS optimization expert, and interview preparation coach.",
       "Analyze the resume without a specific vacancy.",
-      "Score overall market readiness, ATS quality, achievements, structure, clarity, seniority signal, and role positioning.",
+      "Score overall interview readiness, ATS quality, achievements, structure, clarity, seniority signal, and role positioning.",
       "For vacancyMatchScore, return a role-positioning score: how clearly the resume communicates a target role and market fit without a job description.",
       ...rewriteMandate,
       "Return only JSON matching the schema. Be direct, specific, and actionable.",
@@ -131,7 +131,7 @@ function buildSystemPrompt(analysisMode: AnalysisMode) {
   }
 
   return [
-    "You are a senior recruiter and ATS optimization expert.",
+    "You are a senior recruiter, ATS optimization expert, and interview preparation coach.",
     "Analyze the resume against the vacancy.",
     "For vacancyMatchScore, score fit to the provided vacancy.",
     ...rewriteMandate,
@@ -155,6 +155,7 @@ function buildUserPrompt(params: {
     "Assess whether this resume is strong enough for the target role and salary range, not just generally good.",
     "Recommend keywords that improve ATS/search ranking for this target.",
     "Suggest credible ideas the user can add to the resume, including example bullets with bracketed placeholders where proof is needed.",
+    "Prepare likely HR, behavioral, and technical interview questions based on the resume and role. Put the interview plan into the coverLetter field.",
   ].join("\n");
 
   if (params.analysisMode === "general") {
@@ -165,6 +166,8 @@ function buildUserPrompt(params: {
       "General resume audit without a pasted vacancy, but with the target role and salary range above.",
       "Rewrite target:",
       "Create the strongest credible resume version possible for the target role and salary range. Preserve the user's actual background, but improve positioning, structure, seniority signal, ATS phrasing, keyword coverage, and achievement bullets. Add bracketed metric placeholders wherever the original resume lacks numbers.",
+      "Interview preparation target:",
+      "In the coverLetter field, produce a practical interview brief in Russian: 30-second self-presentation, 5 likely HR questions, 5 likely technical or role-specific questions, and recommended answer angles.",
     ].join("\n\n");
   }
 
@@ -174,6 +177,8 @@ function buildUserPrompt(params: {
     `Vacancy:\n${params.vacancyText}`,
     "Rewrite target:",
     "Create the strongest credible resume version possible for this vacancy, target role, and salary range. Reorder and rewrite content around the target job, mirror relevant keywords naturally, and add bracketed metric placeholders wherever quantified impact is missing.",
+    "Interview preparation target:",
+    "In the coverLetter field, produce a practical interview brief in Russian: 30-second self-presentation, 5 likely HR questions, 5 likely technical or role-specific questions, and recommended answer angles based on this vacancy.",
   ].join("\n\n");
 }
 

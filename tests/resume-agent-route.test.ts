@@ -12,7 +12,7 @@ const mocks = vi.hoisted(() => ({
   InsufficientCreditsError: class InsufficientCreditsError extends Error {
     status = 402;
 
-    constructor(message = "Not enough CV Credits to start a resume conversation.") {
+    constructor(message = "Недостаточно токенов для запуска разговора о резюме.") {
       super(message);
       this.name = "InsufficientCreditsError";
     }
@@ -74,7 +74,7 @@ describe("POST /api/resume-agent", () => {
 
     expect(response.status).toBe(401);
     expect(body).toEqual({
-      error: "Sign in before talking to the resume agent.",
+      error: "Войдите, чтобы общаться с помощником по резюме.",
     });
     expect(mocks.chatWithResumeAgent).not.toHaveBeenCalled();
   });
@@ -91,7 +91,7 @@ describe("POST /api/resume-agent", () => {
 
     expect(response.status).toBe(400);
     expect(body).toEqual({
-      error: "Send chat messages with role and content.",
+      error: "Отправьте сообщения чата с ролью и текстом.",
     });
     expect(mocks.chatWithResumeAgent).not.toHaveBeenCalled();
   });
@@ -107,7 +107,7 @@ describe("POST /api/resume-agent", () => {
     const body = await response.json();
 
     expect(response.status).toBe(400);
-    expect(body).toEqual({ error: "Invalid JSON request body." });
+    expect(body).toEqual({ error: "Некорректный JSON в теле запроса." });
     expect(mocks.chatWithResumeAgent).not.toHaveBeenCalled();
   });
 
@@ -148,7 +148,7 @@ describe("POST /api/resume-agent", () => {
       new Request("http://localhost/api/resume-agent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ conversationId, locale: "en", messages }),
+        body: JSON.stringify({ conversationId, locale: "ru", messages }),
       }),
     );
 
@@ -157,7 +157,7 @@ describe("POST /api/resume-agent", () => {
       collectedAnswers: messages
         .filter((message) => message.role === "user")
         .map((message) => message.content.trim()),
-      locale: "en",
+      locale: "ru",
       userId: "user-1",
       shouldProduceResume: false,
       messages: messages.slice(-10).map((message) => ({
@@ -179,7 +179,7 @@ describe("POST /api/resume-agent", () => {
             "Led UI performance improvements",
           ],
           conversationId,
-          locale: "en",
+          locale: "ru",
           messages: [
             {
               role: "assistant",
@@ -201,7 +201,7 @@ describe("POST /api/resume-agent", () => {
         "Worked with React, TypeScript, Next.js",
         "Led UI performance improvements",
       ],
-      locale: "en",
+      locale: "ru",
       userId: "user-1",
       shouldProduceResume: false,
       messages: [
@@ -308,7 +308,7 @@ describe("POST /api/resume-agent", () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           conversationId,
-          locale: "en",
+          locale: "ru",
           stream: true,
           messages: [
             {
@@ -331,7 +331,7 @@ describe("POST /api/resume-agent", () => {
     ]);
     expect(mocks.streamWithResumeAgent).toHaveBeenCalledWith({
       collectedAnswers: ["Frontend developer"],
-      locale: "en",
+      locale: "ru",
       userId: "user-1",
       shouldProduceResume: false,
       messages: [
@@ -354,7 +354,7 @@ describe("POST /api/resume-agent", () => {
     expect(body).toEqual({ error: "OpenRouter unavailable" });
   });
 
-  test("spends one credit when the first message starts a paid resume conversation", async () => {
+  test("spends one token when the first message starts a paid resume conversation", async () => {
     mocks.getResumeAgentConversationCreditCost.mockReturnValue(1);
 
     const response = await POST(createAgentRequest());
@@ -369,7 +369,7 @@ describe("POST /api/resume-agent", () => {
     );
   });
 
-  test("does not spend a credit for later messages in the same conversation", async () => {
+  test("does not spend a token for later messages in the same conversation", async () => {
     mocks.getResumeAgentConversationCreditCost.mockReturnValue(1);
 
     const response = await POST(
@@ -392,7 +392,7 @@ describe("POST /api/resume-agent", () => {
     expect(mocks.spendResumeAgentConversationCredit).not.toHaveBeenCalled();
   });
 
-  test("does not spend a credit when free resume mode is enabled", async () => {
+  test("does not spend a token when free resume mode is enabled", async () => {
     mocks.getResumeAgentConversationCreditCost.mockReturnValue(0);
 
     const response = await POST(createAgentRequest());
@@ -401,7 +401,7 @@ describe("POST /api/resume-agent", () => {
     expect(mocks.spendResumeAgentConversationCredit).not.toHaveBeenCalled();
   });
 
-  test("returns 402 when the user has no credits to start the conversation", async () => {
+  test("returns 402 when the user has no tokens to start the conversation", async () => {
     mocks.getResumeAgentConversationCreditCost.mockReturnValue(1);
     mocks.spendResumeAgentConversationCredit.mockRejectedValue(
       new mocks.InsufficientCreditsError(),
@@ -412,7 +412,7 @@ describe("POST /api/resume-agent", () => {
 
     expect(response.status).toBe(402);
     expect(body).toEqual({
-      error: "Not enough CV Credits to start a resume conversation.",
+      error: "Недостаточно токенов для запуска разговора о резюме.",
     });
     expect(mocks.chatWithResumeAgent).not.toHaveBeenCalled();
   });

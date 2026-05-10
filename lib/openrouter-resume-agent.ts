@@ -173,7 +173,7 @@ async function fetchOpenRouter(body: Record<string, unknown>) {
       Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
       "Content-Type": "application/json",
       "HTTP-Referer": process.env.OPENROUTER_SITE_URL ?? process.env.AUTH_URL ?? "http://localhost:3000",
-      "X-OpenRouter-Title": "CVlift",
+      "X-OpenRouter-Title": "OfferLyra",
     },
     body: JSON.stringify(body),
   });
@@ -315,12 +315,11 @@ function getPositiveIntegerEnv(
 }
 
 function buildResumeAgentSystemPrompt(locale: Locale, isFinal: boolean) {
-  const responseLanguage =
-    locale === "ru" ? "Answer in Russian." : "Answer in English.";
+  const responseLanguage = "Answer in Russian.";
 
   if (!isFinal) {
     return [
-      "You are CVlift's voice resume interviewer.",
+      "You are OfferLyra's voice resume interviewer.",
       responseLanguage,
       "Be fast and concise.",
       "Scope boundary: only help with resume/CV creation, professional background collection, job search targeting, career positioning, vacancy relevance, contacts/links for a resume, education, skills, achievements, and resume formatting.",
@@ -347,7 +346,7 @@ function buildResumeAgentSystemPrompt(locale: Locale, isFinal: boolean) {
   }
 
   return [
-    "You are CVlift's voice resume-building agent.",
+    "You are OfferLyra's voice resume-building agent.",
     responseLanguage,
     "Your goal is to interview the user and assemble a truthful, high-quality, ATS-optimized resume.",
     "Scope boundary: only help with resume/CV creation, professional background collection, job search targeting, career positioning, vacancy relevance, contacts/links for a resume, education, skills, achievements, and resume formatting.",

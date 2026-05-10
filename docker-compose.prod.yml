@@ -1,7 +1,7 @@
 services:
   postgres:
     image: postgres:17-alpine
-    container_name: cvlift-postgres-prod
+    container_name: offerlyra-postgres-prod
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${POSTGRES_USER:?POSTGRES_USER is required}
@@ -15,14 +15,14 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - cvlift_private
+      - offerlyra_private
 
   app:
     build:
       context: .
       dockerfile: Dockerfile
-    image: cvlift-app:prod
-    container_name: cvlift-app-prod
+    image: offerlyra-app:prod
+    container_name: offerlyra-app-prod
     restart: unless-stopped
     env_file:
       - .env
@@ -37,13 +37,13 @@ services:
       postgres:
         condition: service_healthy
     networks:
-      - cvlift_public
-      - cvlift_private
+      - offerlyra_public
+      - offerlyra_private
 
 volumes:
   postgres_data_prod:
 
 networks:
-  cvlift_public:
-  cvlift_private:
+  offerlyra_public:
+  offerlyra_private:
     internal: true

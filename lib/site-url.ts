@@ -1,8 +1,8 @@
-export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://cvlift.ru").replace(
+export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://offerlyra.ru").replace(
   /\/$/,
   "",
 );
-export const siteLogoPath = "/cvlift-logo.svg";
+export const siteLogoPath = "/offerlyra-logo.svg";
 
 export const siteMetadataBase = new URL(siteUrl);
 

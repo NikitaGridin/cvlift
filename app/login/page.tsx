@@ -6,7 +6,7 @@ import { PasswordAuthForms } from "@/components/password-auth-forms";
 import { getSessionSafely } from "@/lib/server-data";
 
 export const metadata: Metadata = {
-  title: "Sign in | CVlift",
+  title: "Вход | OfferLyra",
   robots: {
     index: false,
     follow: false,
@@ -30,9 +30,9 @@ export default async function LoginPage() {
               className="mb-10 inline-flex items-center gap-3 rounded-full border border-[#b5ff00]/20 bg-[#b5ff00]/10 px-4 py-2 text-sm font-bold text-[#d9ff62] transition hover:border-[#b5ff00]/45 hover:bg-[#b5ff00]/15"
             >
               <span className="grid size-8 place-items-center rounded-full bg-[#b5ff00] text-[#071007]">
-                CV
+                OL
               </span>
-              CVlift
+              OfferLyra
             </Link>
 
             <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-[#b5ff00]">
@@ -42,8 +42,8 @@ export default async function LoginPage() {
               Войдите или создайте аккаунт по почте
             </h1>
             <p className="mt-5 text-lg leading-8 text-white/62">
-              Используйте email как логин, чтобы сохранять историю анализов, резюме и будущие
-              инструменты CVlift в одном профиле.
+              Используйте email как логин, чтобы сохранять резюме, историю подготовки,
+              AI-интервью и инструменты OfferLyra в одном профиле.
             </p>
           </div>
 

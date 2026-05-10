@@ -5,8 +5,8 @@ import { LocalizedString } from "@/components/localized-text";
 import { localized as l } from "@/lib/i18n";
 
 export const metadata: Metadata = {
-  title: "Requisites | CVlift",
-  description: "CVlift business requisites: INN and OGRNIP.",
+  title: "Реквизиты | OfferLyra",
+  description: "Реквизиты OfferLyra: ИНН и ОГРНИП.",
   alternates: {
     canonical: "/requisites",
   },
@@ -19,7 +19,7 @@ export default function RequisitesPage() {
 
       <section className="mx-auto w-full max-w-[980px] px-4 pb-12 pt-12 sm:px-6 lg:px-8 lg:pt-16">
         <p className="text-sm font-bold text-[#6366F1]">
-          <LocalizedString value={l("CVlift legal", "Документы CVlift")} />
+          <LocalizedString value={l("OfferLyra legal", "Документы OfferLyra")} />
         </p>
         <h1 className="mt-3 text-5xl font-bold tracking-tight text-[#0F172A] sm:text-6xl">
           <LocalizedString value={l("Business Requisites", "Реквизиты")} />
@@ -27,8 +27,8 @@ export default function RequisitesPage() {
         <p className="mt-5 max-w-3xl text-lg font-medium leading-8 text-[#64748B]">
           <LocalizedString
             value={l(
-              "Public business details for CVlift.",
-              "Публичные реквизиты сервиса CVlift.",
+              "Public business details for OfferLyra.",
+              "Публичные реквизиты сервиса OfferLyra.",
             )}
           />
         </p>

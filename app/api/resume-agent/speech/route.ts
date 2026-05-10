@@ -19,7 +19,7 @@ export async function POST(request: Request) {
 
   if (!session?.user?.id) {
     return Response.json(
-      { error: "Sign in before using high-quality voice." },
+      { error: "Войдите, чтобы использовать качественную озвучку." },
       { status: 401 },
     );
   }
@@ -29,14 +29,14 @@ export async function POST(request: Request) {
   try {
     body = await request.json();
   } catch {
-    return Response.json({ error: "Invalid JSON request body." }, { status: 400 });
+    return Response.json({ error: "Некорректный JSON в теле запроса." }, { status: 400 });
   }
 
   const parsed = speechRequestSchema.safeParse(body);
 
   if (!parsed.success) {
     return Response.json(
-      { error: "Send text up to 4096 characters." },
+      { error: "Отправьте текст до 4096 символов." },
       { status: 400 },
     );
   }

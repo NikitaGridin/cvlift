@@ -8,7 +8,7 @@ import { getAnalysisRecord } from "@/lib/server-data";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Resume Analysis",
+  title: "Анализ резюме",
   robots: {
     index: false,
     follow: false,

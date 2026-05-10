@@ -18,7 +18,7 @@ const zeroWallet: WalletSummary = {
 export class InsufficientCreditsError extends Error {
   status: number;
 
-  constructor(message = "Not enough CV Credits to analyze a resume.") {
+  constructor(message = "Недостаточно токенов для проверки резюме.") {
     super(message);
     this.name = "InsufficientCreditsError";
     this.status = 402;
@@ -161,7 +161,7 @@ export async function spendResumeAgentConversationCredit(
 
   if (debit.count !== 1) {
     throw new InsufficientCreditsError(
-      "Not enough CV Credits to start a resume conversation.",
+      "Недостаточно токенов для запуска разговора о резюме.",
     );
   }
 

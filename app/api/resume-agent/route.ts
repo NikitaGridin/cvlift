@@ -41,7 +41,7 @@ export async function POST(request: Request) {
 
   if (!session?.user?.id) {
     return Response.json(
-      { error: "Sign in before talking to the resume agent." },
+      { error: "Войдите, чтобы общаться с помощником по резюме." },
       { status: 401 },
     );
   }
@@ -51,14 +51,14 @@ export async function POST(request: Request) {
   try {
     body = await request.json();
   } catch {
-    return Response.json({ error: "Invalid JSON request body." }, { status: 400 });
+    return Response.json({ error: "Некорректный JSON в теле запроса." }, { status: 400 });
   }
 
   const parsed = requestSchema.safeParse(body);
 
   if (!parsed.success) {
     return Response.json(
-      { error: "Send chat messages with role and content." },
+      { error: "Отправьте сообщения чата с ролью и текстом." },
       { status: 400 },
     );
   }
@@ -241,7 +241,7 @@ function getAgentErrorMessage(error: unknown) {
     return error.message;
   }
 
-  return "Resume agent is temporarily unavailable.";
+  return "Помощник по резюме временно недоступен.";
 }
 
 function getAgentErrorStatus(error: unknown) {

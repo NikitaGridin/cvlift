@@ -10,7 +10,7 @@ import { getHistoryRecords } from "@/lib/server-data";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Analysis History",
+  title: "История анализов",
   robots: {
     index: false,
     follow: false,
@@ -38,7 +38,7 @@ export default async function HistoryPage() {
               <div>
                 <div className="mb-2 flex items-center gap-2 text-sm font-semibold text-[#64748B]">
                   <Clock3 aria-hidden="true" className="size-4" />
-                  {new Intl.DateTimeFormat("en", {
+                  {new Intl.DateTimeFormat("ru-RU", {
                     month: "short",
                     day: "numeric",
                     year: "numeric",

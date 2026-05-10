@@ -775,5 +775,5 @@ function formatSalaryRange(record: AnalysisRecord) {
 }
 
 function formatNumber(value: number) {
-  return new Intl.NumberFormat("en-US").format(value);
+  return new Intl.NumberFormat("ru-RU").format(value);
 }

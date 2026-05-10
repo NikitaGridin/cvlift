@@ -64,14 +64,14 @@ export async function POST(request: Request) {
 
   if (!session?.user?.id) {
     return Response.json(
-      { error: "Sign in with Google before analyzing a resume." },
+      { error: "Войдите через Google перед анализом резюме." },
       { status: 401 },
     );
   }
 
   if (!isDatabaseConfigured()) {
     return Response.json(
-      { error: "Credits are temporarily unavailable. Please try again later." },
+      { error: "Токены временно недоступны. Попробуйте позже." },
       { status: 503 },
     );
   }
@@ -83,7 +83,7 @@ export async function POST(request: Request) {
 
     if (wallet.balance < analysisCreditCost) {
       return Response.json(
-        { error: "Not enough CV Credits to analyze a resume." },
+        { error: "Недостаточно токенов для проверки резюме." },
         { status: 402 },
       );
     }
@@ -306,18 +306,18 @@ function asPriority(value: unknown): "high" | "medium" | "low" {
 function getClientErrorMessage(error: unknown) {
   const message = error instanceof Error ? error.message : "";
   const userFacingMessages = [
-    "Unsupported file type. Upload PDF, DOCX, or TXT.",
-    "Add vacancy text.",
-    "Choose a target IT role.",
-    "Enter a valid salary range.",
-    "Not enough CV Credits to analyze a resume.",
+    "Неподдерживаемый тип файла. Загрузите PDF, DOCX или TXT.",
+    "Добавьте текст вакансии.",
+    "Выберите целевую IT-должность.",
+    "Введите корректную зарплатную вилку.",
+    "Недостаточно токенов для проверки резюме.",
   ];
 
   if (userFacingMessages.includes(message)) {
     return message;
   }
 
-  return "Resume analysis is temporarily unavailable. Please try again later.";
+  return "Анализ резюме временно недоступен. Попробуйте позже.";
 }
 
 function getInvalidRequestMessage(
@@ -328,7 +328,7 @@ function getInvalidRequestMessage(
   );
 
   if (hasSalaryIssue) {
-    return "Enter a valid salary range.";
+    return "Введите корректную зарплатную вилку.";
   }
 
   const hasRoleIssue = issues.some((issue) =>
@@ -336,8 +336,8 @@ function getInvalidRequestMessage(
   );
 
   if (hasRoleIssue) {
-    return "Choose a target IT role.";
+    return "Выберите целевую IT-должность.";
   }
 
-  return "Add vacancy text.";
+  return "Добавьте текст вакансии.";
 }

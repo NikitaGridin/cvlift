@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getSeoPageLanguageAlternates, getSeoPagePath, seoPages } from "@/lib/seo-content";
+import { getSeoPagePath, seoPages } from "@/lib/seo-content";
 import { siteUrl } from "@/lib/site-url";
 
 const publicRoutes = [
@@ -22,31 +22,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: route.priority,
     })),
     ...seoPages.flatMap((page) => {
-      const languageAlternates = Object.fromEntries(
-        Object.entries(getSeoPageLanguageAlternates(page)).map(([locale, path]) => [
-          locale,
-          `${siteUrl}${path}`,
-        ]),
-      );
-
       return [
-        {
-          url: `${siteUrl}${getSeoPagePath(page, "en")}`,
-          lastModified: now,
-          changeFrequency: "weekly" as const,
-          priority: 0.82,
-          alternates: {
-            languages: languageAlternates,
-          },
-        },
         {
           url: `${siteUrl}${getSeoPagePath(page, "ru")}`,
           lastModified: now,
           changeFrequency: "weekly" as const,
           priority: 0.82,
-          alternates: {
-            languages: languageAlternates,
-          },
         },
       ];
     }),

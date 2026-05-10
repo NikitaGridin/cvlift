@@ -23,835 +23,635 @@ export type SeoPage = {
   faqs: SeoFaq[];
 };
 
-const l = <T,>(en: T, ru: T): LocalizedValue<T> => ({ en, ru });
+const l = <T,>(_legacy: unknown, ru: T): LocalizedValue<T> => ({ ru });
 
 export const seoPages: SeoPage[] = [
   {
-    slug: "ats-resume-checker",
-    localizedSlugs: l("ats-resume-checker", "proverka-rezyume-ats"),
-    title: l("ATS Resume Checker", "ATS-проверка резюме"),
-    eyebrow: l("Resume scanner", "Сканер резюме"),
+    slug: "interview-prep",
+    localizedSlugs: l("interview-prep", "podgotovka-k-sobesedovaniyu"),
+    title: l("", "Подготовка к собеседованию с AI"),
+    eyebrow: l("", "Полный цикл подготовки"),
     description: l(
-      "Check whether your resume is structured for applicant tracking systems and easy for recruiters to scan.",
-      "Проверьте, понятно ли резюме для ATS-систем и удобно ли рекрутеру быстро его просмотреть.",
+      "",
+      "OfferLyra помогает пройти путь от резюме до уверенного интервью: создать и проверить резюме, потренировать вопросы, пройти HR-скрининг и техническое собеседование с AI-агентом.",
     ),
-    metaTitle: l(
-      "ATS Resume Checker | CVlift",
-      "ATS-проверка резюме онлайн | CVlift",
-    ),
+    metaTitle: l("", "Подготовка к собеседованию с AI | OfferLyra"),
     metaDescription: l(
-      "Use CVlift to check ATS readiness, resume structure, keyword coverage, and recruiter readability before applying.",
-      "Проверьте резюме на ATS-совместимость, структуру, ключевые слова и читаемость для рекрутера перед откликом.",
+      "",
+      "Платформа подготовки к собеседованию: AI-тренажёр вопросов, HR-скрининг, техническое интервью, анализ, создание и перевод резюме.",
     ),
-    cta: l("Check ATS readiness", "Проверить ATS-готовность"),
+    cta: l("", "Начать подготовку"),
     bullets: [
-      l(
-        "Find formatting issues that make resumes harder to parse.",
-        "Найдите проблемы форматирования, из-за которых резюме сложнее распарсить.",
-      ),
-      l(
-        "Review sections, skills, keywords, and achievement clarity.",
-        "Проверьте разделы, навыки, ключевые слова и ясность достижений.",
-      ),
-      l(
-        "Get fixes that improve both ATS quality and human readability.",
-        "Получите правки, которые улучшают и ATS-качество, и читаемость для человека.",
-      ),
+      l("", "Тренировка ответов по резюме и вакансии."),
+      l("", "AI-агенты для HR-скрининга и технического интервью."),
+      l("", "Резюме, анализ, перевод и подготовка к вопросам в одном потоке."),
     ],
     sections: [
       {
-        title: l(
-          "What an ATS resume checker should look for",
-          "Что должна проверять ATS-проверка",
-        ),
+        title: l("", "Подготовка начинается до первого звонка"),
         text: l(
-          "A strong resume needs more than keywords. It should be structured clearly, use standard section names, avoid confusing layouts, and make the candidate's impact easy to understand.",
-          "Сильному резюме нужны не только ключевые слова. Важны понятная структура, стандартные названия разделов, аккуратная верстка и ясное описание вашего вклада.",
+          "",
+          "Сильное интервью зависит не только от знаний. Важно, чтобы резюме совпадало с вакансией, история опыта звучала уверенно, а ответы были структурированы под реальные этапы найма.",
         ),
         bullets: [
-          l(
-            "Clear experience, skills, education, and project sections.",
-            "Понятные разделы опыта, навыков, образования и проектов.",
-          ),
-          l(
-            "Role-specific keywords used naturally in context.",
-            "Ключевые слова роли, использованные естественно и в контексте.",
-          ),
-          l(
-            "Bullet points that explain scope, tools, and outcomes.",
-            "Буллеты, которые раскрывают масштаб, инструменты и результат.",
-          ),
+          l("", "Соберите резюме под целевую роль."),
+          l("", "Проверьте слабые места до отклика."),
+          l("", "Отработайте вопросы, которые рекрутер задаст по вашему опыту."),
         ],
       },
       {
-        title: l("How CVlift helps", "Как помогает CVlift"),
+        title: l("", "AI-интервьюер показывает, где вы теряете баллы"),
         text: l(
-          "CVlift reviews the resume for ATS compatibility and translates weak spots into practical edits you can apply immediately.",
-          "CVlift проверяет ATS-совместимость резюме и превращает слабые места в практичные правки, которые можно применить сразу.",
+          "",
+          "Платформа имитирует разные этапы собеседования и помогает увидеть пробелы: технические знания, мотивация, самопрезентация, кейсы, примеры достижений и логика ответа.",
         ),
         bullets: [
-          l("Score the resume from 0 to 100.", "Оценить резюме по шкале от 0 до 100."),
-          l(
-            "Highlight weak sections and missing signals.",
-            "Подсветить слабые разделы и недостающие сигналы.",
-          ),
-          l(
-            "Generate an improved resume draft with stronger phrasing.",
-            "Сгенерировать улучшенный черновик с более сильными формулировками.",
-          ),
+          l("", "Ответы оцениваются по структуре, глубине и релевантности."),
+          l("", "Вопросы адаптируются под роль, стек и резюме."),
+          l("", "После тренировки понятно, что повторить и как усилить ответ."),
         ],
       },
     ],
     faqs: [
       {
-        question: l("What is an ATS resume checker?", "Что такое ATS-проверка резюме?"),
+        question: l("", "Что входит в подготовку к собеседованию?"),
         answer: l(
-          "An ATS resume checker reviews whether your resume can be parsed and ranked by applicant tracking systems while staying readable for recruiters.",
-          "ATS-проверка показывает, сможет ли система распознать и ранжировать резюме, а рекрутер быстро понять его смысл.",
+          "",
+          "Создание и анализ резюме, тренировка типовых вопросов, HR-скрининг, техническое интервью с AI-агентом и подготовка ответов под вакансию.",
         ),
       },
       {
-        question: l(
-          "Does ATS optimization mean keyword stuffing?",
-          "ATS-оптимизация означает набивку ключевыми словами?",
-        ),
+        question: l("", "Можно ли тренироваться по моему резюме?"),
         answer: l(
-          "No. Strong ATS optimization uses relevant keywords naturally inside clear experience, skills, and achievement sections.",
-          "Нет. Хорошая ATS-оптимизация использует релевантные ключевые слова естественно: в опыте, навыках и достижениях.",
+          "",
+          "Да. Вопросы и обратная связь строятся вокруг вашего опыта, целевой роли и текста вакансии.",
         ),
       },
       {
-        question: l(
-          "Can CVlift check a resume without a vacancy?",
-          "Можно проверить резюме без вакансии?",
-        ),
+        question: l("", "Это только для IT?"),
         answer: l(
-          "Yes. You can run a general resume audit or compare your resume against a specific vacancy.",
-          "Да. Можно запустить общий аудит резюме или сравнить его с конкретной вакансией.",
+          "",
+          "Технический блок особенно полезен IT-специалистам, но HR-скрининг, резюме и тренажёр вопросов подходят для разных ролей.",
         ),
       },
     ],
   },
   {
-    slug: "resume-score",
-    localizedSlugs: l("resume-score", "ocenka-rezyume"),
-    title: l("Resume Score Checker", "Оценка резюме"),
-    eyebrow: l("Score your CV", "Оцените CV"),
+    slug: "interview-simulator",
+    localizedSlugs: l("interview-simulator", "trenazher-sobesedovaniy"),
+    title: l("", "Тренажёр собеседований"),
+    eyebrow: l("", "Практика ответов"),
     description: l(
-      "Get a simple 0-100 resume score with clear reasons, weak points, and the next best fixes.",
-      "Получите оценку резюме от 0 до 100, понятные причины, слабые места и следующие лучшие правки.",
+      "",
+      "Тренируйте ответы как на реальном интервью: голосом или текстом, с вопросами по резюме, роли, мотивации, достижениям и сложным ситуациям.",
     ),
-    metaTitle: l("Resume Score Checker | CVlift", "Оценка резюме онлайн | CVlift"),
+    metaTitle: l("", "Тренажёр собеседований онлайн | OfferLyra"),
     metaDescription: l(
-      "Score your resume with CVlift and get specific fixes for ATS quality, structure, achievements, readability, and job fit.",
-      "Получите оценку резюме, ATS score, слабые места и конкретные правки для структуры, достижений и совпадения с вакансией.",
+      "",
+      "Онлайн-тренажёр собеседований с AI-анализом ответов: вопросы по резюме, вакансии, HR-интервью и техническим этапам.",
     ),
-    cta: l("Score my resume", "Оценить резюме"),
+    cta: l("", "Открыть тренажёр"),
     bullets: [
-      l(
-        "Understand why your resume feels weak or unclear.",
-        "Поймите, почему резюме выглядит слабым или неясным.",
-      ),
-      l(
-        "See ATS, structure, readability, and positioning signals.",
-        "Увидьте сигналы ATS, структуры, читаемости и позиционирования.",
-      ),
-      l(
-        "Turn the score into ranked fixes, not generic advice.",
-        "Превратите оценку в приоритетные правки, а не в общие советы.",
-      ),
+      l("", "Вопросы по вашему резюме и целевой вакансии."),
+      l("", "Тренировка самопрезентации, мотивации и достижений."),
+      l("", "Обратная связь по структуре, конкретике и уверенности ответа."),
     ],
     sections: [
       {
-        title: l(
-          "A resume score should explain the why",
-          "Оценка резюме должна объяснять причину",
-        ),
+        title: l("", "Тренировка должна быть похожа на реальное интервью"),
         text: l(
-          "A number is only useful if it shows what to fix. CVlift pairs the score with weak points, strengths, and recommended changes.",
-          "Число полезно только тогда, когда понятно, что исправлять. CVlift связывает оценку со слабыми местами, сильными сторонами и рекомендуемыми изменениями.",
+          "",
+          "Обычный список вопросов не показывает, как вы звучите. Тренажёр помогает отвечать в темпе собеседования и учит держать структуру даже под давлением.",
         ),
         bullets: [
-          l(
-            "Total resume score for quick readiness.",
-            "Итоговая оценка резюме для быстрой проверки готовности.",
-          ),
-          l(
-            "ATS and match scores for practical application decisions.",
-            "ATS и match-оценки для практичных решений перед откликом.",
-          ),
-          l(
-            "Specific recommendations tied to resume sections.",
-            "Конкретные рекомендации, привязанные к разделам резюме.",
-          ),
+          l("", "Вопросы задаются по очереди, как в живом разговоре."),
+          l("", "Можно повторять слабые темы до уверенного ответа."),
+          l("", "AI замечает общие формулировки и просит конкретику."),
         ],
       },
       {
-        title: l("Use the score before applying", "Используйте оценку до отклика"),
+        title: l("", "Подготовка под разные этапы"),
         text: l(
-          "Running a resume score before sending applications helps you avoid wasting strong opportunities on a draft that is not ready.",
-          "Проверка резюме до отклика помогает не тратить сильные возможности на черновик, который ещё не готов.",
+          "",
+          "Используйте тренажёр для HR-этапа, технического интервью, вопросов по проектам, разборов конфликтов, достижений и карьерных переходов.",
         ),
         bullets: [
-          l(
-            "Improve low-impact bullet points.",
-            "Улучшить буллеты с низким влиянием.",
-          ),
-          l("Add missing role signals.", "Добавить недостающие сигналы роли."),
-          l(
-            "Make the resume easier to scan in under a minute.",
-            "Сделать резюме понятным за минутный просмотр.",
-          ),
+          l("", "HR-вопросы: мотивация, ожидания, сильные и слабые стороны."),
+          l("", "Технические вопросы: стек, архитектура, практические решения."),
+          l("", "Поведенческие вопросы: STAR-ответы и примеры из опыта."),
         ],
       },
     ],
     faqs: [
       {
-        question: l("What is a good resume score?", "Какая оценка резюме считается хорошей?"),
+        question: l("", "Чем тренажёр лучше списка вопросов?"),
         answer: l(
-          "A strong resume score is usually 80 or higher, but the best score depends on the role, competition, and how clearly your experience matches the vacancy.",
-          "Сильная оценка обычно начинается от 80, но хороший результат зависит от роли, конкуренции и точности совпадения опыта с вакансией.",
+          "",
+          "Он не просто показывает вопрос, а ведёт диалог, уточняет слабые места и помогает улучшить сам ответ.",
         ),
       },
       {
-        question: l("Should I improve every weak point?", "Нужно исправлять каждое слабое место?"),
+        question: l("", "Можно ли тренироваться перед конкретной вакансией?"),
         answer: l(
-          "Start with high-impact fixes first: unclear achievements, missing keywords, weak structure, and gaps against the target role.",
-          "Начинайте с правок с высоким влиянием: неясных достижений, пропущенных ключевых слов, слабой структуры и пробелов относительно целевой роли.",
+          "",
+          "Да. Добавьте вакансию, и вопросы будут учитывать требования роли, стек, уровень и ожидаемые компетенции.",
         ),
       },
       {
-        question: l(
-          "Can I score a resume without a job description?",
-          "Можно оценить резюме без описания вакансии?",
-        ),
+        question: l("", "Можно отвечать голосом?"),
         answer: l(
-          "Yes. CVlift can run a general audit focused on market readiness, clarity, ATS quality, and positioning.",
-          "Да. CVlift может провести общий аудит готовности к рынку, ясности, ATS-качества и позиционирования.",
+          "",
+          "Да. Голосовой формат помогает подготовиться к реальному разговору, а не только к письменным формулировкам.",
         ),
       },
     ],
   },
   {
-    slug: "resume-keywords",
-    localizedSlugs: l("resume-keywords", "klyuchevye-slova-rezyume"),
-    title: l(
-      "Resume Keywords for Job Applications",
-      "Ключевые слова резюме для откликов",
-    ),
-    eyebrow: l("Keyword matching", "Сопоставление ключевых слов"),
+    slug: "ai-interview",
+    localizedSlugs: l("ai-interview", "ai-sobesedovanie"),
+    title: l("", "AI-собеседование"),
+    eyebrow: l("", "ИИ-интервьюер"),
     description: l(
-      "Find the important role keywords your resume should include naturally before you apply.",
-      "Найдите важные ключевые слова роли, которые стоит естественно добавить в резюме до отклика.",
+      "",
+      "Пройдите пробное собеседование с AI-агентом, который задаёт вопросы, уточняет ответы и помогает подготовиться к реальному интервью.",
     ),
-    metaTitle: l(
-      "Resume Keywords for Job Applications | CVlift",
-      "Ключевые слова для резюме и ATS | CVlift",
-    ),
+    metaTitle: l("", "AI-собеседование и ИИ-интервьюер | OfferLyra"),
     metaDescription: l(
-      "Learn how to use resume keywords naturally and compare your resume against a vacancy with CVlift.",
-      "CVlift находит недостающие ключевые слова из вакансии и помогает добавить их в резюме естественно, без переспама.",
+      "",
+      "Пробное AI-собеседование с ИИ-интервьюером: вопросы по резюме, вакансии, мотивации, опыту и техническим навыкам.",
     ),
-    cta: l("Check keyword match", "Проверить ключевые слова"),
+    cta: l("", "Пройти AI-собеседование"),
     bullets: [
-      l(
-        "Compare your resume against the language of a target role.",
-        "Сравните резюме с языком целевой роли.",
-      ),
-      l(
-        "Avoid keyword stuffing that makes the resume sound unnatural.",
-        "Избегайте набивки ключевыми словами, из-за которой резюме звучит неестественно.",
-      ),
-      l(
-        "Add missing tools, skills, and responsibilities where they fit your real experience.",
-        "Добавьте недостающие инструменты, навыки и обязанности там, где они соответствуют вашему реальному опыту.",
-      ),
+      l("", "Диалог с AI-интервьюером в формате реального интервью."),
+      l("", "Адаптивные уточняющие вопросы по вашим ответам."),
+      l("", "Разбор сильных и слабых мест после сессии."),
     ],
     sections: [
       {
-        title: l("Keywords should support evidence", "Ключевые слова должны подкрепляться фактами"),
+        title: l("", "AI-интервью помогает снять неопределённость"),
         text: l(
-          "Recruiters and ATS systems look for relevant language, but keywords work best when they are attached to real examples of work.",
-          "Рекрутеры и ATS ищут релевантные формулировки, но ключевые слова работают лучше всего, когда связаны с реальными примерами работы.",
+          "",
+          "Перед реальным собеседованием сложно понять, какие вопросы вас застанут врасплох. AI-агент моделирует интервью и показывает, где ответ звучит поверхностно.",
         ),
         bullets: [
-          l(
-            "Use role keywords in experience bullets, not only in a skills list.",
-            "Используйте ключевые слова роли в опыте, а не только в списке навыков.",
-          ),
-          l(
-            "Connect tools to outcomes and business impact.",
-            "Связывайте инструменты с результатами и бизнес-эффектом.",
-          ),
-          l(
-            "Keep the resume readable for a human reviewer.",
-            "Сохраняйте резюме читабельным для человека.",
-          ),
+          l("", "Проверяет самопрезентацию и логику карьерной истории."),
+          l("", "Задаёт уточнения по проектам, метрикам и решениям."),
+          l("", "Помогает убрать лишние детали и усилить ценность опыта."),
         ],
       },
       {
-        title: l("Match the vacancy before you apply", "Сравните с вакансией до отклика"),
+        title: l("", "Сценарии под роль и уровень"),
         text: l(
-          "CVlift can compare your resume with a pasted vacancy and show where your resume is under-aligned.",
-          "CVlift может сравнить резюме с вставленной вакансией и показать, где оно недостаточно совпадает с ролью.",
+          "",
+          "Интервью можно адаптировать под junior, middle, senior, менеджерские роли, технические специальности или переход в новую область.",
         ),
         bullets: [
-          l(
-            "Identify missing skills and role signals.",
-            "Найти недостающие навыки и сигналы роли.",
-          ),
-          l(
-            "Improve phrasing without inventing unverifiable facts.",
-            "Улучшить формулировки без выдумывания непроверяемых фактов.",
-          ),
-          l(
-            "Generate a stronger draft tailored to the target role.",
-            "Сгенерировать более сильный черновик под целевую роль.",
-          ),
+          l("", "Вопросы учитывают уровень и целевую позицию."),
+          l("", "AI проверяет глубину, а не только наличие ключевых слов."),
+          l("", "Можно повторять интервью перед каждым важным этапом."),
         ],
       },
     ],
     faqs: [
       {
-        question: l(
-          "How many resume keywords should I include?",
-          "Сколько ключевых слов нужно добавить в резюме?",
-        ),
+        question: l("", "AI-собеседование заменяет реального интервьюера?"),
         answer: l(
-          "There is no fixed number. Include the keywords that honestly match your experience and are important for the role.",
-          "Фиксированного числа нет. Добавляйте те ключевые слова, которые честно соответствуют вашему опыту и важны для роли.",
+          "",
+          "Нет. Оно нужно для тренировки: помогает увидеть слабые ответы до встречи с рекрутером или техническим специалистом.",
         ),
       },
       {
-        question: l("Where should resume keywords go?", "Куда добавлять ключевые слова резюме?"),
+        question: l("", "AI задаёт одинаковые вопросы всем?"),
         answer: l(
-          "Use them in skills, summary, and experience bullets. The strongest keywords are backed by real work examples.",
-          "Используйте их в навыках, summary и буллетах опыта. Самые сильные ключевые слова подкреплены реальными примерами работы.",
+          "",
+          "Нет. Вопросы зависят от резюме, вакансии, роли, уровня и предыдущих ответов.",
         ),
       },
       {
-        question: l("Can CVlift find missing keywords?", "Может ли CVlift найти недостающие ключевые слова?"),
+        question: l("", "Можно использовать перед финальным интервью?"),
         answer: l(
-          "Yes. In vacancy mode, CVlift checks how well your resume matches the target role and recommends changes.",
-          "Да. В режиме вакансии CVlift проверяет совпадение с целевой ролью и рекомендует изменения.",
+          "",
+          "Да. Для финального этапа полезны вопросы о влиянии, решениях, лидерстве, приоритетах и ожиданиях работодателя.",
         ),
       },
     ],
   },
   {
-    slug: "resume-improvement",
-    localizedSlugs: l("resume-improvement", "uluchshit-rezyume"),
-    title: l("Resume Improvement Tool", "Инструмент улучшения резюме"),
-    eyebrow: l("Rewrite weak resumes", "Усиление слабых резюме"),
+    slug: "technical-interview",
+    localizedSlugs: l("technical-interview", "tehnicheskoe-sobesedovanie"),
+    title: l("", "Подготовка к техническому собеседованию"),
+    eyebrow: l("", "Hard skills"),
     description: l(
-      "Improve weak bullet points, structure, achievements, and positioning with a focused AI resume workflow.",
-      "Улучшайте слабые буллеты, структуру, достижения и позиционирование в сфокусированном AI-процессе.",
+      "",
+      "Отрабатывайте технические вопросы по стеку, архитектуре, проектам и решениям, чтобы отвечать глубже и увереннее на интервью.",
     ),
-    metaTitle: l(
-      "Resume Improvement Tool | CVlift",
-      "Улучшить резюме с AI | CVlift",
-    ),
+    metaTitle: l("", "Подготовка к техническому собеседованию | OfferLyra"),
     metaDescription: l(
-      "Improve your resume with CVlift. Get weak points, strong points, ranked fixes, and an improved resume draft.",
-      "Улучшите резюме с AI: найдите слабые места, усилите достижения, структуру, ключевые слова и получите готовый черновик.",
+      "",
+      "AI-тренажёр технического собеседования: вопросы по стеку, архитектуре, проектам, практическим решениям и опыту разработчика.",
     ),
-    cta: l("Improve my resume", "Улучшить резюме"),
+    cta: l("", "Тренировать техническое интервью"),
     bullets: [
-      l(
-        "Rewrite responsibilities into achievement-driven bullets.",
-        "Перепишите обязанности в буллеты, построенные вокруг достижений.",
-      ),
-      l(
-        "Improve structure, readability, and role positioning.",
-        "Улучшите структуру, читаемость и позиционирование под роль.",
-      ),
-      l(
-        "See what to replace with verified numbers and details.",
-        "Увидьте, что заменить проверенными цифрами и деталями.",
-      ),
+      l("", "Вопросы по стеку, проектам и архитектурным решениям."),
+      l("", "Проверка глубины ответа и умения объяснять trade-offs."),
+      l("", "Подготовка к интервью для IT-специалистов разных уровней."),
     ],
     sections: [
       {
-        title: l("Better resumes are specific", "Сильные резюме конкретны"),
+        title: l("", "Техническое интервью проверяет мышление"),
         text: l(
-          "Generic resumes often list tasks without explaining scope, tools, outcomes, or business value. CVlift helps convert that into sharper language.",
-          "Общие резюме часто перечисляют задачи без масштаба, инструментов, результатов и бизнес-ценности. CVlift помогает превратить это в более точные формулировки.",
+          "",
+          "Работодателю важно не только знание терминов, но и то, как кандидат рассуждает, выбирает решения, объясняет ограничения и связывает опыт с реальными задачами.",
         ),
         bullets: [
-          l(
-            "Replace passive responsibilities with action-led bullets.",
-            "Заменить пассивные обязанности на буллеты с активным действием.",
-          ),
-          l(
-            "Add measurable placeholders where verified metrics are needed.",
-            "Добавить измеримые плейсхолдеры там, где нужны проверенные метрики.",
-          ),
-          l(
-            "Keep claims realistic and easy to discuss in interviews.",
-            "Сохранять утверждения реалистичными и удобными для обсуждения на интервью.",
-          ),
+          l("", "Объясняйте решения простым языком."),
+          l("", "Показывайте причины выбора технологий."),
+          l("", "Готовьте примеры из проектов, а не абстрактные определения."),
         ],
       },
       {
-        title: l("Improve the whole application package", "Улучшайте весь пакет отклика"),
+        title: l("", "AI помогает найти технические пробелы"),
         text: l(
-          "A resume rewrite is more useful when it connects to a clear application strategy and cover letter.",
-          "Переписанное резюме полезнее, когда связано с понятной стратегией отклика и сопроводительным письмом.",
+          "",
+          "После ответа агент может уточнить детали, попросить пример, проверить понимание архитектуры, производительности, тестирования, безопасности или процессов команды.",
         ),
         bullets: [
-          l(
-            "Generate an improved resume draft.",
-            "Сгенерировать улучшенный черновик резюме.",
-          ),
-          l(
-            "Create a cover letter aligned with the resume.",
-            "Создать сопроводительное письмо, согласованное с резюме.",
-          ),
-          l("Save past checks in history.", "Сохранить прошлые проверки в истории."),
+          l("", "Фокус на глубине, причинно-следственных связях и практике."),
+          l("", "Разбор слабых мест по стеку и проектному опыту."),
+          l("", "Подготовка к вопросам от тимлида и технического интервьюера."),
         ],
       },
     ],
     faqs: [
       {
-        question: l("Can AI improve my resume?", "Может ли AI улучшить резюме?"),
+        question: l("", "Какие вопросы бывают на техническом собеседовании?"),
         answer: l(
-          "AI can improve clarity, structure, phrasing, and positioning. You should verify every metric and factual detail before using the final version.",
-          "AI может улучшить ясность, структуру, формулировки и позиционирование. Перед использованием финальной версии нужно проверить каждую метрику и факт.",
+          "",
+          "Обычно спрашивают стек, архитектурные решения, опыт в проектах, алгоритмическое мышление, тестирование, производительность и командные процессы.",
         ),
       },
       {
-        question: l("Why are some values shown in brackets?", "Почему некоторые значения в скобках?"),
+        question: l("", "Можно тренироваться под конкретный стек?"),
         answer: l(
-          "Bracketed values are editable placeholders. Replace them with verified numbers from your real work before applying.",
-          "Значения в скобках — редактируемые плейсхолдеры. Перед откликом замените их проверенными цифрами из реальной работы.",
+          "",
+          "Да. Укажите целевую роль и технологии, чтобы AI задавал вопросы ближе к вашему интервью.",
         ),
       },
       {
-        question: l("Does CVlift rewrite the whole resume?", "CVlift переписывает всё резюме?"),
+        question: l("", "Подходит ли это для junior?"),
         answer: l(
-          "Yes. CVlift can generate an improved resume draft, not just small grammar edits.",
-          "Да. CVlift может сгенерировать улучшенный черновик резюме, а не только мелкие грамматические правки.",
+          "",
+          "Да. Для junior важны база, ясность объяснения, учебные проекты и честное понимание ограничений.",
         ),
       },
     ],
   },
   {
-    slug: "cover-letter-generator",
-    localizedSlugs: l("cover-letter-generator", "soprovoditelnoe-pismo"),
-    title: l("Cover Letter Generator", "Генератор сопроводительных писем"),
-    eyebrow: l("Application writing", "Текст для отклика"),
+    slug: "hr-screening",
+    localizedSlugs: l("hr-screening", "hr-skrining-ai"),
+    title: l("", "HR-скрининг с AI-агентом"),
+    eyebrow: l("", "Первый этап интервью"),
     description: l(
-      "Generate a focused cover letter that matches your resume and the role you are applying for.",
-      "Сгенерируйте сфокусированное сопроводительное письмо, связанное с резюме и целевой ролью.",
+      "",
+      "Подготовьтесь к первичному HR-скринингу: мотивация, ожидания по зарплате, релокация, формат работы, причины перехода и самопрезентация.",
     ),
-    metaTitle: l(
-      "Cover Letter Generator | CVlift",
-      "Генератор сопроводительного письма | CVlift",
-    ),
+    metaTitle: l("", "HR-скрининг с AI-агентом | OfferLyra"),
     metaDescription: l(
-      "Use CVlift to generate a polished cover letter from your resume and target vacancy.",
-      "Сгенерируйте сопроводительное письмо по резюме и вакансии: короткое, конкретное и согласованное с вашим опытом.",
+      "",
+      "Тренировка HR-скрининга с AI: вопросы по резюме, мотивации, зарплате, формату работы, карьерным переходам и ожиданиям.",
     ),
-    cta: l("Generate cover letter", "Сгенерировать письмо"),
+    cta: l("", "Пройти HR-скрининг"),
     bullets: [
-      l(
-        "Create a letter based on your resume and target role.",
-        "Создать письмо на основе резюме и целевой роли.",
-      ),
-      l(
-        "Keep the message concise, confident, and recruiter-friendly.",
-        "Сохранить текст коротким, уверенным и удобным для рекрутера.",
-      ),
-      l(
-        "Align the cover letter with your strongest resume points.",
-        "Связать сопроводительное письмо с сильнейшими пунктами резюме.",
-      ),
+      l("", "Вопросы рекрутера по резюме и мотивации."),
+      l("", "Подготовка к зарплатным ожиданиям и формату работы."),
+      l("", "Проверка самопрезентации перед первым звонком."),
     ],
     sections: [
       {
-        title: l(
-          "A cover letter should support the resume",
-          "Сопроводительное письмо должно поддерживать резюме",
-        ),
+        title: l("", "HR-скрининг решает, пройдёте ли вы дальше"),
         text: l(
-          "The best cover letters do not repeat every resume bullet. They explain why your experience matters for the specific role.",
-          "Лучшие сопроводительные письма не повторяют каждый буллет резюме. Они объясняют, почему ваш опыт важен для конкретной роли.",
+          "",
+          "На первом звонке оценивают не только опыт, но и адекватность ожиданий, мотивацию, коммуникацию, готовность к условиям и совпадение с ролью.",
         ),
         bullets: [
-          l("Open with clear role fit.", "Начать с понятного соответствия роли."),
-          l(
-            "Connect achievements to business needs.",
-            "Связать достижения с бизнес-потребностями.",
-          ),
-          l(
-            "Keep the letter specific and easy to scan.",
-            "Сделать письмо конкретным и удобным для быстрого просмотра.",
-          ),
+          l("", "Сформулируйте короткую историю о себе."),
+          l("", "Подготовьте причины перехода без негативных акцентов."),
+          l("", "Объясните зарплатную вилку и формат работы уверенно."),
         ],
       },
       {
-        title: l(
-          "Use the resume and vacancy together",
-          "Используйте резюме и вакансию вместе",
-        ),
+        title: l("", "AI задаёт вопросы на основе резюме"),
         text: l(
-          "CVlift uses the resume and vacancy context to generate a letter that matches the application instead of sounding generic.",
-          "CVlift использует контекст резюме и вакансии, чтобы письмо соответствовало отклику, а не звучало шаблонно.",
+          "",
+          "Скрининг можно строить вокруг вашего резюме: пробелы, частые переходы, смена роли, нерелевантный опыт, ожидания и сильные аргументы для рекрутера.",
         ),
         bullets: [
-          l(
-            "Reflect the target role language.",
-            "Отразить язык целевой роли.",
-          ),
-          l(
-            "Stay consistent with the improved resume.",
-            "Сохранить согласованность с улучшенным резюме.",
-          ),
-          l(
-            "Avoid unsupported claims and vague enthusiasm.",
-            "Избежать неподтвержденных заявлений и расплывчатого энтузиазма.",
-          ),
+          l("", "Отработка ответов на неудобные вопросы."),
+          l("", "Проверка ясности и краткости речи."),
+          l("", "Рекомендации, что уточнить перед звонком."),
         ],
       },
     ],
     faqs: [
       {
-        question: l(
-          "Should every application include a cover letter?",
-          "Нужно ли сопроводительное письмо для каждого отклика?",
-        ),
+        question: l("", "Что спрашивают на HR-скрининге?"),
         answer: l(
-          "Not every role requires one, but a focused cover letter can help when you need to explain fit, motivation, or a career transition.",
-          "Не каждая роль требует письмо, но сфокусированный текст помогает объяснить соответствие, мотивацию или карьерный переход.",
+          "",
+          "Обычно обсуждают опыт, мотивацию, ожидания, зарплату, формат работы, сроки выхода, английский и причины поиска.",
         ),
       },
       {
-        question: l(
-          "Can CVlift generate a cover letter from a resume?",
-          "Может ли CVlift создать письмо по резюме?",
-        ),
+        question: l("", "Нужно ли готовиться к HR-интервью?"),
         answer: l(
-          "Yes. CVlift generates a cover letter as part of the resume analysis result.",
-          "Да. CVlift генерирует сопроводительное письмо как часть результата анализа резюме.",
+          "",
+          "Да. Хорошая самопрезентация и ясные ожидания часто влияют на то, попадёте ли вы на технический этап.",
         ),
       },
       {
-        question: l("How long should a cover letter be?", "Какой длины должно быть сопроводительное письмо?"),
+        question: l("", "Можно ли тренировать ответы по резюме?"),
         answer: l(
-          "A strong cover letter is usually short: a clear opening, two focused body paragraphs, and a concise close.",
-          "Сильное сопроводительное письмо обычно короткое: ясное начало, два сфокусированных абзаца и лаконичное завершение.",
+          "",
+          "Да. AI-агент задаёт вопросы по вашему опыту и помогает сформулировать ответы короче и убедительнее.",
         ),
       },
     ],
   },
   {
-    slug: "resume-job-match",
-    localizedSlugs: l("resume-job-match", "rezume-pod-vakansiyu"),
-    title: l("Resume Job Match Checker", "Проверка резюме под вакансию"),
-    eyebrow: l("Vacancy matching", "Сравнение с вакансией"),
+    slug: "interview-questions",
+    localizedSlugs: l("interview-questions", "voprosy-dlya-sobesedovaniya"),
+    title: l("", "Вопросы для собеседования"),
+    eyebrow: l("", "Банк вопросов"),
     description: l(
-      "Compare your resume with a job description and see what to change before applying.",
-      "Сравните резюме с описанием вакансии и поймите, что исправить до отклика.",
+      "",
+      "Готовьтесь к типовым и сложным вопросам на собеседовании: HR, технический этап, опыт, проекты, мотивация, достижения и зарплатные ожидания.",
     ),
-    metaTitle: l(
-      "Resume Job Match Checker | CVlift",
-      "Проверка резюме под вакансию | CVlift",
-    ),
+    metaTitle: l("", "Вопросы для собеседования и ответы | OfferLyra"),
     metaDescription: l(
-      "Paste a job description and compare your resume against role requirements, keywords, seniority signals, and recruiter expectations.",
-      "Вставьте текст вакансии и проверьте совпадение резюме с требованиями, ключевыми словами, уровнем роли и ожиданиями рекрутера.",
+      "",
+      "Тренируйте вопросы для собеседования с AI: HR-вопросы, технические вопросы, вопросы по резюме, проектам, мотивации и достижениям.",
     ),
-    cta: l("Check job match", "Проверить совпадение"),
+    cta: l("", "Тренировать вопросы"),
     bullets: [
-      l(
-        "Find gaps between your resume and the job description.",
-        "Найдите расхождения между резюме и описанием вакансии.",
-      ),
-      l(
-        "Prioritize missing skills, tools, and seniority signals.",
-        "Приоритизируйте недостающие навыки, инструменты и сигналы уровня.",
-      ),
-      l(
-        "Rewrite the resume around the role without inventing facts.",
-        "Адаптируйте резюме под роль без выдумывания фактов.",
-      ),
+      l("", "Типовые вопросы рекрутера и технического интервьюера."),
+      l("", "Подсказки по структуре ответа и примерам из опыта."),
+      l("", "Адаптация вопросов под роль, уровень и вакансию."),
     ],
     sections: [
       {
-        title: l("Generic resumes lose relevance", "Общие резюме теряют релевантность"),
+        title: l("", "Список вопросов полезен, если есть практика"),
         text: l(
-          "A strong candidate can still look weak when the resume language does not match the vacancy. CVlift highlights the exact parts that need alignment.",
-          "Даже сильный кандидат может выглядеть слабее, если язык резюме не совпадает с вакансией. CVlift показывает конкретные места для адаптации.",
+          "",
+          "Выученные ответы звучат шаблонно. Лучше понимать, зачем задают вопрос, какой сигнал ищет интервьюер и какой пример из опыта подходит.",
         ),
         bullets: [
-          l(
-            "Compare responsibilities, skills, tools, and outcomes.",
-            "Сравнить обязанности, навыки, инструменты и результаты.",
-          ),
-          l(
-            "See missing role evidence before sending an application.",
-            "Увидеть недостающие доказательства соответствия до отклика.",
-          ),
-          l(
-            "Turn vacancy requirements into resume edits.",
-            "Превратить требования вакансии в правки резюме.",
-          ),
+          l("", "Разбирайте вопрос через цель интервьюера."),
+          l("", "Готовьте короткие истории с фактами и метриками."),
+          l("", "Тренируйте уточняющие вопросы и follow-up ответы."),
         ],
       },
       {
-        title: l("Use the vacancy as a scoring context", "Используйте вакансию как контекст оценки"),
+        title: l("", "Вопросы зависят от этапа"),
         text: l(
-          "CVlift checks not only grammar or formatting, but how well the resume fits the exact role you want.",
-          "CVlift проверяет не только грамматику или формат, а то, насколько резюме подходит конкретной роли.",
+          "",
+          "HR оценивает мотивацию и ожидания, технический интервьюер — глубину, руководитель — самостоятельность, влияние и зрелость решений.",
         ),
         bullets: [
-          l("Get a vacancy match score.", "Получить оценку совпадения с вакансией."),
-          l(
-            "Improve keywords where they naturally belong.",
-            "Усилить ключевые слова там, где они звучат естественно.",
-          ),
-          l(
-            "Create a stronger version for the selected position.",
-            "Создать более сильную версию под выбранную должность.",
-          ),
+          l("", "HR: мотивация, зарплата, переходы, формат работы."),
+          l("", "Техника: стек, архитектура, проекты, ошибки и решения."),
+          l("", "Финал: ответственность, приоритеты, коммуникация, рост."),
         ],
       },
     ],
     faqs: [
       {
-        question: l(
-          "Can I paste a job description into CVlift?",
-          "Можно вставить описание вакансии в CVlift?",
-        ),
+        question: l("", "Какие вопросы чаще всего задают на собеседовании?"),
         answer: l(
-          "Yes. Paste the vacancy text to get a targeted match score and role-specific recommendations.",
-          "Да. Вставьте текст вакансии, чтобы получить оценку совпадения и рекомендации под конкретную роль.",
+          "",
+          "Обычно спрашивают о себе, опыте, достижениях, причинах перехода, сильных сторонах, ожиданиях и конкретных ситуациях из работы.",
         ),
       },
       {
-        question: l(
-          "What does vacancy match measure?",
-          "Что измеряет совпадение с вакансией?",
-        ),
+        question: l("", "Как отвечать на поведенческие вопросы?"),
         answer: l(
-          "It checks relevant skills, tools, experience signals, achievements, keywords, and whether the resume is positioned for the target role.",
-          "Оно проверяет релевантные навыки, инструменты, сигналы опыта, достижения, ключевые слова и позиционирование под роль.",
+          "",
+          "Используйте структуру: ситуация, задача, действие, результат. Добавляйте контекст, вашу роль и измеримый итог.",
         ),
       },
       {
-        question: l(
-          "Should I customize my resume for every job?",
-          "Нужно адаптировать резюме под каждую вакансию?",
-        ),
+        question: l("", "Можно ли получить вопросы по моей вакансии?"),
         answer: l(
-          "For important roles, yes. A tailored resume usually communicates relevance faster than a generic version.",
-          "Для важных вакансий — да. Адаптированное резюме обычно быстрее показывает релевантность, чем общая версия.",
+          "",
+          "Да. Добавьте описание вакансии, чтобы AI подготовил вопросы под требования работодателя.",
         ),
       },
     ],
   },
   {
-    slug: "ai-resume-builder",
-    localizedSlugs: l("ai-resume-builder", "ai-konstruktor-rezyume"),
-    title: l("AI Resume Builder", "AI-конструктор резюме"),
-    eyebrow: l("AI resume writing", "AI для резюме"),
+    slug: "resume-builder",
+    localizedSlugs: l("resume-builder", "ai-konstruktor-rezyume"),
+    title: l("", "AI-конструктор резюме"),
+    eyebrow: l("", "Старт подготовки"),
     description: l(
-      "Build a sharper resume draft from your existing experience, target role, and verified achievements.",
-      "Соберите более сильный черновик резюме из вашего опыта, целевой роли и подтвержденных достижений.",
+      "",
+      "Соберите резюме с AI-агентом через вопросы об опыте, проектах, достижениях, стеке, образовании и целевой роли.",
     ),
-    metaTitle: l("AI Resume Builder | CVlift", "AI-конструктор резюме | CVlift"),
+    metaTitle: l("", "AI-конструктор резюме для собеседования | OfferLyra"),
     metaDescription: l(
-      "Use CVlift as an AI resume builder to improve structure, rewrite weak bullet points, add relevant keywords, and prepare a stronger application.",
-      "Используйте CVlift как AI-конструктор резюме: улучшайте структуру, буллеты, ключевые слова и готовьте сильный отклик.",
+      "",
+      "Создайте резюме с AI-агентом: сбор опыта, достижений, проектов, навыков и формулировок под вакансию и будущие собеседования.",
     ),
-    cta: l("Build my resume", "Собрать резюме"),
+    cta: l("", "Собрать резюме"),
     bullets: [
-      l(
-        "Transform raw experience into clear resume sections.",
-        "Превратите сырой опыт в понятные разделы резюме.",
-      ),
-      l(
-        "Generate stronger achievement bullets with editable metrics.",
-        "Создавайте сильные буллеты достижений с редактируемыми метриками.",
-      ),
-      l(
-        "Keep the final resume aligned with the job you want.",
-        "Сохраняйте финальное резюме согласованным с нужной вакансией.",
-      ),
+      l("", "AI задаёт вопросы и собирает факты для резюме."),
+      l("", "Формулировки усиливаются под роль и интервью."),
+      l("", "Готовый текст можно использовать для отклика и тренировки."),
     ],
     sections: [
       {
-        title: l("AI should strengthen the truth", "AI должен усиливать реальные факты"),
+        title: l("", "Резюме должно помогать на интервью"),
         text: l(
-          "CVlift helps you phrase real work more clearly instead of creating unsupported claims that are hard to defend in interviews.",
-          "CVlift помогает яснее описать реальный опыт, а не создавать неподтвержденные утверждения, которые сложно защитить на интервью.",
+          "",
+          "Каждый пункт резюме может стать вопросом интервьюера. Поэтому важно не просто красиво оформить опыт, а подготовить факты, метрики и объяснения.",
         ),
         bullets: [
-          l("Rewrite vague responsibilities.", "Переписать расплывчатые обязанности."),
-          l("Add achievement framing.", "Добавить фокус на достижениях."),
-          l(
-            "Keep placeholders visible until you verify the numbers.",
-            "Оставлять плейсхолдеры видимыми, пока вы не проверите цифры.",
-          ),
+          l("", "Собирайте достижения и контекст по каждому месту работы."),
+          l("", "Добавляйте технологии, решения и влияние на продукт."),
+          l("", "Оставляйте только то, что сможете уверенно объяснить."),
         ],
       },
       {
-        title: l("Built for applications, not templates", "Не шаблон, а подготовка к отклику"),
+        title: l("", "AI помогает не забыть важные детали"),
         text: l(
-          "A resume builder is useful only when it understands ATS, recruiters, and the role context. CVlift combines all three.",
-          "Конструктор резюме полезен только тогда, когда учитывает ATS, рекрутеров и контекст роли. CVlift объединяет все три слоя.",
+          "",
+          "Агент проходит по целевой роли, компаниям, проектам, навыкам и личному блоку, чтобы резюме было полным и пригодным для дальнейшей подготовки.",
         ),
         bullets: [
-          l(
-            "Score the resume before and after edits.",
-            "Оценить резюме до и после правок.",
-          ),
-          l(
-            "Use keywords from the target role.",
-            "Использовать ключевые слова целевой роли.",
-          ),
-          l(
-            "Generate a cover letter from the same context.",
-            "Создать сопроводительное письмо из того же контекста.",
-          ),
+          l("", "Вопросы идут по структуре будущего резюме."),
+          l("", "Слабые формулировки заменяются конкретными тезисами."),
+          l("", "Неизвестные метрики помечаются как места для уточнения."),
         ],
       },
     ],
     faqs: [
       {
-        question: l(
-          "Is CVlift a resume builder or a resume checker?",
-          "CVlift — это конструктор или проверка резюме?",
-        ),
+        question: l("", "AI сам напишет резюме?"),
         answer: l(
-          "Both. CVlift checks your current resume and can generate a stronger draft based on the analysis.",
-          "И то, и другое. CVlift проверяет текущее резюме и может создать более сильный черновик на основе анализа.",
+          "",
+          "Да, но на основе ваших ответов. Важно проверить факты, цифры и формулировки перед отправкой работодателю.",
         ),
       },
       {
-        question: l(
-          "Can AI write a resume from scratch?",
-          "Может ли AI написать резюме с нуля?",
-        ),
+        question: l("", "Можно создать резюме без готового файла?"),
         answer: l(
-          "AI can structure and draft a resume, but the best result needs your real experience, verified metrics, and target role context.",
-          "AI может структурировать и подготовить черновик, но лучший результат требует вашего реального опыта, проверенных метрик и контекста роли.",
+          "",
+          "Да. AI-агент может собрать резюме с нуля через последовательные вопросы.",
         ),
       },
       {
-        question: l(
-          "Will the resume sound generic?",
-          "Резюме будет звучать шаблонно?",
-        ),
+        question: l("", "Резюме будет готово к собеседованию?"),
         answer: l(
-          "CVlift focuses on concrete role signals and achievements, so the output is more specific than a generic template.",
-          "CVlift фокусируется на конкретных сигналах роли и достижениях, поэтому результат специфичнее обычного шаблона.",
+          "",
+          "Оно станет основой: по нему можно тренировать HR-скрининг, технические вопросы и рассказ о проектах.",
         ),
       },
     ],
   },
   {
-    slug: "resume-optimizer",
-    localizedSlugs: l("resume-optimizer", "optimizaciya-rezyume"),
-    title: l("Resume Optimizer", "Оптимизация резюме"),
-    eyebrow: l("Search-ready resume", "Резюме для выдачи"),
+    slug: "resume-analysis",
+    localizedSlugs: l("resume-analysis", "analiz-rezyume"),
+    title: l("", "Анализ резюме перед собеседованием"),
+    eyebrow: l("", "Проверка резюме"),
     description: l(
-      "Optimize your resume for ATS filters, keyword search, recruiter scanning, and target job requirements.",
-      "Оптимизируйте резюме для ATS-фильтров, поиска по ключевым словам, рекрутера и требований вакансии.",
+      "",
+      "Проверьте резюме перед откликом и интервью: структура, ATS, совпадение с вакансией, слабые места, достижения и вопросы, которые могут возникнуть у рекрутера.",
     ),
-    metaTitle: l("Resume Optimizer | CVlift", "Оптимизация резюме для ATS | CVlift"),
+    metaTitle: l("", "Анализ резюме перед собеседованием | OfferLyra"),
     metaDescription: l(
-      "Optimize your resume with CVlift for ATS score, keyword match, readability, achievements, and vacancy relevance.",
-      "Оптимизируйте резюме с CVlift: ATS score, совпадение ключевых слов, читаемость, достижения и релевантность вакансии.",
+      "",
+      "AI-анализ резюме: ATS-оценка, совпадение с вакансией, слабые места, ключевые слова, улучшенная версия и подготовка к вопросам интервью.",
     ),
-    cta: l("Optimize my resume", "Оптимизировать резюме"),
+    cta: l("", "Проверить резюме"),
     bullets: [
-      l(
-        "Improve ATS parsing, section names, and formatting signals.",
-        "Улучшите ATS-чтение, названия разделов и сигналы форматирования.",
-      ),
-      l(
-        "Raise keyword coverage without making the resume unnatural.",
-        "Повышайте покрытие ключевых слов без неестественного текста.",
-      ),
-      l(
-        "Prioritize fixes that can move the resume closer to an interview.",
-        "Приоритизируйте правки, которые приближают резюме к интервью.",
-      ),
+      l("", "ATS-оценка, структура и читаемость резюме."),
+      l("", "Сравнение с вакансией и недостающие сигналы."),
+      l("", "Идеи, как усилить опыт перед собеседованием."),
     ],
     sections: [
       {
-        title: l(
-          "Optimization is more than grammar",
-          "Оптимизация — это больше, чем грамматика",
-        ),
+        title: l("", "Резюме влияет на вопросы интервью"),
         text: l(
-          "A polished resume can still underperform if it misses target keywords, hides impact, or uses a structure that ATS tools parse poorly.",
-          "Даже аккуратное резюме может работать плохо, если в нем нет ключевых слов, спрятан результат или структура плохо читается ATS.",
+          "",
+          "Если резюме расплывчатое, интервьюер будет уточнять базовые вещи. Если резюме конкретное, разговор быстрее переходит к сильным проектам и решениям.",
         ),
         bullets: [
-          l(
-            "Check keyword coverage against the target role.",
-            "Проверить покрытие ключевых слов под целевую роль.",
-          ),
-          l(
-            "Make achievements easier to scan.",
-            "Сделать достижения проще для быстрого просмотра.",
-          ),
-          l(
-            "Remove weak or distracting phrasing.",
-            "Убрать слабые или отвлекающие формулировки.",
-          ),
+          l("", "Проверьте, понятна ли целевая роль."),
+          l("", "Найдите слабые буллеты и пустые достижения."),
+          l("", "Подготовьте объяснения к спорным местам."),
         ],
       },
       {
-        title: l(
-          "Optimize before high-value applications",
-          "Оптимизируйте перед важными откликами",
-        ),
+        title: l("", "Анализ показывает, что исправить до отклика"),
         text: l(
-          "CVlift helps you avoid sending a resume that has obvious gaps for the exact job you want.",
-          "CVlift помогает не отправлять резюме с очевидными пробелами для вакансии, которая вам действительно важна.",
+          "",
+          "OfferLyra оценивает резюме, подсвечивает пробелы, предлагает улучшенный текст и помогает понять, какие темы стоит потренировать перед интервью.",
         ),
         bullets: [
-          l("Review ATS and recruiter signals.", "Проверить ATS и рекрутерские сигналы."),
-          l("Get ranked changes first.", "Получить приоритетные изменения."),
-          l(
-            "Generate an improved version in one flow.",
-            "Сгенерировать улучшенную версию в одном процессе.",
-          ),
+          l("", "Ключевые слова и соответствие вакансии."),
+          l("", "Сильные и слабые стороны резюме."),
+          l("", "Улучшенная версия и план вопросов для интервью."),
         ],
       },
     ],
     faqs: [
       {
-        question: l(
-          "What is resume optimization?",
-          "Что такое оптимизация резюме?",
-        ),
+        question: l("", "Зачем анализировать резюме перед интервью?"),
         answer: l(
-          "Resume optimization means improving structure, keywords, achievements, readability, and role fit so the resume performs better in screening.",
-          "Оптимизация резюме — это улучшение структуры, ключевых слов, достижений, читаемости и совпадения с ролью для лучшего прохождения отбора.",
+          "",
+          "Чтобы понять, какие вопросы могут возникнуть у рекрутера и где нужно усилить историю опыта.",
         ),
       },
       {
-        question: l(
-          "Does resume optimization guarantee interviews?",
-          "Оптимизация резюме гарантирует интервью?",
-        ),
+        question: l("", "Анализ учитывает вакансию?"),
         answer: l(
-          "No tool can guarantee interviews, but optimization can remove common blockers before a recruiter or ATS reviews the resume.",
-          "Нет, ни один инструмент не гарантирует интервью, но оптимизация помогает убрать частые блокеры до проверки рекрутером или ATS.",
+          "",
+          "Да. Можно сравнить резюме с конкретной вакансией и увидеть пробелы по требованиям.",
         ),
       },
       {
-        question: l(
-          "Is this different from a resume template?",
-          "Это отличается от шаблона резюме?",
-        ),
+        question: l("", "Можно ли получить улучшенную версию резюме?"),
         answer: l(
-          "Yes. A template changes layout. CVlift focuses on content quality, ATS fit, keywords, and the logic of your application.",
-          "Да. Шаблон меняет внешний вид. CVlift работает с качеством содержания, ATS, ключевыми словами и логикой отклика.",
+          "",
+          "Да. После анализа формируется улучшенный черновик с более сильными формулировками.",
+        ),
+      },
+    ],
+  },
+  {
+    slug: "resume-translation",
+    localizedSlugs: l("resume-translation", "perevod-rezyume"),
+    title: l("", "Перевод резюме на другой язык"),
+    eyebrow: l("", "Международные отклики"),
+    description: l(
+      "",
+      "Переведите резюме на другой язык с сохранением смысла, структуры, профессиональных терминов и формулировок, которые можно защищать на интервью.",
+    ),
+    metaTitle: l("", "Перевод резюме на английский и другие языки | OfferLyra"),
+    metaDescription: l(
+      "",
+      "AI-перевод резюме для международных вакансий: сохранение структуры, терминов, достижений, ATS-ключей и подготовки к интервью.",
+    ),
+    cta: l("", "Подготовить перевод"),
+    bullets: [
+      l("", "Перевод с сохранением профессионального смысла."),
+      l("", "Адаптация терминов под международные вакансии."),
+      l("", "Формулировки, которые можно уверенно объяснить на интервью."),
+    ],
+    sections: [
+      {
+        title: l("", "Перевод резюме — это не дословный перевод"),
+        text: l(
+          "",
+          "Для международного отклика важно адаптировать должности, достижения, стек, формулировки и ключевые слова так, чтобы резюме звучало естественно для работодателя.",
+        ),
+        bullets: [
+          l("", "Сохраняйте факты и метрики без искажений."),
+          l("", "Адаптируйте профессиональные термины и названия ролей."),
+          l("", "Проверяйте, что каждый пункт можно объяснить на интервью."),
+        ],
+      },
+      {
+        title: l("", "Перевод помогает готовиться к интервью на языке вакансии"),
+        text: l(
+          "",
+          "После перевода можно тренировать ответы по тому же резюме: рассказ о себе, проекты, достижения и технические решения на языке работодателя.",
+        ),
+        bullets: [
+          l("", "Единая терминология в резюме и ответах."),
+          l("", "Подготовка к вопросам по международной вакансии."),
+          l("", "Более аккуратная подача опыта для зарубежных команд."),
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: l("", "Можно перевести резюме на английский?"),
+        answer: l(
+          "",
+          "Да. Резюме можно адаптировать на английский и другие языки, сохраняя структуру и профессиональный смысл.",
+        ),
+      },
+      {
+        question: l("", "AI меняет содержание резюме при переводе?"),
+        answer: l(
+          "",
+          "Факты должны сохраняться. Улучшаться могут формулировки, терминология и читаемость.",
+        ),
+      },
+      {
+        question: l("", "Нужна ли подготовка к интервью после перевода?"),
+        answer: l(
+          "",
+          "Да. Лучше отдельно потренировать рассказ о проектах и достижениях на языке вакансии.",
         ),
       },
     ],
@@ -860,223 +660,133 @@ export const seoPages: SeoPage[] = [
 
 export const faqItems: SeoFaq[] = [
   {
-    question: l("What is CVlift?", "Что такое CVlift?"),
+    question: l("", "Что такое OfferLyra?"),
     answer: l(
-      "CVlift is an AI resume analysis tool that scores your resume, finds weak points, recommends fixes, and generates an improved resume draft.",
-      "CVlift — AI-инструмент для анализа резюме: он ставит оценку, находит слабые места, рекомендует правки и генерирует улучшенный черновик.",
+      "",
+      "OfferLyra — AI-платформа подготовки к собеседованию: резюме, анализ, тренажёр вопросов, HR-скрининг, техническое интервью и перевод резюме.",
     ),
   },
   {
-    question: l(
-      "Can I analyze a resume without a vacancy?",
-      "Можно анализировать резюме без вакансии?",
-    ),
+    question: l("", "Чем платформа отличается от обычного конструктора резюме?"),
     answer: l(
-      "Yes. CVlift supports a general resume audit and a vacancy-based analysis mode.",
-      "Да. CVlift поддерживает общий аудит резюме и анализ под конкретную вакансию.",
+      "",
+      "Конструктор резюме закрывает только документ. OfferLyra помогает пройти весь путь до интервью: подготовить резюме, потренировать ответы и пройти пробные AI-собеседования.",
     ),
   },
   {
-    question: l("What file types can I upload?", "Какие типы файлов можно загрузить?"),
+    question: l("", "Можно ли готовиться по конкретной вакансии?"),
     answer: l(
-      "CVlift supports PDF, DOCX, and TXT resume uploads.",
-      "CVlift поддерживает загрузку резюме в PDF, DOCX и TXT.",
+      "",
+      "Да. Вакансия используется как контекст для анализа резюме, вопросов, HR-скрининга и технического интервью.",
     ),
   },
   {
-    question: l("What does the resume score mean?", "Что означает оценка резюме?"),
+    question: l("", "Какие этапы собеседования можно тренировать?"),
     answer: l(
-      "The score summarizes resume readiness across ATS quality, structure, achievements, readability, and role fit.",
-      "Оценка показывает готовность резюме по ATS-качеству, структуре, достижениям, читаемости и соответствию роли.",
+      "",
+      "HR-скрининг, техническое интервью, вопросы по резюме, самопрезентацию, мотивацию, достижения, проекты и зарплатные ожидания.",
     ),
   },
   {
-    question: l(
-      "Does CVlift create a better resume version?",
-      "Создает ли CVlift улучшенную версию резюме?",
-    ),
+    question: l("", "Можно ли создать резюме с нуля?"),
     answer: l(
-      "Yes. Each analysis can generate an improved resume draft and a cover letter.",
-      "Да. Каждый анализ может сгенерировать улучшенный черновик резюме и сопроводительное письмо.",
+      "",
+      "Да. AI-агент задаёт вопросы об опыте, проектах, навыках и целях, а затем собирает структурированный черновик резюме.",
     ),
   },
   {
-    question: l(
-      "Why does the improved resume include bracketed numbers?",
-      "Почему в улучшенном резюме есть числа в скобках?",
-    ),
+    question: l("", "Сколько стоит анализ или тренировка?"),
     answer: l(
-      "Bracketed values are placeholders for details you should verify and replace with your real metrics before applying.",
-      "Значения в скобках — плейсхолдеры для деталей, которые нужно проверить и заменить реальными метриками перед откликом.",
-    ),
-  },
-  {
-    question: l(
-      "Can CVlift compare my resume to a job description?",
-      "Может ли CVlift сравнить резюме с описанием вакансии?",
-    ),
-    answer: l(
-      "Yes. Paste the vacancy text to get a vacancy match score and tailored fixes.",
-      "Да. Вставьте текст вакансии, чтобы получить оценку совпадения и точечные правки.",
-    ),
-  },
-  {
-    question: l("Is the advice generic?", "Рекомендации будут общими?"),
-    answer: l(
-      "CVlift focuses on specific weak points from your resume and returns concrete changes rather than generic resume tips.",
-      "CVlift фокусируется на конкретных слабых местах вашего резюме и возвращает практичные изменения вместо общих советов.",
+      "",
+      "Платные действия используют токены. Сейчас базовая логика пакетов: 1 токен, 5 токенов и 10 токенов.",
     ),
   },
 ];
 
 export const seoKeywordClusters: Record<string, LocalizedValue<string[]>> = {
-  "ats-resume-checker": l(
-    [
-      "ATS resume checker",
-      "resume ATS checker",
-      "ATS friendly resume",
-      "resume parser check",
-      "applicant tracking system resume",
-    ],
-    [
-      "проверка резюме ATS",
-      "ATS проверка резюме онлайн",
-      "проверить резюме для ATS",
-      "ATS совместимость резюме",
-      "как пройти ATS резюме",
-    ],
-  ),
-  "resume-score": l(
-    [
-      "resume score checker",
-      "CV score",
-      "resume review score",
-      "free resume score",
-      "resume grading tool",
-    ],
-    [
-      "оценка резюме",
-      "проверить резюме онлайн",
-      "оценить резюме",
-      "скоринг резюме",
-      "AI анализ резюме",
-    ],
-  ),
-  "resume-keywords": l(
-    [
-      "resume keywords",
-      "ATS keywords",
-      "resume keyword scanner",
-      "job keywords for resume",
-      "keyword match resume",
-    ],
-    [
-      "ключевые слова для резюме",
-      "ключевые слова ATS",
-      "поиск ключевых слов в резюме",
-      "ключевые навыки в резюме",
-      "резюме ключевые слова вакансии",
-    ],
-  ),
-  "resume-improvement": l(
-    [
-      "improve my resume",
-      "resume improvement tool",
-      "AI resume review",
-      "resume rewrite",
-      "make resume better",
-    ],
-    [
-      "улучшить резюме",
-      "как улучшить резюме",
-      "AI проверка резюме",
-      "переписать резюме",
-      "сделать резюме лучше",
-    ],
-  ),
-  "cover-letter-generator": l(
-    [
-      "cover letter generator",
-      "AI cover letter",
-      "cover letter for job application",
-      "generate cover letter",
-      "cover letter from resume",
-    ],
-    [
-      "генератор сопроводительного письма",
-      "сопроводительное письмо AI",
-      "сопроводительное письмо к резюме",
-      "написать сопроводительное письмо",
-      "сопроводительное письмо по вакансии",
-    ],
-  ),
-  "resume-job-match": l(
-    [
-      "resume job match",
-      "match resume to job description",
-      "compare resume to job description",
-      "job description resume checker",
-      "tailor resume to job",
-    ],
-    [
-      "резюме под вакансию",
-      "сравнить резюме с вакансией",
-      "проверка резюме под вакансию",
-      "адаптировать резюме под вакансию",
-      "соответствие резюме вакансии",
-    ],
-  ),
-  "ai-resume-builder": l(
-    [
-      "AI resume builder",
-      "resume builder AI",
-      "build resume with AI",
-      "AI CV builder",
-      "AI resume writer",
-    ],
-    [
-      "AI конструктор резюме",
-      "нейросеть для резюме",
-      "составить резюме с AI",
-      "AI генератор резюме",
-      "написать резюме нейросетью",
-    ],
-  ),
-  "resume-optimizer": l(
-    [
-      "resume optimizer",
-      "ATS resume optimizer",
-      "optimize resume",
-      "resume optimization",
-      "CV optimizer",
-    ],
-    [
-      "оптимизация резюме",
-      "оптимизировать резюме",
-      "ATS оптимизация резюме",
-      "резюме для поиска работы",
-      "улучшить выдачу резюме",
-    ],
-  ),
+  "interview-prep": l("", [
+    "подготовка к собеседованию",
+    "подготовка к интервью",
+    "как подготовиться к собеседованию",
+    "платформа подготовки к собеседованию",
+    "AI подготовка к собеседованию",
+  ]),
+  "interview-simulator": l("", [
+    "тренажер собеседований",
+    "тренажер интервью",
+    "тренировка собеседования онлайн",
+    "пробное собеседование онлайн",
+    "тренажер вопросов собеседования",
+  ]),
+  "ai-interview": l("", [
+    "AI собеседование",
+    "ИИ интервьюер",
+    "собеседование с искусственным интеллектом",
+    "AI интервью",
+    "пробное интервью с AI",
+  ]),
+  "technical-interview": l("", [
+    "техническое собеседование",
+    "подготовка к техническому собеседованию",
+    "техническое интервью",
+    "вопросы на техническом собеседовании",
+    "тренажер технических вопросов",
+  ]),
+  "hr-screening": l("", [
+    "HR скрининг",
+    "HR интервью",
+    "подготовка к HR собеседованию",
+    "вопросы HR на собеседовании",
+    "скрининг с AI",
+  ]),
+  "interview-questions": l("", [
+    "вопросы для собеседования",
+    "вопросы на собеседовании",
+    "ответы на вопросы собеседования",
+    "поведенческие вопросы собеседование",
+    "STAR ответы собеседование",
+  ]),
+  "resume-builder": l("", [
+    "AI конструктор резюме",
+    "создать резюме с AI",
+    "составить резюме онлайн",
+    "составить резюме нейросетью",
+    "резюме для собеседования",
+  ]),
+  "resume-analysis": l("", [
+    "анализ резюме",
+    "проверка резюме",
+    "ATS проверка резюме",
+    "оценка резюме",
+    "резюме под вакансию",
+  ]),
+  "resume-translation": l("", [
+    "перевод резюме",
+    "перевод резюме на английский",
+    "резюме на английском",
+    "перевести CV",
+    "резюме для международной вакансии",
+  ]),
 };
 
 export function getSeoPage(slug: string) {
-  return seoPages.find((page) =>
-    locales.some((locale) => page.localizedSlugs[locale] === slug),
+  return seoPages.find(
+    (page) =>
+      page.slug === slug ||
+      locales.some((locale) => page.localizedSlugs[locale] === slug),
   );
 }
 
-export function getSeoPagePath(page: SeoPage, locale: Locale = "en") {
+export function getSeoPagePath(page: SeoPage, locale: Locale = "ru") {
   const slug = page.localizedSlugs[locale];
 
-  return locale === "ru" ? `/ru/${slug}` : `/${slug}`;
+  return `/ru/${slug}`;
 }
 
 export function getSeoPageLanguageAlternates(page: SeoPage) {
   return {
-    en: getSeoPagePath(page, "en"),
     ru: getSeoPagePath(page, "ru"),
-    "x-default": getSeoPagePath(page, "en"),
+    "x-default": getSeoPagePath(page, "ru"),
   };
 }
 
@@ -1085,9 +795,11 @@ export function getSeoPageKeywords(page: SeoPage, locale: Locale) {
 
   return [
     ...baseKeywords,
-    locale === "ru" ? "CVlift" : "CVlift",
-    locale === "ru" ? "анализ резюме" : "resume analysis",
-    locale === "ru" ? "резюме для IT" : "IT resume",
+    "OfferLyra",
+    "подготовка к собеседованию",
+    "AI собеседование",
+    "тренажер собеседований",
+    "анализ резюме",
   ];
 }
 

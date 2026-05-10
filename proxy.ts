@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 
-const localeCookieName = "cvlift_locale";
+const localeCookieName = "offerlyra_locale";
 
 export function proxy(request: NextRequest) {
   const locale = getLocaleFromPath(request.nextUrl.pathname);
@@ -10,7 +10,7 @@ export function proxy(request: NextRequest) {
   }
 
   const requestHeaders = new Headers(request.headers);
-  requestHeaders.set("x-cvlift-locale", locale);
+  requestHeaders.set("x-offerlyra-locale", locale);
 
   const response = NextResponse.next({
     request: {

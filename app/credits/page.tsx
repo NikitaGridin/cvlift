@@ -8,7 +8,7 @@ import { getAnalysisCreditCost, getCreditsPageData } from "@/lib/credits";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Credits",
+  title: "Токены",
   robots: {
     index: false,
     follow: false,

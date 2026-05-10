@@ -18,7 +18,7 @@ vi.mock("@/lib/credits", () => ({
     status = 402;
 
     constructor() {
-      super("Not enough CV Credits to analyze a resume.");
+      super("Недостаточно токенов для проверки резюме.");
       this.name = "InsufficientCreditsError";
     }
   },
@@ -151,7 +151,7 @@ describe("POST /api/analyses credit gate", () => {
 
     expect(response.status).toBe(402);
     expect(body).toEqual({
-      error: "Not enough CV Credits to analyze a resume.",
+      error: "Недостаточно токенов для проверки резюме.",
     });
     expect(mocks.parseResumeFile).not.toHaveBeenCalled();
     expect(mocks.analyzeResumeWithOpenRouter).not.toHaveBeenCalled();
@@ -187,7 +187,7 @@ describe("POST /api/analyses credit gate", () => {
 
     expect(response.status).toBe(401);
     expect(body).toEqual({
-      error: "Sign in with Google before analyzing a resume.",
+      error: "Войдите через Google перед анализом резюме.",
     });
     expect(mocks.isDatabaseConfigured).not.toHaveBeenCalled();
     expect(mocks.getAnalysisCreditCost).not.toHaveBeenCalled();
@@ -202,7 +202,7 @@ describe("POST /api/analyses credit gate", () => {
 
     expect(response.status).toBe(503);
     expect(body).toEqual({
-      error: "Credits are temporarily unavailable. Please try again later.",
+      error: "Токены временно недоступны. Попробуйте позже.",
     });
     expect(mocks.getAnalysisCreditCost).not.toHaveBeenCalled();
     expect(mocks.getWalletSummary).not.toHaveBeenCalled();
@@ -245,7 +245,7 @@ const analysisFixture = {
   improvedResumeText:
     "Improved resume text with stronger frontend positioning and measurable outcomes.",
   coverLetter:
-    "Generated cover letter tailored to the frontend vacancy and candidate impact.",
+    "Interview preparation brief with self-presentation, HR questions, technical questions, and answer angles.",
 } as const;
 
 function createAnalysisRequest() {

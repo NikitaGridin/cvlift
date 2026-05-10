@@ -7,7 +7,7 @@ import { requireUserSession } from "@/lib/auth-required";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Resume Builder",
+  title: "Создание резюме",
   robots: {
     index: false,
     follow: false,

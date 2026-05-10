@@ -43,7 +43,7 @@ describe("POST /api/resume-agent/speech", () => {
 
     expect(response.status).toBe(401);
     expect(body).toEqual({
-      error: "Sign in before using high-quality voice.",
+      error: "Войдите, чтобы использовать качественную озвучку.",
     });
     expect(mocks.synthesizeOpenRouterSpeech).not.toHaveBeenCalled();
   });
@@ -59,7 +59,7 @@ describe("POST /api/resume-agent/speech", () => {
     const body = await response.json();
 
     expect(response.status).toBe(400);
-    expect(body).toEqual({ error: "Send text up to 4096 characters." });
+    expect(body).toEqual({ error: "Отправьте текст до 4096 символов." });
     expect(mocks.synthesizeOpenRouterSpeech).not.toHaveBeenCalled();
   });
 

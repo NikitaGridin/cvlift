@@ -15,9 +15,9 @@ import {
 import { HomeRoiSections } from "@/components/home-roi-sections";
 import { LocalizedString, LocalizedText } from "@/components/localized-text";
 import { PreferenceControls } from "@/components/preference-controls";
-import { creditPackages, formatUsdCents } from "@/lib/credits-public";
-import type { TranslationKey } from "@/lib/i18n";
-import { seoPages } from "@/lib/seo-content";
+import { creditPackages, formatRubles } from "@/lib/credits-public";
+import type { LocalizedValue, TranslationKey } from "@/lib/i18n";
+import { getSeoPagePath, seoPages } from "@/lib/seo-content";
 import { getSessionSafely } from "@/lib/server-data";
 import { absoluteUrl, siteLogoPath, siteLogoUrl } from "@/lib/site-url";
 
@@ -29,8 +29,8 @@ const outcomes = [
 ] as TranslationKey[];
 
 const homeNavLinks = [
-  { href: "/ats-resume-checker", labelKey: "marketing.nav.ats" },
-  { href: "/resume-score", labelKey: "marketing.nav.resumeScore" },
+  { href: "/ru/trenazher-sobesedovaniy", labelKey: "marketing.nav.ats" },
+  { href: "/ru/ai-sobesedovanie", labelKey: "marketing.nav.resumeScore" },
   { href: "/faq", labelKey: "common.faq" },
 ].map((item) => ({ ...item, labelKey: item.labelKey as TranslationKey }));
 
@@ -67,29 +67,31 @@ const tokenPackageMeta = {
   }
 >;
 
+function getTokenUnit(count: number): LocalizedValue<string> {
+  return {
+    ru: count === 1 ? "токен" : count < 5 ? "токена" : "токенов",
+  };
+}
+
 const homeTitle =
-  "CVlift - AI Resume Checker, ATS Score and Resume Optimization";
+  "OfferLyra - AI-платформа подготовки к собеседованию";
 const homeDescription =
-  "CVlift analyzes resumes with AI, checks ATS score, finds missing keywords, matches vacancies, and helps create stronger job applications.";
+  "OfferLyra помогает подготовиться к собеседованию: AI-тренажёр вопросов, HR-скрининг, техническое интервью, создание, анализ и перевод резюме.";
 
 export const metadata: Metadata = {
   title: homeTitle,
   description: homeDescription,
   keywords: [
-    "AI resume checker",
-    "ATS resume checker",
-    "resume score checker",
-    "resume optimizer",
-    "resume job match",
-    "resume keywords",
-    "cover letter generator",
-    "проверка резюме онлайн",
-    "оценка резюме онлайн",
-    "AI анализ резюме",
-    "ATS проверка резюме",
-    "резюме под вакансию",
-    "улучшить резюме",
-    "ключевые слова резюме",
+    "подготовка к собеседованию",
+    "тренажер собеседований",
+    "AI собеседование",
+    "ИИ интервьюер",
+    "техническое собеседование",
+    "HR скрининг",
+    "вопросы для собеседования",
+    "создать резюме с AI",
+    "анализ резюме",
+    "перевод резюме",
   ],
   alternates: {
     canonical: "/",
@@ -98,16 +100,15 @@ export const metadata: Metadata = {
     title: homeTitle,
     description: homeDescription,
     url: "/",
-    siteName: "CVlift",
+    siteName: "OfferLyra",
     type: "website",
-    locale: "en_US",
-    alternateLocale: ["ru_RU"],
+    locale: "ru_RU",
     images: [
       {
         url: siteLogoPath,
         width: 512,
         height: 512,
-        alt: "CVlift logo",
+        alt: "Логотип OfferLyra",
       },
     ],
   },
@@ -123,37 +124,37 @@ const homeJsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "CVlift",
+    name: "OfferLyra",
     url: absoluteUrl("/"),
     logo: siteLogoUrl,
   },
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "CVlift",
+    name: "OfferLyra",
     url: absoluteUrl("/"),
-    inLanguage: ["en-US", "ru-RU"],
+    inLanguage: ["ru-RU"],
     description: homeDescription,
   },
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    name: "CVlift",
+    name: "OfferLyra",
     url: absoluteUrl("/"),
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web",
-    inLanguage: ["en-US", "ru-RU"],
+    inLanguage: ["ru-RU"],
     description: homeDescription,
     image: siteLogoUrl,
     provider: {
       "@type": "Organization",
-      name: "CVlift",
+      name: "OfferLyra",
       logo: siteLogoUrl,
     },
     offers: {
       "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD",
+      price: "99",
+      priceCurrency: "RUB",
     },
   },
 ];
@@ -251,7 +252,7 @@ export default async function Home() {
           {useCaseCards.map((page, index) => (
             <Link
               key={page.slug}
-              href={`/${page.slug}`}
+              href={getSeoPagePath(page, "ru")}
               className="cvlift-panel cvlift-use-case-card group border border-white/8 bg-[#080A07] p-6 transition duration-300 hover:bg-[#0C1008]"
             >
               <div className="mb-5 flex items-center justify-between gap-4">
@@ -283,7 +284,7 @@ export default async function Home() {
 
       <footer className="bg-[#050605]">
         <div className="mx-auto flex w-full max-w-[1180px] flex-col gap-4 px-4 py-8 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-[#666C61] sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
-          <span>© 2026 CVlift</span>
+          <span>© 2026 OfferLyra</span>
           <div className="flex flex-wrap gap-4">
             <Link href="/privacy" className="transition hover:text-[#B7FF00]">
               <LocalizedText k="marketing.footer.privacy" />
@@ -337,7 +338,7 @@ function BottomCta({ isSignedIn }: { isSignedIn: boolean }) {
                 <LocalizedText k="home.cta.google" />
               </Link>
             )}
-            <Link href="/resume-keywords" className="cvlift-secondary-button">
+            <Link href="/ru/voprosy-dlya-sobesedovaniya" className="cvlift-secondary-button">
               <Radar aria-hidden="true" className="size-4" />
               <LocalizedText k="home.cta.secondary" />
             </Link>
@@ -448,7 +449,7 @@ function TokenPurchaseSection() {
                     </p>
                   </div>
                   <span className="cvlift-token-price">
-                    {formatUsdCents(item.amountUsdCents)}
+                    {formatRubles(item.amountRubles)}
                   </span>
                 </div>
 
@@ -461,7 +462,7 @@ function TokenPurchaseSection() {
                       {item.credits}
                     </span>
                     <span className="pb-1 font-mono text-xs font-black uppercase tracking-[0.12em] text-[#B7FF00]">
-                      <LocalizedText k="home.tokens.units" />
+                      <LocalizedString value={getTokenUnit(item.credits)} />
                     </span>
                   </p>
                 </div>
@@ -495,7 +496,7 @@ function CyberHeader({ isSignedIn }: { isSignedIn: boolean }) {
             <Zap aria-hidden="true" className="size-4 fill-black" />
           </span>
           <span className="font-mono text-sm font-black tracking-normal text-white">
-            CVlift
+            OfferLyra
           </span>
         </Link>
 

@@ -14,7 +14,7 @@ beforeEach(() => {
   vi.unstubAllGlobals();
 
   process.env.OPENROUTER_API_KEY = "test-openrouter-key";
-  process.env.OPENROUTER_SITE_URL = "https://cvlift.test";
+  process.env.OPENROUTER_SITE_URL = "https://offerlyra.test";
   process.env.OPENROUTER_TTS_MODEL = "openai/gpt-4o-mini-tts-2025-12-15";
   process.env.OPENROUTER_TTS_SPEED = "0.92";
   process.env.OPENROUTER_TTS_VOICE = "marin";
@@ -69,8 +69,8 @@ describe("synthesizeOpenRouterSpeech", () => {
     expect(init.method).toBe("POST");
     expect(headers.Authorization).toBe("Bearer test-openrouter-key");
     expect(headers["Content-Type"]).toBe("application/json");
-    expect(headers["HTTP-Referer"]).toBe("https://cvlift.test");
-    expect(headers["X-OpenRouter-Title"]).toBe("CVlift");
+    expect(headers["HTTP-Referer"]).toBe("https://offerlyra.test");
+    expect(headers["X-OpenRouter-Title"]).toBe("OfferLyra");
     expect(body).toMatchObject({
       input: "Собери резюме голосом.",
       model: "openai/gpt-4o-mini-tts-2025-12-15",

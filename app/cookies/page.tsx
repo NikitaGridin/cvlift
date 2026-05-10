@@ -3,9 +3,9 @@ import { LegalPage } from "@/components/legal-page";
 import { localized as l } from "@/lib/i18n";
 
 export const metadata: Metadata = {
-  title: "Cookie Policy | CVlift",
+  title: "Политика cookie | OfferLyra",
   description:
-    "How CVlift uses cookies for sign-in, security, preferences, and product improvement.",
+    "Как OfferLyra использует cookie для входа, безопасности, настроек и улучшения продукта.",
   alternates: {
     canonical: "/cookies",
   },
@@ -16,8 +16,8 @@ export default function CookiesPage() {
     <LegalPage
       title={l("Cookie Policy", "Политика cookie")}
       description={l(
-        "This policy explains how CVlift uses cookies. By continuing to use the website, you agree to this cookie use.",
-        "Эта политика объясняет, как CVlift использует cookie. Продолжая пользоваться сайтом, вы соглашаетесь с использованием cookie.",
+        "This policy explains how OfferLyra uses cookies. By continuing to use the website, you agree to this cookie use.",
+        "Эта политика объясняет, как OfferLyra использует cookie. Продолжая пользоваться сайтом, вы соглашаетесь с использованием cookie.",
       )}
       sections={[
         {
@@ -30,8 +30,8 @@ export default function CookiesPage() {
         {
           title: l("Essential cookies", "Обязательные cookie"),
           text: l(
-            "Essential cookies are required for core product behavior and cannot be turned off inside CVlift.",
-            "Обязательные cookie нужны для основной работы продукта и не отключаются внутри CVlift.",
+            "Essential cookies are required for core product behavior and cannot be turned off inside OfferLyra.",
+            "Обязательные cookie нужны для основной работы продукта и не отключаются внутри OfferLyra.",
           ),
           bullets: [
             l(
@@ -51,8 +51,8 @@ export default function CookiesPage() {
         {
           title: l("Product and preference cookies", "Cookie продукта и настроек"),
           text: l(
-            "CVlift may use cookies to remember product preferences, understand usage, improve public pages, and make the service more stable.",
-            "CVlift может использовать cookie, чтобы запоминать настройки продукта, понимать использование, улучшать публичные страницы и делать сервис стабильнее.",
+            "OfferLyra may use cookies to remember product preferences, understand usage, improve public pages, and make the service more stable.",
+            "OfferLyra может использовать cookie, чтобы запоминать настройки продукта, понимать использование, улучшать публичные страницы и делать сервис стабильнее.",
           ),
           bullets: [
             l(
@@ -72,15 +72,15 @@ export default function CookiesPage() {
         {
           title: l("How to control cookies", "Как управлять cookie"),
           text: l(
-            "You can clear or block site cookies in your browser settings. If you block essential cookies, sign-in and analysis history may not work correctly.",
-            "Вы можете очистить или заблокировать cookie сайта в настройках браузера. Если заблокировать обязательные cookie, вход и история анализа могут работать некорректно.",
+            "You can clear or block site cookies in your browser settings. If you block essential cookies, sign-in and preparation history may not work correctly.",
+            "Вы можете очистить или заблокировать cookie сайта в настройках браузера. Если заблокировать обязательные cookie, вход и история подготовки могут работать некорректно.",
           ),
         },
         {
           title: l("Website use means agreement", "Использование сайта означает согласие"),
           text: l(
-            "The banner is informational. CVlift stores a technical cookie named cvlift_cookie_notice only to remember that the notice has already been shown.",
-            "Баннер носит информационный характер. CVlift хранит техническую cookie cvlift_cookie_notice только для того, чтобы помнить, что уведомление уже было показано.",
+            "The banner is informational. OfferLyra stores a technical cookie named offerlyra_cookie_notice only to remember that the notice has already been shown.",
+            "Баннер носит информационный характер. OfferLyra хранит техническую cookie offerlyra_cookie_notice только для того, чтобы помнить, что уведомление уже было показано.",
           ),
         },
       ]}

@@ -3,9 +3,9 @@ import { LegalPage } from "@/components/legal-page";
 import { localized as l } from "@/lib/i18n";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | CVlift",
+  title: "Условия сервиса | OfferLyra",
   description:
-    "Terms for using CVlift resume analysis, resume improvement, and cover letter generation.",
+    "Условия использования AI-платформы OfferLyra для подготовки к собеседованию, анализа резюме, HR-скрининга и технических интервью.",
   alternates: {
     canonical: "/terms",
   },
@@ -16,20 +16,20 @@ export default function TermsPage() {
     <LegalPage
       title={l("Terms of Service", "Условия сервиса")}
       description={l(
-        "These terms describe the basic rules for using CVlift and the responsibilities that come with resume analysis.",
-        "Эти условия описывают базовые правила использования CVlift и ответственность, связанную с анализом резюме.",
+        "These terms describe the basic rules for using OfferLyra and the responsibilities that come with interview preparation.",
+        "Эти условия описывают базовые правила использования OfferLyra и ответственность, связанную с подготовкой к собеседованиям.",
       )}
       sections={[
         {
-          title: l("Using CVlift", "Использование CVlift"),
+          title: l("Using OfferLyra", "Использование OfferLyra"),
           text: l(
-            "CVlift helps users analyze resumes, compare resumes with vacancies, generate improved resume drafts, and create cover letters.",
-            "CVlift помогает анализировать резюме, сравнивать их с вакансиями, создавать улучшенные черновики и сопроводительные письма.",
+            "OfferLyra helps users create and analyze resumes, compare resumes with vacancies, practice interview questions, run AI screening, and prepare for technical interviews.",
+            "OfferLyra помогает создавать и анализировать резюме, сравнивать их с вакансиями, тренировать вопросы, проходить AI-скрининг и готовиться к техническим интервью.",
           ),
           bullets: [
             l(
-              "You must sign in before running resume analysis.",
-              "Перед запуском анализа резюме нужно войти в аккаунт.",
+              "You must sign in before using saved preparation scenarios.",
+              "Перед запуском сохраненных сценариев подготовки нужно войти в аккаунт.",
             ),
             l(
               "You are responsible for the files and text you submit.",
@@ -49,8 +49,8 @@ export default function TermsPage() {
           ),
           bullets: [
             l(
-              "Review every generated resume and cover letter before sending it.",
-              "Проверяйте каждое сгенерированное резюме и письмо перед отправкой.",
+              "Review every generated resume, answer draft, and recommendation before using it.",
+              "Проверяйте каждое сгенерированное резюме, черновик ответа и рекомендацию перед использованием.",
             ),
             l(
               "Replace bracketed placeholders with verified details.",
@@ -65,8 +65,8 @@ export default function TermsPage() {
         {
           title: l("No job guarantee", "Нет гарантии трудоустройства"),
           text: l(
-            "CVlift can improve resume clarity and application quality, but it cannot guarantee interviews, job offers, salary outcomes, or employer decisions.",
-            "CVlift может улучшить ясность резюме и качество отклика, но не гарантирует интервью, офферы, зарплатные результаты или решения работодателей.",
+            "OfferLyra can improve preparation quality, resume clarity, and interview readiness, but it cannot guarantee interviews, job offers, salary outcomes, or employer decisions.",
+            "OfferLyra может улучшить качество подготовки, ясность резюме и готовность к интервью, но не гарантирует приглашения, офферы, зарплатные результаты или решения работодателей.",
           ),
         },
         {
@@ -79,8 +79,8 @@ export default function TermsPage() {
         {
           title: l("Changes to the service", "Изменения сервиса"),
           text: l(
-            "CVlift may update product features, content, policies, and terms over time to improve the service and comply with operational needs.",
-            "CVlift может обновлять функции, контент, политики и условия, чтобы улучшать сервис и соответствовать операционным требованиям.",
+            "OfferLyra may update product features, content, policies, and terms over time to improve the service and comply with operational needs.",
+            "OfferLyra может обновлять функции, контент, политики и условия, чтобы улучшать сервис и соответствовать операционным требованиям.",
           ),
         },
       ]}

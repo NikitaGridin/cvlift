@@ -8,7 +8,7 @@ export class ResumeAgentCreditsUnavailableError extends Error {
   status = 503;
 
   constructor() {
-    super("Credits are temporarily unavailable. Please try again later.");
+    super("Токены временно недоступны. Попробуйте позже.");
     this.name = "ResumeAgentCreditsUnavailableError";
   }
 }

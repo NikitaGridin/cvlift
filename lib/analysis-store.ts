@@ -26,7 +26,7 @@ export const useAnalysisStore = create<AnalysisStore>()(
       clearCurrent: () => set({ current: undefined }),
     }),
     {
-      name: "cvlift-analysis",
+      name: "offerlyra-analysis",
       partialize: (state) => ({
         current: state.current,
         localHistory: state.localHistory,

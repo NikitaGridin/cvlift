@@ -7,7 +7,7 @@ const mocks = vi.hoisted(() => ({
   InsufficientCreditsError: class InsufficientCreditsError extends Error {
     status = 402;
 
-    constructor(message = "Not enough CV Credits to start a resume conversation.") {
+    constructor(message = "Недостаточно токенов для запуска разговора о резюме.") {
       super(message);
       this.name = "InsufficientCreditsError";
     }
@@ -46,7 +46,7 @@ describe("POST /api/resume-agent/start", () => {
 
     expect(response.status).toBe(401);
     expect(body).toEqual({
-      error: "Sign in before talking to the resume agent.",
+      error: "Войдите, чтобы общаться с помощником по резюме.",
     });
     expect(mocks.chargeResumeAgentConversationStart).not.toHaveBeenCalled();
   });
@@ -74,11 +74,11 @@ describe("POST /api/resume-agent/start", () => {
     const body = await response.json();
 
     expect(response.status).toBe(400);
-    expect(body).toEqual({ error: "Send a valid conversation id." });
+    expect(body).toEqual({ error: "Отправьте корректный id разговора." });
     expect(mocks.chargeResumeAgentConversationStart).not.toHaveBeenCalled();
   });
 
-  test("returns 402 when the user has no credits", async () => {
+  test("returns 402 when the user has no tokens", async () => {
     mocks.chargeResumeAgentConversationStart.mockRejectedValue(
       new mocks.InsufficientCreditsError(),
     );
@@ -88,7 +88,7 @@ describe("POST /api/resume-agent/start", () => {
 
     expect(response.status).toBe(402);
     expect(body).toEqual({
-      error: "Not enough CV Credits to start a resume conversation.",
+      error: "Недостаточно токенов для запуска разговора о резюме.",
     });
   });
 });

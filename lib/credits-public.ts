@@ -1,5 +1,6 @@
-export const CREDIT_NAME = "CV Credits";
+export const CREDIT_NAME = "Токены";
 export const ANALYSIS_CREDIT_COST = 1;
+export const TOKEN_PRICE_RUB = 99;
 
 export type WalletSummary = {
   balance: number;
@@ -11,7 +12,7 @@ export type CreditPackage = {
   id: string;
   name: string;
   credits: number;
-  amountUsdCents: number;
+  amountRubles: number;
   description: string;
   badge?: string;
 };
@@ -19,32 +20,32 @@ export type CreditPackage = {
 export const creditPackages: CreditPackage[] = [
   {
     id: "starter",
-    name: "Starter",
-    credits: 5,
-    amountUsdCents: 500,
-    description: "For quick resume checks before several applications.",
+    name: "1 токен",
+    credits: 1,
+    amountRubles: TOKEN_PRICE_RUB,
+    description: "Для одного анализа резюме или сценария подготовки.",
   },
   {
     id: "focused",
-    name: "Focused",
-    credits: 15,
-    amountUsdCents: 1500,
-    description: "Best for focused job search sprints and role tailoring.",
-    badge: "Most popular",
+    name: "5 токенов",
+    credits: 5,
+    amountRubles: 399,
+    description: "Для HR-скрининга, вопросов и нескольких итераций резюме.",
+    badge: "Популярно",
   },
   {
     id: "career",
-    name: "Career",
-    credits: 30,
-    amountUsdCents: 3000,
-    description: "For repeated iterations across multiple roles and resumes.",
+    name: "10 токенов",
+    credits: 10,
+    amountRubles: 799,
+    description: "Для полного цикла подготовки к нескольким вакансиям.",
   },
 ];
 
-export function formatUsdCents(value: number) {
-  return new Intl.NumberFormat("en", {
+export function formatRubles(value: number) {
+  return new Intl.NumberFormat("ru-RU", {
     style: "currency",
-    currency: "USD",
-    maximumFractionDigits: value % 100 === 0 ? 0 : 2,
-  }).format(value / 100);
+    currency: "RUB",
+    maximumFractionDigits: 0,
+  }).format(value);
 }

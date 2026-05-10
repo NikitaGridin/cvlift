@@ -22,7 +22,7 @@ export function LegalPage({ title, description, sections }: LegalPageProps) {
 
       <section className="mx-auto w-full max-w-[980px] px-4 pb-12 pt-12 sm:px-6 lg:px-8 lg:pt-16">
         <p className="text-sm font-bold text-[#6366F1]">
-          <LocalizedString value={{ en: "CVlift legal", ru: "Документы CVlift" }} />
+          <LocalizedString value={{ ru: "Документы OfferLyra" }} />
         </p>
         <h1 className="mt-3 text-5xl font-bold tracking-tight text-[#0F172A] sm:text-6xl">
           <LocalizedString value={title} />
@@ -32,14 +32,14 @@ export function LegalPage({ title, description, sections }: LegalPageProps) {
         </p>
         <p className="mt-4 text-sm font-semibold text-[#94A3B8]">
           <LocalizedString
-            value={{ en: "Last updated: May 9, 2026", ru: "Обновлено: 9 мая 2026" }}
+            value={{ ru: "Обновлено: 9 мая 2026" }}
           />
         </p>
 
         <div className="mt-10 grid gap-4">
           {sections.map((section) => (
             <article
-              key={section.title.en}
+              key={section.title.ru}
               className="rounded-[24px] border border-black/[0.06] bg-white/75 p-6 shadow-sm backdrop-blur-xl"
             >
               <h2 className="text-2xl font-bold tracking-tight text-[#0F172A]">
@@ -51,7 +51,7 @@ export function LegalPage({ title, description, sections }: LegalPageProps) {
               {section.bullets?.length ? (
                 <ul className="mt-5 grid gap-3">
                   {section.bullets.map((bullet) => (
-                    <li key={bullet.en} className="text-sm font-semibold leading-6 text-[#0F172A]">
+                    <li key={bullet.ru} className="text-sm font-semibold leading-6 text-[#0F172A]">
                       <LocalizedString value={bullet} />
                     </li>
                   ))}

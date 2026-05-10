@@ -10,7 +10,6 @@ import {
 } from "react";
 import {
   defaultLocale,
-  isLocale,
   translate,
   type Locale,
   type TranslationKey,
@@ -24,7 +23,7 @@ type PreferencesContextValue = {
 
 const PreferencesContext = createContext<PreferencesContextValue | null>(null);
 const legacyPreferencePrefix = "cv" + "pilot";
-const localeStorageKey = "cvlift_locale";
+const localeStorageKey = "offerlyra_locale";
 const legacyLocaleStorageKey = `${legacyPreferencePrefix}_locale`;
 
 export function PreferencesProvider({
@@ -86,19 +85,10 @@ export function useI18n() {
 }
 
 function readStoredLocale(initialLocale: Locale): Locale {
-  const storedLocale =
-    window.localStorage.getItem(localeStorageKey) ??
-    window.localStorage.getItem(legacyLocaleStorageKey);
+  window.localStorage.removeItem(legacyLocaleStorageKey);
+  window.localStorage.setItem(localeStorageKey, defaultLocale);
 
-  if (isLocale(storedLocale)) {
-    return storedLocale;
-  }
-
-  if (isLocale(document.documentElement.lang)) {
-    return document.documentElement.lang;
-  }
-
-  return window.navigator.language?.toLowerCase().startsWith("ru") ? "ru" : initialLocale;
+  return initialLocale;
 }
 
 function writePreferenceCookie(name: string, value: string) {

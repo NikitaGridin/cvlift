@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Sparkles } from "lucide-react";
 import { LocalizedString, LocalizedText } from "@/components/localized-text";
-import { seoPages } from "@/lib/seo-content";
+import { getSeoPagePath, seoPages } from "@/lib/seo-content";
 
 export function MarketingFooter() {
   return (
@@ -13,7 +13,7 @@ export function MarketingFooter() {
               <span className="flex size-10 items-center justify-center rounded-2xl bg-[#6366F1] text-white shadow-[0_14px_32px_rgba(99,102,241,0.22)]">
                 <Sparkles aria-hidden="true" className="size-5" />
               </span>
-              <span className="text-base font-bold text-[#0F172A]">CVlift</span>
+              <span className="text-base font-bold text-[#0F172A]">OfferLyra</span>
             </Link>
             <p className="mt-4 max-w-md text-sm font-medium leading-6 text-[#64748B]">
               <LocalizedText k="marketing.footer.description" />
@@ -45,7 +45,7 @@ export function MarketingFooter() {
               title={<LocalizedText k="marketing.footer.useCases" />}
               links={seoPages.map((page) => [
                 <LocalizedString key={page.slug} value={page.title} />,
-                `/${page.slug}`,
+                getSeoPagePath(page, "ru"),
               ])}
             />
           </div>

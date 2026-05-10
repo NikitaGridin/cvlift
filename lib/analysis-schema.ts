@@ -70,7 +70,7 @@ export const analyzeRequestSchema = z.object({
     value.analysisMode === "general" ||
     Boolean(value.vacancyText?.trim()),
   {
-    message: "Add vacancy text.",
+    message: "Добавьте текст вакансии.",
     path: ["vacancyText"],
   },
 ).refine(
@@ -79,7 +79,7 @@ export const analyzeRequestSchema = z.object({
     typeof value.salaryMax !== "number" ||
     value.salaryMax >= value.salaryMin,
   {
-    message: "Salary max must be greater than salary min.",
+    message: "Максимальная зарплата должна быть больше минимальной.",
     path: ["salaryMax"],
   },
 );

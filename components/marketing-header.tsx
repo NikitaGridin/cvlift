@@ -9,8 +9,8 @@ type MarketingHeaderProps = {
 };
 
 const links = [
-  { href: "/ats-resume-checker", labelKey: "marketing.nav.ats" },
-  { href: "/resume-score", labelKey: "marketing.nav.resumeScore" },
+  { href: "/ru/trenazher-sobesedovaniy", labelKey: "marketing.nav.ats" },
+  { href: "/ru/ai-sobesedovanie", labelKey: "marketing.nav.resumeScore" },
   { href: "/faq", labelKey: "common.faq" },
 ].map((item) => ({ ...item, labelKey: item.labelKey as TranslationKey }));
 
@@ -21,7 +21,7 @@ export function MarketingHeader({ isSignedIn = false }: MarketingHeaderProps) {
         <span className="flex size-10 items-center justify-center rounded-2xl bg-[#6366F1] text-white shadow-[0_14px_32px_rgba(99,102,241,0.28)]">
           <Sparkles aria-hidden="true" className="size-5" />
         </span>
-        <span className="text-base font-bold">CVlift</span>
+        <span className="text-base font-bold">OfferLyra</span>
       </Link>
 
       <div className="hidden items-center gap-1 md:flex">

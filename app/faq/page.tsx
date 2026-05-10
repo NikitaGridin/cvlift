@@ -7,9 +7,9 @@ import { MarketingHeader } from "@/components/marketing-header";
 import { faqItems } from "@/lib/seo-content";
 
 export const metadata: Metadata = {
-  title: "FAQ | CVlift",
+  title: "FAQ | OfferLyra",
   description:
-    "Answers about CVlift resume scoring, ATS checks, vacancy matching, improved resumes, and cover letters.",
+    "Ответы о подготовке к собеседованию, AI-интервью, HR-скрининге, технических вопросах, анализе и переводе резюме в OfferLyra.",
   alternates: {
     canonical: "/faq",
   },
@@ -21,10 +21,10 @@ export default function FaqPage() {
     "@type": "FAQPage",
     mainEntity: faqItems.map((item) => ({
       "@type": "Question",
-      name: item.question.en,
+      name: item.question.ru,
       acceptedAnswer: {
         "@type": "Answer",
-        text: item.answer.en,
+        text: item.answer.ru,
       },
     })),
   };
@@ -40,13 +40,12 @@ export default function FaqPage() {
             <HelpCircle aria-hidden="true" className="size-7" />
           </div>
           <h1 className="text-5xl font-bold tracking-tight text-[#0F172A] sm:text-6xl">
-            <LocalizedString value={{ en: "CVlift FAQ", ru: "FAQ CVlift" }} />
+            <LocalizedString value={{ ru: "FAQ OfferLyra" }} />
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg font-medium leading-8 text-[#64748B]">
             <LocalizedString
               value={{
-                en: "Everything candidates usually ask before scoring a resume, comparing it with a vacancy, or generating a stronger version.",
-                ru: "Все, что кандидаты обычно спрашивают перед оценкой резюме, сравнением с вакансией или созданием более сильной версии.",
+                ru: "Все, что кандидаты обычно спрашивают перед подготовкой к интервью: резюме, вопросы, HR-скрининг, технический этап и перевод.",
               }}
             />
           </p>
@@ -55,7 +54,7 @@ export default function FaqPage() {
         <div className="mt-10 grid gap-3">
           {faqItems.map((item) => (
             <details
-              key={item.question.en}
+              key={item.question.ru}
               className="group rounded-[22px] border border-black/[0.06] bg-white/75 p-5 shadow-sm backdrop-blur-xl"
             >
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-bold text-[#0F172A] [&::-webkit-details-marker]:hidden">
@@ -80,16 +79,14 @@ export default function FaqPage() {
               <h2 className="text-2xl font-bold">
                 <LocalizedString
                   value={{
-                    en: "Ready to check your resume?",
-                    ru: "Готовы проверить резюме?",
+                    ru: "Готовы подготовиться к интервью?",
                   }}
                 />
               </h2>
               <p className="mt-2 text-sm font-medium leading-6 text-[#CBD5E1]">
                 <LocalizedString
                   value={{
-                    en: "Upload a resume, choose general or vacancy mode, and get specific fixes.",
-                    ru: "Загрузите резюме, выберите общий режим или вакансию и получите конкретные правки.",
+                    ru: "Загрузите резюме, добавьте вакансию и соберите план подготовки к HR-скринингу, техническому этапу и вопросам по опыту.",
                   }}
                 />
               </p>
@@ -105,13 +102,12 @@ export default function FaqPage() {
 
         <div className="mt-8 text-center">
           <Link
-            href="/ats-resume-checker"
+            href="/ru/podgotovka-k-sobesedovaniyu"
             className="text-sm font-bold text-[#6366F1] transition duration-200 hover:text-[#4F46E5]"
           >
             <LocalizedString
               value={{
-                en: "Read the ATS resume checker guide",
-                ru: "Читать гид по ATS-проверке резюме",
+                ru: "Читать гид по подготовке к собеседованию",
               }}
             />
           </Link>

@@ -365,7 +365,7 @@ export function ResumeAgentChat() {
 
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = locale === "ru" ? "ru-RU" : "en-US";
+      utterance.lang = "ru-RU";
       utterance.rate = 1.12;
       utterance.pitch = 1;
       utterance.volume = 0.92;
@@ -656,7 +656,7 @@ export function ResumeAgentChat() {
     }
 
     const recognition = new SpeechRecognition();
-    recognition.lang = locale === "ru" ? "ru-RU" : "en-US";
+    recognition.lang = "ru-RU";
     recognition.continuous = true;
     recognition.interimResults = true;
     recognition.onstart = () => setIsListening(true);
@@ -1145,7 +1145,7 @@ function toCollectedAnswers(messages: AgentMessage[]) {
 function getResumeTextFileName() {
   const date = new Date().toISOString().slice(0, 10);
 
-  return `cvlift-resume-${date}.txt`;
+  return `offerlyra-resume-${date}.txt`;
 }
 
 function downloadTextFile(text: string, fileName: string) {

@@ -47,14 +47,14 @@ type RejectionReason = {
 const l = (en: string, ru: string): LocalizedValue<string> => ({ en, ru });
 
 const interviewData = [
-  { week: "W1", before: 8, after: 9 },
-  { week: "W2", before: 9, after: 13 },
-  { week: "W3", before: 8, after: 18 },
-  { week: "W4", before: 10, after: 26 },
-  { week: "W5", before: 9, after: 34 },
-  { week: "W6", before: 8, after: 42 },
-  { week: "W7", before: 9, after: 49 },
-  { week: "W8", before: 10, after: 54 },
+  { week: "1 нед.", before: 8, after: 9 },
+  { week: "2 нед.", before: 9, after: 13 },
+  { week: "3 нед.", before: 8, after: 18 },
+  { week: "4 нед.", before: 10, after: 26 },
+  { week: "5 нед.", before: 9, after: 34 },
+  { week: "6 нед.", before: 8, after: 42 },
+  { week: "7 нед.", before: 9, after: 49 },
+  { week: "8 нед.", before: 10, after: 54 },
 ];
 
 const kpis = [
@@ -62,7 +62,7 @@ const kpis = [
     prefix: "+",
     value: 43,
     suffix: "%",
-    label: "Interview Rate",
+    label: "Конверсия",
     detail: l(
       "More qualified interview invitations",
       "Больше релевантных приглашений",
@@ -72,7 +72,7 @@ const kpis = [
     prefix: "+",
     value: 61,
     suffix: "",
-    label: "ATS Score",
+    label: "Готовность",
     detail: l(
       "Cleaner parsing and stronger matching",
       "Чище парсинг и сильнее совпадение",
@@ -82,7 +82,7 @@ const kpis = [
     prefix: "",
     value: 2.3,
     suffix: "x",
-    label: "Recruiter Responses",
+    label: "Ответы",
     detail: l(
       "Higher response density per application",
       "Больше ответов на каждый отклик",
@@ -185,21 +185,21 @@ function InterviewGrowthSection({ isSignedIn }: HomeRoiSectionsProps) {
         <div className="cvlift-roi-copy">
           <p className="cvlift-roi-eyebrow">
             <TrendingUp aria-hidden="true" className="size-4" />
-            measurable_resume_growth
+            рост_готовности
           </p>
           <h2 className="cvlift-section-title mt-6 text-white">
             <LocalizedString
               value={l(
                 "More invitations. Fewer rejections.",
-                "Больше приглашений. Меньше отказов.",
+                "Больше уверенности. Меньше провалов на интервью.",
               )}
             />
           </h2>
           <p className="mt-5 max-w-xl font-mono text-sm font-medium leading-7 text-[#92988E]">
             <LocalizedString
               value={l(
-                "CVlift analyzes resumes, optimizes for ATS, and helps candidates pass recruiter filters.",
-                "CVlift анализирует резюме, оптимизирует под ATS и помогает проходить фильтры рекрутеров.",
+                "OfferLyra analyzes resumes, optimizes for ATS, and helps candidates pass recruiter filters.",
+                "OfferLyra готовит к собеседованию целиком: резюме, вопросы, HR-скрининг, техническое интервью и ответы по вакансии.",
               )}
             />
           </p>
@@ -208,8 +208,8 @@ function InterviewGrowthSection({ isSignedIn }: HomeRoiSectionsProps) {
               <LocalizedString
                 value={
                   isSignedIn
-                    ? l("Improve resume", "Улучшить резюме")
-                    : l("Start analysis", "Запустить анализ")
+                    ? l("Improve resume", "Открыть подготовку")
+                    : l("Start analysis", "Начать подготовку")
                 }
               />
               <ArrowRight aria-hidden="true" className="size-4" />
@@ -226,7 +226,7 @@ function InterviewGrowthSection({ isSignedIn }: HomeRoiSectionsProps) {
             <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-start">
               <div>
                 <p className="font-mono text-[11px] font-black uppercase text-[#B7FF00]">
-                  interview_rate_%
+                  конверсия_к_интервью
                 </p>
                 <h3 className="mt-2 text-2xl font-black text-white">
                   <LocalizedString
@@ -239,23 +239,29 @@ function InterviewGrowthSection({ isSignedIn }: HomeRoiSectionsProps) {
               </div>
               <div className="flex flex-wrap gap-2 font-mono text-[11px] font-black">
                 <span className="cvlift-chart-legend cvlift-chart-legend-before">
-                  Before CVlift
+                  До OfferLyra
                 </span>
                 <span className="cvlift-chart-legend cvlift-chart-legend-after">
-                  After CVlift
+                  После OfferLyra
                 </span>
               </div>
             </div>
 
-            <div className="h-[320px] w-full">
-              <ResponsiveContainer width="100%" height="100%">
+            <div className="h-[320px] min-h-[320px] w-full min-w-0 overflow-hidden">
+              <ResponsiveContainer
+                width="100%"
+                height={320}
+                minWidth={0}
+                minHeight={320}
+                initialDimension={{ width: 360, height: 320 }}
+              >
                 <LineChart
                   data={interviewData}
                   margin={{ top: 10, right: 16, left: -18, bottom: 4 }}
                 >
                   <defs>
                     <linearGradient
-                      id="cvliftInterviewGradient"
+                      id="offerlyraInterviewGradient"
                       x1="0"
                       y1="0"
                       x2="1"
@@ -299,7 +305,7 @@ function InterviewGrowthSection({ isSignedIn }: HomeRoiSectionsProps) {
                     }}
                     formatter={(value, name) => [
                       `${Number(value ?? 0)}%`,
-                      name === "after" ? "After CVlift" : "Before CVlift",
+                      name === "after" ? "После OfferLyra" : "До OfferLyra",
                     ]}
                     labelStyle={{ color: "#B7FF00", fontWeight: 900 }}
                   />
@@ -314,7 +320,7 @@ function InterviewGrowthSection({ isSignedIn }: HomeRoiSectionsProps) {
                   <Line
                     type="monotone"
                     dataKey="after"
-                    stroke="url(#cvliftInterviewGradient)"
+                    stroke="url(#offerlyraInterviewGradient)"
                     strokeWidth={5}
                     dot={false}
                     activeDot={{
@@ -389,23 +395,23 @@ function RejectionReasonsSection() {
             <LocalizedString
               value={l(
                 "Premium AI resume assistant",
-                "Премиальный AI-помощник для резюме",
+                "Платформа подготовки к собеседованию",
               )}
             />
           </p>
           <h2 className="cvlift-section-title cvlift-rejection-title mt-4 text-white">
             <LocalizedString
-              value={l("AI vacancy matching", "Подбор под вакансию")}
+              value={l("AI vacancy matching", "AI-собеседование")}
             />
             <span className="block cvlift-gradient-text">
-              <LocalizedString value={l("based on AI", "на основе AI")} />
+              <LocalizedString value={l("based on AI", "по вашему резюме")} />
             </span>
           </h2>
           <p className="cvlift-rejection-subtitle mx-auto mt-3 max-w-3xl font-mono text-sm font-medium text-[#92988E]">
             <LocalizedString
               value={l(
-                "CVlift analyzes vacancy requirements and adapts your resume so it passes filters and moves further.",
-                "CVlift анализирует требования вакансии и адаптирует ваше резюме так, чтобы вы проходили дальше.",
+                "OfferLyra analyzes vacancy requirements and adapts your resume so it passes filters and moves further.",
+                "OfferLyra анализирует вакансию и резюме, а затем помогает тренировать ответы для HR, технического этапа и финального интервью.",
               )}
             />
           </p>
@@ -416,7 +422,7 @@ function RejectionReasonsSection() {
             <div className="cvlift-reason-column cvlift-reason-column-left">
               {leftReasonIndexes.map((reasonIndex) => (
                 <ReasonCallout
-                  key={rejectionReasons[reasonIndex].label.en}
+                  key={rejectionReasons[reasonIndex].label.ru}
                   active={activeIndex === reasonIndex}
                   dimmed={hasActiveReason && activeIndex !== reasonIndex}
                   index={reasonIndex}
@@ -439,7 +445,7 @@ function RejectionReasonsSection() {
             <div className="cvlift-reason-column cvlift-reason-column-right">
               {rightReasonIndexes.map((reasonIndex) => (
                 <ReasonCallout
-                  key={rejectionReasons[reasonIndex].label.en}
+                  key={rejectionReasons[reasonIndex].label.ru}
                   active={activeIndex === reasonIndex}
                   dimmed={hasActiveReason && activeIndex !== reasonIndex}
                   index={reasonIndex}
@@ -495,7 +501,7 @@ function ReasonCallout({
       onMouseLeave={onInactive}
       onFocus={onActive}
       onBlur={onInactive}
-      aria-label={`${reason.value}% ${reason.label.en}`}
+      aria-label={`${reason.value}% ${reason.label.ru}`}
     >
       <span className="cvlift-reason-icon" aria-hidden="true">
         <Icon className="size-7" />
@@ -569,7 +575,7 @@ function DonutChart({
 
             return (
               <path
-                key={item.label.en}
+                key={item.label.ru}
                 d={d}
                 fill={item.color}
                 opacity={isInView ? visibleOpacity : 0}
@@ -587,7 +593,7 @@ function DonutChart({
                 onMouseLeave={() => onActiveChange(null)}
                 onFocus={() => onActiveChange(index)}
                 onBlur={() => onActiveChange(null)}
-                aria-label={`${item.value}% ${item.label.en}`}
+                aria-label={`${item.value}% ${item.label.ru}`}
                 className="cvlift-donut-segment"
                 tabIndex={0}
               />

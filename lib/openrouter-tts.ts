@@ -34,7 +34,7 @@ export async function synthesizeOpenRouterSpeech(params: {
         process.env.OPENROUTER_SITE_URL ??
         process.env.AUTH_URL ??
         "http://localhost:3000",
-      "X-OpenRouter-Title": "CVlift",
+      "X-OpenRouter-Title": "OfferLyra",
     },
     body: JSON.stringify({
       model: DEFAULT_TTS_MODEL,
@@ -65,21 +65,9 @@ export async function synthesizeOpenRouterSpeech(params: {
   };
 }
 
-function buildVoiceInstructions(locale: Locale) {
-  if (locale === "ru") {
-    return [
-      "Speak in natural, polished Russian.",
-      "Sound like a calm senior career coach.",
-      "Use warm but professional intonation.",
-      "Speak at a natural, moderately brisk pace.",
-      "Keep pauses brief and conversational.",
-      "Keep articulation clean while maintaining momentum.",
-      "Do not sound robotic, overly excited, or theatrical.",
-    ].join(" ");
-  }
-
+function buildVoiceInstructions(_locale: Locale) {
   return [
-    "Speak in natural, polished English.",
+    "Speak in natural, polished Russian.",
     "Sound like a calm senior career coach.",
     "Use warm but professional intonation.",
     "Speak at a natural, moderately brisk pace.",

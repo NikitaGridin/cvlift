@@ -3,9 +3,9 @@ import { LegalPage } from "@/components/legal-page";
 import { localized as l } from "@/lib/i18n";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | CVlift",
+  title: "Политика приватности | OfferLyra",
   description:
-    "How CVlift handles account information, resume content, vacancy text, analysis history, and user choices.",
+    "Как OfferLyra обрабатывает данные аккаунта, резюме, вакансии, ответы на интервью, историю подготовки и пользовательские настройки.",
   alternates: {
     canonical: "/privacy",
   },
@@ -16,15 +16,15 @@ export default function PrivacyPage() {
     <LegalPage
       title={l("Privacy Policy", "Политика приватности")}
       description={l(
-        "This policy explains what CVlift collects, why it is used, and how users can manage their information.",
-        "Эта политика объясняет, что CVlift собирает, зачем это используется и как пользователи могут управлять своей информацией.",
+        "This policy explains what OfferLyra collects, why it is used, and how users can manage their information.",
+        "Эта политика объясняет, что OfferLyra собирает, зачем это используется и как пользователи могут управлять своей информацией.",
       )}
       sections={[
         {
           title: l("Information you provide", "Информация, которую вы предоставляете"),
           text: l(
-            "CVlift works with the information you choose to submit while using the product.",
-            "CVlift работает с информацией, которую вы сами передаете при использовании продукта.",
+            "OfferLyra works with the information you choose to submit while using the product.",
+            "OfferLyra работает с информацией, которую вы сами передаете при использовании продукта.",
           ),
           bullets: [
             l(
@@ -37,29 +37,29 @@ export default function PrivacyPage() {
               "Текст вакансии, который вы добавляете для сопоставления с ролью.",
             ),
             l(
-              "Generated scores, recommendations, improved resumes, cover letters, and analysis history.",
-              "Сгенерированные оценки, рекомендации, улучшенные резюме, сопроводительные письма и история анализа.",
+              "Generated scores, recommendations, improved resumes, answer drafts, screening feedback, and preparation history.",
+              "Сгенерированные оценки, рекомендации, улучшенные резюме, черновики ответов, фидбек по скринингу и история подготовки.",
             ),
           ],
         },
         {
           title: l("How the information is used", "Как используется информация"),
           text: l(
-            "The information is used to run resume analysis, show results, keep user history, and improve the product experience.",
-            "Информация используется для анализа резюме, показа результатов, хранения истории и улучшения продукта.",
+            "The information is used to run resume analysis, prepare interview scenarios, show results, keep user history, and improve the product experience.",
+            "Информация используется для анализа резюме, подготовки сценариев интервью, показа результатов, хранения истории и улучшения продукта.",
           ),
           bullets: [
             l(
-              "Generate resume scores, weak points, strong points, and recommended fixes.",
-              "Генерировать оценки резюме, слабые и сильные стороны, а также рекомендованные правки.",
+              "Generate resume scores, weak points, strong points, recommended fixes, and likely interview questions.",
+              "Генерировать оценки резюме, слабые и сильные стороны, рекомендованные правки и вероятные вопросы на интервью.",
             ),
             l(
               "Compare a resume with a vacancy when you choose vacancy mode.",
               "Сравнивать резюме с вакансией, когда выбран режим вакансии.",
             ),
             l(
-              "Let signed-in users reopen previous analyses.",
-              "Позволять авторизованным пользователям открывать прошлые анализы.",
+              "Let signed-in users reopen previous analyses and preparation sessions.",
+              "Позволять авторизованным пользователям открывать прошлые анализы и сессии подготовки.",
             ),
             l(
               "Maintain product security and prevent abuse.",
@@ -70,8 +70,8 @@ export default function PrivacyPage() {
         {
           title: l("AI processing", "AI-обработка"),
           text: l(
-            "Resume and vacancy content may be processed by AI systems to produce analysis results. You should review generated content before using it in a real application.",
-            "Контент резюме и вакансии может обрабатываться AI-системами для создания результата анализа. Перед использованием в реальном отклике нужно проверить сгенерированный контент.",
+            "Resume, vacancy, and interview-answer content may be processed by AI systems to produce analysis, screening, and preparation results. You should review generated content before using it in a real application or interview.",
+            "Контент резюме, вакансии и ответов на интервью может обрабатываться AI-системами для анализа, скрининга и подготовки. Перед использованием в реальном отклике или интервью нужно проверить сгенерированный контент.",
           ),
           bullets: [
             l(
@@ -91,8 +91,8 @@ export default function PrivacyPage() {
         {
           title: l("Cookies and sign-in", "Cookie и вход"),
           text: l(
-            "CVlift uses cookies to support sign-in, session security, product preferences, and service improvement. By continuing to use the website, you agree to this cookie use.",
-            "CVlift использует cookie для входа, безопасности сессии, настроек продукта и улучшения сервиса. Продолжая пользоваться сайтом, вы соглашаетесь с использованием cookie.",
+            "OfferLyra uses cookies to support sign-in, session security, product preferences, and service improvement. By continuing to use the website, you agree to this cookie use.",
+            "OfferLyra использует cookie для входа, безопасности сессии, настроек продукта и улучшения сервиса. Продолжая пользоваться сайтом, вы соглашаетесь с использованием cookie.",
           ),
           bullets: [
             l(
@@ -121,12 +121,12 @@ export default function PrivacyPage() {
               "Вы можете выйти через боковую панель продукта.",
             ),
             l(
-              "You can request deletion of stored resume analyses.",
-              "Вы можете запросить удаление сохраненных анализов резюме.",
+              "You can request deletion of stored analyses and preparation sessions.",
+              "Вы можете запросить удаление сохраненных анализов и сессий подготовки.",
             ),
             l(
-              "You can contact CVlift at support@cvlift.app for privacy requests.",
-              "По вопросам приватности можно связаться с CVlift: support@cvlift.app.",
+              "You can contact OfferLyra at support@offerlyra.ru for privacy requests.",
+              "По вопросам приватности можно связаться с OfferLyra: support@offerlyra.ru.",
             ),
           ],
         },

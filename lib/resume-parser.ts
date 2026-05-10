@@ -25,7 +25,7 @@ export async function parseResumeFile(file: File) {
     return normalizeResumeText(text).slice(0, MAX_RESUME_CHARS);
   }
 
-  throw new Error("Unsupported file type. Upload PDF, DOCX, or TXT.");
+  throw new Error("Неподдерживаемый тип файла. Загрузите PDF, DOCX или TXT.");
 }
 
 export async function resolveVacancyInput(vacancyText?: string) {
@@ -35,7 +35,7 @@ export async function resolveVacancyInput(vacancyText?: string) {
     return directText.slice(0, MAX_VACANCY_CHARS);
   }
 
-  throw new Error("Add vacancy text.");
+  throw new Error("Добавьте текст вакансии.");
 }
 
 async function extractDocxText(buffer: Buffer) {

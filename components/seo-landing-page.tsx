@@ -6,7 +6,6 @@ import { MarketingFooter } from "@/components/marketing-footer";
 import { MarketingHeader } from "@/components/marketing-header";
 import {
   getSeoPageKeywords,
-  getSeoPageLanguageAlternates,
   getSeoPagePath,
   type SeoPage,
 } from "@/lib/seo-content";
@@ -18,7 +17,7 @@ import {
   type TranslationKey,
 } from "@/lib/i18n";
 
-export function getSeoLandingMetadata(page: SeoPage, locale: Locale = "en"): Metadata {
+export function getSeoLandingMetadata(page: SeoPage, locale: Locale = "ru"): Metadata {
   const canonicalPath = getSeoPagePath(page, locale);
   const title = page.metaTitle[locale];
   const description = page.metaDescription[locale];
@@ -29,22 +28,20 @@ export function getSeoLandingMetadata(page: SeoPage, locale: Locale = "en"): Met
     keywords: getSeoPageKeywords(page, locale),
     alternates: {
       canonical: canonicalPath,
-      languages: getSeoPageLanguageAlternates(page),
     },
     openGraph: {
       title,
       description,
       url: canonicalPath,
-      siteName: "CVlift",
+      siteName: "OfferLyra",
       type: "website",
-      locale: locale === "ru" ? "ru_RU" : "en_US",
-      alternateLocale: locale === "ru" ? ["en_US"] : ["ru_RU"],
+      locale: "ru_RU",
       images: [
         {
           url: siteLogoPath,
           width: 512,
           height: 512,
-          alt: "CVlift logo",
+          alt: "OfferLyra logo",
         },
       ],
     },
@@ -75,7 +72,7 @@ export function SeoLandingPage({
   page: SeoPage;
   locale?: Locale;
 }) {
-  const contentLocale = locale ?? "en";
+  const contentLocale = locale ?? "ru";
   const canonicalPath = getSeoPagePath(page, contentLocale);
   const jsonLd = [
     {
@@ -85,15 +82,15 @@ export function SeoLandingPage({
       description: page.metaDescription[contentLocale],
       url: absoluteUrl(canonicalPath),
       image: siteLogoUrl,
-      inLanguage: contentLocale === "ru" ? "ru-RU" : "en-US",
+      inLanguage: "ru-RU",
       isPartOf: {
         "@type": "WebSite",
-        name: "CVlift",
+        name: "OfferLyra",
         url: absoluteUrl("/"),
       },
       publisher: {
         "@type": "Organization",
-        name: "CVlift",
+        name: "OfferLyra",
         logo: siteLogoUrl,
       },
     },
@@ -104,7 +101,7 @@ export function SeoLandingPage({
         {
           "@type": "ListItem",
           position: 1,
-          name: "CVlift",
+          name: "OfferLyra",
           item: absoluteUrl("/"),
         },
         {
@@ -130,7 +127,6 @@ export function SeoLandingPage({
   ];
   const jsonLdHtml = JSON.stringify(jsonLd).replace(/</g, "\\u003c");
   const questionHeading = {
-    en: `Common questions about ${page.title.en.toLowerCase()}`,
     ru: `Частые вопросы: ${page.title.ru.toLowerCase()}`,
   };
 
@@ -170,14 +166,14 @@ export function SeoLandingPage({
         <div className="rounded-[28px] border border-black/[0.06] bg-white/75 p-6 shadow-sm backdrop-blur-xl">
           <h2 className="text-xl font-bold text-[#0F172A]">
             <SeoLocalizedString
-              value={{ en: "What CVlift checks", ru: "Что проверяет CVlift" }}
+              value={{ ru: "Что проверяет OfferLyra" }}
               locale={locale}
             />
           </h2>
           <div className="mt-5 grid gap-3">
             {page.bullets.map((bullet) => (
               <div
-                key={bullet.en}
+                key={bullet.ru}
                 className="flex gap-3 rounded-[20px] bg-[#FAFBFC] p-4"
               >
                 <CheckCircle2
@@ -196,7 +192,7 @@ export function SeoLandingPage({
       <section className="mx-auto grid w-full max-w-[1240px] gap-4 px-4 py-8 sm:px-6 lg:grid-cols-2 lg:px-8">
         {page.sections.map((section) => (
           <article
-            key={section.title.en}
+            key={section.title.ru}
             className="rounded-[24px] border border-black/[0.06] bg-white/75 p-6 shadow-sm backdrop-blur-xl"
           >
             <h2 className="text-2xl font-bold tracking-tight text-[#0F172A]">
@@ -208,7 +204,7 @@ export function SeoLandingPage({
             <ul className="mt-5 grid gap-3">
               {section.bullets.map((bullet) => (
                 <li
-                  key={bullet.en}
+                  key={bullet.ru}
                   className="flex gap-3 text-sm font-semibold leading-6 text-[#0F172A]"
                 >
                   <CheckCircle2
@@ -227,7 +223,7 @@ export function SeoLandingPage({
         <div className="rounded-[28px] border border-black/[0.06] bg-white/75 p-6 shadow-sm backdrop-blur-xl sm:p-8">
           <p className="text-sm font-bold text-[#6366F1]">
             <SeoLocalizedString
-              value={{ en: "Questions", ru: "Вопросы" }}
+              value={{ ru: "Вопросы" }}
               locale={locale}
             />
           </p>
@@ -237,7 +233,7 @@ export function SeoLandingPage({
           <div className="mt-8 grid gap-3">
             {page.faqs.map((item) => (
               <details
-                key={item.question.en}
+                key={item.question.ru}
                 className="group rounded-[20px] bg-[#FAFBFC] p-5"
               >
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-bold text-[#0F172A] [&::-webkit-details-marker]:hidden">
@@ -268,7 +264,6 @@ export function SeoLandingPage({
               <h2 className="mt-3 max-w-3xl text-3xl font-bold leading-tight">
                 <SeoLocalizedString
                   value={{
-                    en: "Upload your resume and get a clearer application strategy.",
                     ru: "Загрузите резюме и получите более ясную стратегию отклика.",
                   }}
                   locale={locale}

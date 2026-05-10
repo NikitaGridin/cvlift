@@ -1,9 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Montserrat } from "next/font/google";
-import { cookies, headers } from "next/headers";
 import { CookieConsent } from "@/components/cookie-consent";
 import { PreferencesProvider } from "@/components/preferences-provider";
-import { defaultLocale, isLocale, type Locale } from "@/lib/i18n";
+import { defaultLocale } from "@/lib/i18n";
 import { siteLogoPath, siteMetadataBase } from "@/lib/site-url";
 import "./globals.css";
 
@@ -15,66 +14,60 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   metadataBase: siteMetadataBase,
-  applicationName: "CVlift",
+  applicationName: "OfferLyra",
   title: {
-    default: "CVlift - AI Resume Analysis and ATS Resume Checker",
-    template: "%s | CVlift",
+    default: "OfferLyra - AI-платформа подготовки к собеседованию",
+    template: "%s | OfferLyra",
   },
   description:
-    "CVlift analyzes resumes with AI, checks ATS score, finds missing keywords, matches vacancies, and helps create stronger job applications.",
+    "OfferLyra помогает подготовиться к собеседованию: AI-тренажёр вопросов, HR-скрининг, техническое интервью, создание, анализ и перевод резюме.",
   keywords: [
-    "CVlift",
-    "AI resume checker",
-    "ATS resume checker",
-    "resume score checker",
-    "resume optimizer",
-    "resume keywords",
-    "job description resume match",
-    "cover letter generator",
-    "проверка резюме",
-    "оценка резюме",
-    "ATS проверка резюме",
-    "улучшить резюме",
-    "резюме под вакансию",
-    "ключевые слова для резюме",
+    "OfferLyra",
+    "подготовка к собеседованию",
+    "тренажер собеседований",
+    "AI собеседование",
+    "ИИ интервьюер",
+    "техническое собеседование",
+    "HR скрининг",
+    "вопросы для собеседования",
+    "анализ резюме",
+    "перевод резюме",
   ],
-  authors: [{ name: "CVlift" }],
-  creator: "CVlift",
-  publisher: "CVlift",
+  authors: [{ name: "OfferLyra" }],
+  creator: "OfferLyra",
+  publisher: "OfferLyra",
   category: "career software",
   alternates: {
     canonical: "/",
   },
   icons: {
     icon: [
-      { url: "/favicon.ico" },
-      { url: siteLogoPath, type: "image/svg+xml" },
+      { url: "/icon.svg", type: "image/svg+xml" },
     ],
     apple: [{ url: siteLogoPath, type: "image/svg+xml" }],
   },
   openGraph: {
-    title: "CVlift - AI Resume Analysis and ATS Resume Checker",
+    title: "OfferLyra - AI-платформа подготовки к собеседованию",
     description:
-      "Analyze resumes with AI, improve ATS score, match vacancies, strengthen keywords, and generate better application materials.",
+      "Готовьтесь к интервью с AI: тренажёр вопросов, HR-скрининг, техническое собеседование, резюме, анализ и перевод.",
     url: "/",
-    siteName: "CVlift",
+    siteName: "OfferLyra",
     type: "website",
-    locale: "en_US",
-    alternateLocale: ["ru_RU"],
+    locale: "ru_RU",
     images: [
       {
         url: siteLogoPath,
         width: 512,
         height: 512,
-        alt: "CVlift logo",
+        alt: "Логотип OfferLyra",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "CVlift - AI Resume Analysis and ATS Resume Checker",
+    title: "OfferLyra - AI-платформа подготовки к собеседованию",
     description:
-      "AI resume analysis, ATS score, vacancy matching, keyword audit, improved resume drafts, and cover letters.",
+      "AI-тренажёр собеседований, HR-скрининг, техническое интервью, создание, анализ и перевод резюме.",
     images: [siteLogoPath],
   },
   robots: {
@@ -94,10 +87,6 @@ export const metadata: Metadata = {
   },
 };
 
-const legacyPreferencePrefix = "cv" + "pilot";
-const localeCookieName = "cvlift_locale";
-const legacyLocaleCookieName = `${legacyPreferencePrefix}_locale`;
-
 export const viewport: Viewport = {
   colorScheme: "dark",
   themeColor: "#050605",
@@ -108,32 +97,19 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookieStore = await cookies();
-  const headerStore = await headers();
-  const locale =
-    getOptionalLocale(headerStore.get("x-cvlift-locale")) ??
-    getOptionalLocale(
-      cookieStore.get(localeCookieName)?.value ?? cookieStore.get(legacyLocaleCookieName)?.value,
-    ) ??
-    defaultLocale;
-
   return (
     <html
-      lang={locale}
+      lang={defaultLocale}
       data-theme="dark"
       className={`${montserrat.variable} h-full antialiased dark`}
       suppressHydrationWarning
     >
       <body className="min-h-full bg-[#050605] text-[#F4F7F0]">
-        <PreferencesProvider initialLocale={locale}>
+        <PreferencesProvider initialLocale={defaultLocale}>
           {children}
           <CookieConsent />
         </PreferencesProvider>
       </body>
     </html>
   );
-}
-
-function getOptionalLocale(value: string | null | undefined): Locale | null {
-  return isLocale(value) ? value : null;
 }
