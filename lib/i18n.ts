@@ -132,7 +132,7 @@ export const translations = {
     "home.tokens.popular": "Лучший спринт",
     "home.tokens.balance": "Баланс пакета",
     "home.tokens.units": "токенов",
-    "home.tokens.mock": "Только превью",
+    "home.tokens.mock": "Оплата через YooKassa",
     "home.tokens.starter.name": "1 токен",
     "home.tokens.starter.description":
       "Для одного анализа или пробного сценария перед важным этапом.",
@@ -299,13 +299,19 @@ export const translations = {
     "credits.spent": "Потрачено токенов: {count}",
     "credits.spentText": "Уже использовано на анализы резюме.",
     "credits.packagesEyebrow": "Пакеты",
-    "credits.topUpTitle": "Превью пакетов токенов",
+    "credits.topUpTitle": "Пополнение баланса",
     "credits.topUpText":
-      "Карточки пакетов показаны как превью. Активация токенов сейчас отключена.",
-    "credits.mockBadge": "Превью",
+      "Выберите пакет, оплатите через YooKassa, и токены появятся на балансе после подтверждения платежа.",
+    "credits.pay": "Оплатить",
+    "credits.payPending": "Создаем платеж",
+    "credits.payment.succeeded": "Платеж подтвержден. Токены начислены на баланс.",
+    "credits.payment.pending":
+      "Платеж еще подтверждается. Баланс обновится после уведомления YooKassa.",
+    "credits.payment.canceled": "Платеж отменен или не был завершен.",
+    "credits.payment.error": "Не удалось проверить платеж. Обновите страницу позже.",
     "credits.usage": "Использование токенов",
     "credits.usageText":
-      "Каждый завершенный анализ списывает один токен. Пакеты токенов сейчас отображаются только как превью.",
+      "Каждый завершенный анализ списывает один токен. Пополнение начисляется только после успешного статуса платежа в YooKassa.",
     "credits.usageTextFree":
       "Пока бесплатный режим включен, завершенные анализы не списывают токены.",
     "credits.packages.starter.name": "1 токен",

@@ -1,9 +1,16 @@
 "use client";
 
+import { useActionState } from "react";
 import {
+  CreditCard,
   Coins,
+  Loader2,
   WalletCards,
 } from "lucide-react";
+import {
+  createYooKassaTopUp,
+  type CreateTopUpState,
+} from "@/app/credits/actions";
 import {
   ANALYSIS_CREDIT_COST,
   CREDIT_NAME,
@@ -17,14 +24,22 @@ type CreditsPanelProps = {
   analysisCreditCost?: number;
   initialSummary: WalletSummary;
   packages: CreditPackage[];
+  paymentStatus?: "succeeded" | "pending" | "canceled" | "error";
 };
+
+const initialTopUpState: CreateTopUpState = {};
 
 export function CreditsPanel({
   analysisCreditCost = ANALYSIS_CREDIT_COST,
   initialSummary,
   packages,
+  paymentStatus,
 }: CreditsPanelProps) {
   const { t } = useI18n();
+  const [topUpState, topUpAction, isTopUpPending] = useActionState(
+    createYooKassaTopUp,
+    initialTopUpState,
+  );
   const isFreeAnalysis = analysisCreditCost === 0;
 
   return (
@@ -79,10 +94,22 @@ export function CreditsPanel({
             </p>
           </div>
           <span className="inline-flex h-10 w-fit items-center gap-2 rounded-full border border-black/[0.06] bg-[#FAFBFC] px-4 text-sm font-bold text-[#0F172A]">
-            <Coins aria-hidden="true" className="size-4 text-[#6366F1]" />
-            {t("credits.mockBadge")}
+            <CreditCard aria-hidden="true" className="size-4 text-[#6366F1]" />
+            YooKassa
           </span>
         </div>
+
+        {paymentStatus ? (
+          <p className={getPaymentNoticeClass(paymentStatus)}>
+            {getPaymentNotice(paymentStatus, t)}
+          </p>
+        ) : null}
+
+        {topUpState.error ? (
+          <p className="mt-5 rounded-[18px] border border-red-200 bg-red-50 px-4 py-3 text-sm font-bold text-red-700">
+            {topUpState.error}
+          </p>
+        ) : null}
 
         <div className="mt-7 grid gap-3 lg:grid-cols-3">
           {packages.map((item) => (
@@ -109,6 +136,21 @@ export function CreditsPanel({
               <p className="mt-4 text-sm font-medium leading-6 text-[#64748B]">
                 {getPackageDescription(item, t)}
               </p>
+              <form action={topUpAction} className="mt-5">
+                <input type="hidden" name="packageId" value={item.id} />
+                <button
+                  type="submit"
+                  disabled={isTopUpPending}
+                  className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-[16px] bg-[#0F172A] px-4 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-[#1E293B] disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-70"
+                >
+                  {isTopUpPending ? (
+                    <Loader2 aria-hidden="true" className="size-4 animate-spin" />
+                  ) : (
+                    <CreditCard aria-hidden="true" className="size-4" />
+                  )}
+                  {isTopUpPending ? t("credits.payPending") : t("credits.pay")}
+                </button>
+              </form>
             </article>
           ))}
         </div>
@@ -165,4 +207,31 @@ function getPackageBadge(item: CreditPackage, t: ReturnType<typeof useI18n>["t"]
   }
 
   return item.badge;
+}
+
+function getPaymentNotice(
+  status: NonNullable<CreditsPanelProps["paymentStatus"]>,
+  t: ReturnType<typeof useI18n>["t"],
+) {
+  switch (status) {
+    case "succeeded":
+      return t("credits.payment.succeeded");
+    case "pending":
+      return t("credits.payment.pending");
+    case "canceled":
+      return t("credits.payment.canceled");
+    case "error":
+      return t("credits.payment.error");
+  }
+}
+
+function getPaymentNoticeClass(status: NonNullable<CreditsPanelProps["paymentStatus"]>) {
+  const tone =
+    status === "succeeded"
+      ? "border-emerald-200 bg-emerald-50 text-emerald-700"
+      : status === "pending"
+        ? "border-amber-200 bg-amber-50 text-amber-700"
+        : "border-red-200 bg-red-50 text-red-700";
+
+  return `mt-5 rounded-[18px] border px-4 py-3 text-sm font-bold ${tone}`;
 }
