@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Bot, Coins, History, ScanSearch } from "lucide-react";
+import { Bot, BrainCircuit, Coins, History, ScanSearch } from "lucide-react";
 import { useI18n } from "@/components/preferences-provider";
 import type { TranslationKey } from "@/lib/i18n";
 
 const navigation = [
   { href: "/upload", labelKey: "common.analysis", icon: ScanSearch },
+  { href: "/trainer", labelKey: "common.trainer", icon: BrainCircuit },
   { href: "/agent", labelKey: "common.agent", icon: Bot },
   { href: "/history", labelKey: "common.history", icon: History },
   { href: "/credits", labelKey: "common.creditsPage", icon: Coins },

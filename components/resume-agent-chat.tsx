@@ -110,6 +110,7 @@ export function ResumeAgentChat() {
   const [silencePending, setSilencePending] = useState(false);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [exitConfirmOpen, setExitConfirmOpen] = useState(false);
+  const [startConfirmOpen, setStartConfirmOpen] = useState(false);
   const [finalResumeText, setFinalResumeText] = useState("");
   const [finalResumeFileName, setFinalResumeFileName] = useState("");
   const [conversationComplete, setConversationComplete] = useState(false);
@@ -120,6 +121,8 @@ export function ResumeAgentChat() {
   const messagesRef = useRef(messages);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const speechAbortControllerRef = useRef<AbortController | null>(null);
+  const speechRequestIdRef = useRef(0);
   const audioUrlRef = useRef<string | null>(null);
   const conversationIdRef = useRef<string | null>(null);
   const conversationStartPromiseRef = useRef<Promise<void> | null>(null);
@@ -325,7 +328,15 @@ export function ResumeAgentChat() {
   }, []);
 
   const stopSpeaking = useCallback(() => {
-    audioRef.current?.pause();
+    speechRequestIdRef.current += 1;
+    speechAbortControllerRef.current?.abort();
+    speechAbortControllerRef.current = null;
+
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.src = "";
+    }
+
     audioRef.current = null;
 
     if (audioUrlRef.current) {
@@ -381,12 +392,17 @@ export function ResumeAgentChat() {
 
       window.speechSynthesis.speak(utterance);
     },
-    [locale, resumeListeningAfterAssistant],
+    [resumeListeningAfterAssistant],
   );
 
   const speak = useCallback(
     async (text: string) => {
       stopSpeaking();
+      const requestId = speechRequestIdRef.current + 1;
+      const abortController = new AbortController();
+
+      speechRequestIdRef.current = requestId;
+      speechAbortControllerRef.current = abortController;
       setIsSpeaking(true);
 
       try {
@@ -394,6 +410,7 @@ export function ResumeAgentChat() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ locale, text }),
+          signal: abortController.signal,
         });
 
         if (!response.ok) {
@@ -401,24 +418,62 @@ export function ResumeAgentChat() {
         }
 
         const audioBlob = await response.blob();
+        if (
+          abortController.signal.aborted ||
+          speechRequestIdRef.current !== requestId
+        ) {
+          return;
+        }
+
         const audioUrl = URL.createObjectURL(audioBlob);
         const audio = new Audio(audioUrl);
+
+        if (
+          abortController.signal.aborted ||
+          speechRequestIdRef.current !== requestId
+        ) {
+          URL.revokeObjectURL(audioUrl);
+          return;
+        }
 
         audioRef.current = audio;
         audioUrlRef.current = audioUrl;
         audio.playbackRate = 1.08;
         audio.onended = () => {
+          if (speechRequestIdRef.current !== requestId) {
+            return;
+          }
+
           stopSpeaking();
           resumeListeningAfterAssistant();
         };
         audio.onerror = () => {
+          if (speechRequestIdRef.current !== requestId) {
+            return;
+          }
+
           stopSpeaking();
           speakWithBrowserFallback(text);
         };
 
         await audio.play();
-      } catch {
+      } catch (speechError) {
+        if (
+          abortController.signal.aborted ||
+          speechRequestIdRef.current !== requestId
+        ) {
+          return;
+        }
+
+        if (speechError instanceof DOMException && speechError.name === "AbortError") {
+          return;
+        }
+
         speakWithBrowserFallback(text);
+      } finally {
+        if (speechAbortControllerRef.current === abortController) {
+          speechAbortControllerRef.current = null;
+        }
       }
     },
     [locale, resumeListeningAfterAssistant, speakWithBrowserFallback, stopSpeaking],
@@ -715,6 +770,24 @@ export function ResumeAgentChat() {
     setSilencePending(false);
   }
 
+  function handleStartVoiceClick() {
+    if (conversationStartPromiseRef.current) {
+      void startListening();
+      return;
+    }
+
+    setStartConfirmOpen(true);
+  }
+
+  function cancelVoiceStart() {
+    setStartConfirmOpen(false);
+  }
+
+  function confirmVoiceStart() {
+    setStartConfirmOpen(false);
+    void startListening();
+  }
+
   function cancelPendingExit() {
     pendingExitActionRef.current = null;
     setExitConfirmOpen(false);
@@ -738,12 +811,17 @@ export function ResumeAgentChat() {
     exitConfirmOpen && typeof document !== "undefined"
       ? createPortal(renderExitConfirmDialog(), document.body)
       : null;
+  const startConfirmDialog =
+    startConfirmOpen && typeof document !== "undefined"
+      ? createPortal(renderStartConfirmDialog(), document.body)
+      : null;
 
   return (
     <>
       {renderAgentShell(false)}
       {fullscreenOverlay}
       {exitConfirmDialog}
+      {startConfirmDialog}
     </>
   );
 
@@ -841,7 +919,10 @@ export function ResumeAgentChat() {
               ) : null}
             </div>
 
-            <div className="flex justify-center px-5 pb-5 sm:px-8">
+            <div className="flex flex-col items-center gap-3 px-5 pb-5 text-center sm:px-8">
+              <p className="max-w-sm text-xs font-bold leading-5 text-[#C9FF18]">
+                {t("agent.costNotice")}
+              </p>
               <VoiceControlButton
                 featured
                 icon={
@@ -852,7 +933,7 @@ export function ResumeAgentChat() {
                   )
                 }
                 label={activeSession ? t("agent.call.pause") : t("agent.call.start")}
-                onClick={activeSession ? pauseVoiceSession : startListening}
+                onClick={activeSession ? pauseVoiceSession : handleStartVoiceClick}
                 disabled={!voiceSupported || isSending}
               />
             </div>
@@ -1013,6 +1094,49 @@ export function ResumeAgentChat() {
               className="inline-flex h-11 items-center justify-center rounded-[14px] bg-[#C9FF18] px-4 text-sm font-bold text-[#061006] shadow-[0_0_28px_rgba(201,255,24,0.28)] transition duration-200 hover:bg-[#D8FF3B]"
             >
               {t("agent.leave.confirm")}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  function renderStartConfirmDialog() {
+    return (
+      <div
+        className="fixed inset-0 flex items-center justify-center bg-black/62 px-4 text-[#F4F8EF] backdrop-blur-md"
+        style={{ zIndex: 2147483647 }}
+        role="presentation"
+      >
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="agent-start-confirm-title"
+          className="w-full max-w-md rounded-[24px] border border-[#C9FF18]/18 bg-[#061006] p-5 shadow-[0_30px_120px_rgba(0,0,0,0.6)]"
+        >
+          <h2
+            id="agent-start-confirm-title"
+            className="text-xl font-bold tracking-tight text-white"
+          >
+            {t("agent.startConfirm.title")}
+          </h2>
+          <p className="mt-3 text-sm font-medium leading-6 text-[#A9C8B5]">
+            {t("agent.startConfirm.text")}
+          </p>
+          <div className="mt-5 grid grid-cols-2 gap-3">
+            <button
+              type="button"
+              onClick={cancelVoiceStart}
+              className="inline-flex h-11 items-center justify-center rounded-[14px] border border-[#C9FF18]/14 bg-white/[0.04] px-4 text-sm font-bold text-[#F4F8EF] transition duration-200 hover:bg-white/[0.08]"
+            >
+              {t("agent.startConfirm.cancel")}
+            </button>
+            <button
+              type="button"
+              onClick={confirmVoiceStart}
+              className="inline-flex h-11 items-center justify-center rounded-[14px] bg-[#C9FF18] px-4 text-sm font-bold text-[#061006] shadow-[0_0_28px_rgba(201,255,24,0.28)] transition duration-200 hover:bg-[#D8FF3B]"
+            >
+              {t("agent.startConfirm.confirm")}
             </button>
           </div>
         </div>

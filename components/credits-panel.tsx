@@ -1,12 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import {
-  CreditCard,
-  Coins,
-  Loader2,
-  WalletCards,
-} from "lucide-react";
+import { CreditCard, Loader2, WalletCards } from "lucide-react";
 import {
   createYooKassaTopUp,
   type CreateTopUpState,
@@ -43,8 +38,8 @@ export function CreditsPanel({
   const isFreeAnalysis = analysisCreditCost === 0;
 
   return (
-    <div className="grid gap-6 xl:grid-cols-[0.72fr_1.28fr]">
-      <section className="rounded-[28px] border border-black/[0.06] bg-white/75 p-6 shadow-sm backdrop-blur-xl">
+    <div className="grid gap-6 xl:h-[calc(100vh-64px)] xl:grid-cols-[0.72fr_1.28fr]">
+      <section className="flex min-h-0 flex-col rounded-[28px] border border-black/[0.06] bg-white/75 p-6 shadow-sm backdrop-blur-xl xl:h-full">
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="text-sm font-bold text-[#6366F1]">{CREDIT_NAME}</p>
@@ -82,10 +77,12 @@ export function CreditsPanel({
         </div>
       </section>
 
-      <section className="rounded-[28px] border border-black/[0.06] bg-white/75 p-6 shadow-sm backdrop-blur-xl">
+      <section className="min-h-0 overflow-y-auto rounded-[28px] border border-black/[0.06] bg-white/75 p-6 shadow-sm backdrop-blur-xl xl:h-full">
         <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-start">
           <div>
-            <p className="text-sm font-bold text-[#6366F1]">{t("credits.packagesEyebrow")}</p>
+            <p className="text-sm font-bold text-[#6366F1]">
+              {t("credits.packagesEyebrow")}
+            </p>
             <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#0F172A]">
               {t("credits.topUpTitle")}
             </h2>
@@ -115,27 +112,31 @@ export function CreditsPanel({
           {packages.map((item) => (
             <article
               key={item.id}
-              className={`relative rounded-[24px] border p-5 ${
+              className={`relative rounded-[24px] border p-5 flex flex-col justify-between ${
                 item.badge
                   ? "border-[#6366F1]/40 bg-white shadow-[0_16px_42px_rgba(99,102,241,0.12)]"
                   : "border-black/[0.06] bg-[#FAFBFC]"
               }`}
             >
-              {item.badge ? (
-                <span className="absolute right-4 top-4 rounded-full bg-[#6366F1] px-3 py-1 text-xs font-bold text-white">
-                  {getPackageBadge(item, t)}
-                </span>
-              ) : null}
-              <p className="text-sm font-bold text-[#64748B]">{getPackageName(item, t)}</p>
-              <p className="mt-3 text-3xl font-bold text-[#0F172A]">
-                {item.credits}
-              </p>
-              <p className="mt-1 text-sm font-bold text-[#6366F1]">
-                {formatRubles(item.amountRubles)}
-              </p>
-              <p className="mt-4 text-sm font-medium leading-6 text-[#64748B]">
-                {getPackageDescription(item, t)}
-              </p>
+              <div>
+                {item.badge ? (
+                  <span className="absolute right-4 top-4 rounded-full bg-[#6366F1] px-3 py-1 text-xs font-bold text-white">
+                    {getPackageBadge(item, t)}
+                  </span>
+                ) : null}
+                <p className="text-sm font-bold text-[#64748B]">
+                  {getPackageName(item, t)}
+                </p>
+                <p className="mt-3 text-3xl font-bold text-[#0F172A]">
+                  {item.credits}
+                </p>
+                <p className="mt-1 text-sm font-bold text-[#6366F1]">
+                  {formatRubles(item.amountRubles)}
+                </p>
+                <p className="mt-4 text-sm font-medium leading-6 text-[#64748B]">
+                  {getPackageDescription(item, t)}
+                </p>
+              </div>
               <form action={topUpAction} className="mt-5">
                 <input type="hidden" name="packageId" value={item.id} />
                 <button
@@ -144,7 +145,10 @@ export function CreditsPanel({
                   className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-[16px] bg-[#0F172A] px-4 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-[#1E293B] disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-70"
                 >
                   {isTopUpPending ? (
-                    <Loader2 aria-hidden="true" className="size-4 animate-spin" />
+                    <Loader2
+                      aria-hidden="true"
+                      className="size-4 animate-spin"
+                    />
                   ) : (
                     <CreditCard aria-hidden="true" className="size-4" />
                   )}
@@ -155,27 +159,14 @@ export function CreditsPanel({
           ))}
         </div>
       </section>
-
-      <section className="rounded-[28px] border border-black/[0.06] bg-white/75 p-6 shadow-sm backdrop-blur-xl xl:col-span-2">
-        <div className="flex items-start gap-4 rounded-[24px] bg-[#FAFBFC] p-5">
-          <span className="flex size-11 shrink-0 items-center justify-center rounded-[18px] bg-[#6366F1]/10 text-[#6366F1]">
-            <Coins aria-hidden="true" className="size-5" />
-          </span>
-          <div>
-            <h2 className="text-xl font-bold text-[#0F172A]">
-              {t("credits.usage")}
-            </h2>
-            <p className="mt-2 max-w-3xl text-sm font-medium leading-6 text-[#64748B]">
-              {isFreeAnalysis ? t("credits.usageTextFree") : t("credits.usageText")}
-            </p>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
 
-function getPackageName(item: CreditPackage, t: ReturnType<typeof useI18n>["t"]) {
+function getPackageName(
+  item: CreditPackage,
+  t: ReturnType<typeof useI18n>["t"],
+) {
   switch (item.id) {
     case "starter":
       return t("credits.packages.starter.name");
@@ -188,7 +179,10 @@ function getPackageName(item: CreditPackage, t: ReturnType<typeof useI18n>["t"])
   }
 }
 
-function getPackageDescription(item: CreditPackage, t: ReturnType<typeof useI18n>["t"]) {
+function getPackageDescription(
+  item: CreditPackage,
+  t: ReturnType<typeof useI18n>["t"],
+) {
   switch (item.id) {
     case "starter":
       return t("credits.packages.starter.description");
@@ -201,7 +195,10 @@ function getPackageDescription(item: CreditPackage, t: ReturnType<typeof useI18n
   }
 }
 
-function getPackageBadge(item: CreditPackage, t: ReturnType<typeof useI18n>["t"]) {
+function getPackageBadge(
+  item: CreditPackage,
+  t: ReturnType<typeof useI18n>["t"],
+) {
   if (item.id === "focused") {
     return t("credits.packages.focused.badge");
   }
@@ -225,7 +222,9 @@ function getPaymentNotice(
   }
 }
 
-function getPaymentNoticeClass(status: NonNullable<CreditsPanelProps["paymentStatus"]>) {
+function getPaymentNoticeClass(
+  status: NonNullable<CreditsPanelProps["paymentStatus"]>,
+) {
   const tone =
     status === "succeeded"
       ? "border-emerald-200 bg-emerald-50 text-emerald-700"

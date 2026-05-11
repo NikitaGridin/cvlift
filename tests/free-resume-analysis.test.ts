@@ -7,6 +7,7 @@ import {
   isFreeResumeAnalysisEnabled,
   spendAnalysisCredit,
   spendResumeAgentConversationCredit,
+  spendTrainerTestCredit,
 } from "@/lib/credits";
 import { isEnvFlagEnabled } from "@/lib/env";
 
@@ -14,6 +15,7 @@ type SpendAnalysisCreditTransaction = Parameters<typeof spendAnalysisCredit>[0];
 type SpendResumeAgentConversationCreditTransaction = Parameters<
   typeof spendResumeAgentConversationCredit
 >[0];
+type SpendTrainerTestCreditTransaction = Parameters<typeof spendTrainerTestCredit>[0];
 
 vi.mock("@/lib/prisma", () => ({
   isDatabaseConfigured: vi.fn(),
@@ -206,6 +208,114 @@ describe("spendResumeAgentConversationCredit", () => {
   });
 });
 
+describe("spendTrainerTestCredit", () => {
+  test("does not touch wallet tables when trainer test cost is zero", async () => {
+    const tx = createCreditTransactionClient();
+
+    await expect(
+      spendTrainerTestCredit(
+        asSpendTrainerTestTransaction(tx),
+        "user-1",
+        "frontend:junior:javascript-basics",
+        0,
+        "trainer-test-unlock:user-1:frontend:junior:javascript-basics",
+      ),
+    ).resolves.toBeNull();
+
+    expect(tx.wallet.upsert).not.toHaveBeenCalled();
+    expect(tx.wallet.updateMany).not.toHaveBeenCalled();
+    expect(tx.walletTransaction.create).not.toHaveBeenCalled();
+  });
+
+  test("does not debit twice for an already unlocked trainer test", async () => {
+    const tx = createCreditTransactionClient({
+      existingWalletTransaction: {
+        id: "trainer-test-unlock:user-1:frontend:junior:typescript",
+      },
+    });
+
+    await expect(
+      spendTrainerTestCredit(
+        asSpendTrainerTestTransaction(tx),
+        "user-1",
+        "frontend:junior:typescript",
+        2,
+        "trainer-test-unlock:user-1:frontend:junior:typescript",
+      ),
+    ).resolves.toBeNull();
+
+    expect(tx.walletTransaction.findUnique).toHaveBeenCalledWith({
+      where: {
+        id: "trainer-test-unlock:user-1:frontend:junior:typescript",
+      },
+    });
+    expect(tx.wallet.updateMany).not.toHaveBeenCalled();
+    expect(tx.walletTransaction.create).not.toHaveBeenCalled();
+  });
+
+  test("debits two points for a paid trainer test unlock", async () => {
+    const tx = createCreditTransactionClient({
+      wallet: { id: "wallet-1", balance: 4 },
+      updatedWallet: { id: "wallet-1", balance: 2 },
+    });
+
+    await expect(
+      spendTrainerTestCredit(
+        asSpendTrainerTestTransaction(tx),
+        "user-1",
+        "frontend:junior:typescript",
+        2,
+        "trainer-test-unlock:user-1:frontend:junior:typescript",
+      ),
+    ).resolves.toMatchObject({ id: "wallet-1", balance: 2 });
+
+    expect(tx.walletTransaction.findUnique).toHaveBeenCalledWith({
+      where: {
+        id: "trainer-test-unlock:user-1:frontend:junior:typescript",
+      },
+    });
+    expect(tx.wallet.updateMany).toHaveBeenCalledWith({
+      where: {
+        id: "wallet-1",
+        balance: { gte: 2 },
+      },
+      data: {
+        balance: { decrement: 2 },
+        spentCredits: { increment: 2 },
+      },
+    });
+    expect(tx.walletTransaction.create).toHaveBeenCalledWith({
+      data: {
+        id: "trainer-test-unlock:user-1:frontend:junior:typescript",
+        userId: "user-1",
+        walletId: "wallet-1",
+        type: "trainer_test_unlock",
+        credits: -2,
+        balanceAfter: 2,
+        description:
+          "Technical interview trainer test unlock: frontend:junior:typescript",
+      },
+    });
+  });
+
+  test("throws and skips transaction logging when trainer test balance is not enough", async () => {
+    const tx = createCreditTransactionClient({ debitCount: 0 });
+
+    await expect(
+      spendTrainerTestCredit(
+        asSpendTrainerTestTransaction(tx),
+        "user-1",
+        "frontend:junior:typescript",
+        2,
+        "trainer-test-unlock:user-1:frontend:junior:typescript",
+      ),
+    ).rejects.toBeInstanceOf(InsufficientCreditsError);
+
+    expect(tx.wallet.findUniqueOrThrow).not.toHaveBeenCalled();
+    expect(tx.walletTransaction.create).not.toHaveBeenCalled();
+  });
+});
+
 function createCreditTransactionClient({
   debitCount = 1,
   existingWalletTransaction = null,
@@ -238,4 +348,10 @@ function asSpendResumeAgentTransaction(
   tx: ReturnType<typeof createCreditTransactionClient>,
 ) {
   return tx as unknown as SpendResumeAgentConversationCreditTransaction;
+}
+
+function asSpendTrainerTestTransaction(
+  tx: ReturnType<typeof createCreditTransactionClient>,
+) {
+  return tx as unknown as SpendTrainerTestCreditTransaction;
 }

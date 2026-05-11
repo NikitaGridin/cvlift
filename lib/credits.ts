@@ -184,6 +184,67 @@ export async function spendResumeAgentConversationCredit(
   return updatedWallet;
 }
 
+export async function spendTrainerTestCredit(
+  tx: PrismaTransaction,
+  userId: string,
+  testReference: string,
+  testCreditCost: number,
+  transactionId: string,
+) {
+  if (testCreditCost === 0) {
+    return null;
+  }
+
+  const existingTransaction = await tx.walletTransaction.findUnique({
+    where: { id: transactionId },
+  });
+
+  if (existingTransaction) {
+    return null;
+  }
+
+  const wallet = await tx.wallet.upsert({
+    where: { userId },
+    create: { userId },
+    update: {},
+  });
+
+  const debit = await tx.wallet.updateMany({
+    where: {
+      id: wallet.id,
+      balance: { gte: testCreditCost },
+    },
+    data: {
+      balance: { decrement: testCreditCost },
+      spentCredits: { increment: testCreditCost },
+    },
+  });
+
+  if (debit.count !== 1) {
+    throw new InsufficientCreditsError(
+      "Недостаточно поинтов для открытия теста.",
+    );
+  }
+
+  const updatedWallet = await tx.wallet.findUniqueOrThrow({
+    where: { id: wallet.id },
+  });
+
+  await tx.walletTransaction.create({
+    data: {
+      id: transactionId,
+      userId,
+      walletId: wallet.id,
+      type: "trainer_test_unlock",
+      credits: -testCreditCost,
+      balanceAfter: updatedWallet.balance,
+      description: `Technical interview trainer test unlock: ${testReference}`,
+    },
+  });
+
+  return updatedWallet;
+}
+
 function getResumeAgentConversationTransactionId(conversationId: string) {
   return `resume-agent-${conversationId}`;
 }

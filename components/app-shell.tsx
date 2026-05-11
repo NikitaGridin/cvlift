@@ -21,7 +21,9 @@ export async function AppShell({
   children,
 }: AppShellProps) {
   const session = await getSessionSafely();
-  const wallet = session?.user?.id ? await getWalletSummary(session.user.id) : null;
+  const wallet = session?.user?.id
+    ? await getWalletSummary(session.user.id)
+    : null;
   const isFreeAnalysis = getAnalysisCreditCost() === 0;
 
   return (
@@ -88,7 +90,7 @@ export async function AppShell({
           </div>
         </aside>
 
-        <main className={`min-w-0 flex-1 ${hideHeader ? "pb-0" : "pb-8"}`}>
+        <main className={`min-w-0 flex-1 ${hideHeader ? "pb-0" : "pb-4"}`}>
           {hideHeader ? null : (
             <header className="mb-8 flex flex-col justify-between gap-4 pt-2 sm:flex-row sm:items-end lg:pt-0">
               <div className="min-w-0">
@@ -116,14 +118,19 @@ export async function AppShell({
                       {isFreeAnalysis ? (
                         <LocalizedText k="common.free" />
                       ) : (
-                        wallet?.balance ?? 0
+                        (wallet?.balance ?? 0)
                       )}
                     </Link>
                     <div className="min-w-0 rounded-full border border-black/[0.06] bg-white/75 px-3 py-2 shadow-sm backdrop-blur-xl">
                       <p className="flex max-w-[190px] items-center gap-2 truncate text-sm font-bold text-[#0F172A]">
-                        <UserCircle aria-hidden="true" className="size-4 shrink-0 text-[#6366F1]" />
+                        <UserCircle
+                          aria-hidden="true"
+                          className="size-4 shrink-0 text-[#6366F1]"
+                        />
                         <span className="truncate">
-                          {session.user.name ?? session.user.email ?? <LocalizedText k="common.profile" />}
+                          {session.user.name ?? session.user.email ?? (
+                            <LocalizedText k="common.profile" />
+                          )}
                         </span>
                       </p>
                     </div>

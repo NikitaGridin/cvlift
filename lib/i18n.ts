@@ -21,6 +21,7 @@ export const translations = {
     "common.dashboard": "Дашборд",
     "common.openDashboard": "В дашборд",
     "common.analysis": "Анализ",
+    "common.trainer": "Тренажер",
     "common.agent": "Создать резюме",
     "common.upload": "Анализ",
     "common.uploadResume": "Анализ резюме",
@@ -152,6 +153,9 @@ export const translations = {
     "preview.upload": "Загрузите резюме",
     "preview.vacancyMode": "Режим вакансии",
     "appShell.eyebrow": "Центр подготовки",
+    "trainer.title": "Технический тренажер",
+    "trainer.subtitle":
+      "Практикуйте вопросы для Frontend и Backend собеседований по грейдам Junior, Middle и Senior.",
     "agent.title": "Создание резюме",
     "agent.subtitle":
       "Ответьте на вопросы голосом или текстом, а OfferLyra соберет структурированное резюме.",
@@ -167,6 +171,7 @@ export const translations = {
     "agent.voice.current": "Текущий вопрос",
     "agent.voice.answer": "Ваш ответ",
     "agent.voice.empty": "Голосовой ответ появится здесь.",
+    "agent.costNotice": "Создание резюме с AI-агентом стоит 1 токен.",
     "agent.chat.title": "Диалог",
     "agent.chat.aiAgent": "Помощник по резюме",
     "agent.chat.you": "Вы",
@@ -194,6 +199,11 @@ export const translations = {
     "agent.call.start": "Начать",
     "agent.call.pause": "Пауза",
     "agent.call.speaker": "Динамик",
+    "agent.startConfirm.title": "Начать создание резюме?",
+    "agent.startConfirm.text":
+      "Создание резюме при помощи AI-агента стоит 1 токен. Токен спишется после начала разговора.",
+    "agent.startConfirm.cancel": "Отмена",
+    "agent.startConfirm.confirm": "Начать",
     "agent.input.placeholder": "Напишите здесь...",
     "agent.finalVoiceSummary":
       "Готово. Я подготовил резюме и скачал его текстовым файлом.",
